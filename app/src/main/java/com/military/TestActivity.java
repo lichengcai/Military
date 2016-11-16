@@ -1,48 +1,35 @@
 package com.military;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ImageView;
+import android.widget.Toast;
+import android.widget.VideoView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
-import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 /**
  * Created by lichengcai on 2016/11/16.
  */
 
 public class TestActivity extends Activity {
-    private ImageView imageView;
+    private VideoView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        imageView = (ImageView) findViewById(R.id.image_test);
+        imageView = (VideoView) findViewById(R.id.videoView);
 
-        Glide.with(this)
-                .load("http://inthecheesefactory.com/uploads/source/glidepicasso/cover.jpg")
-                .placeholder(R.mipmap.ic_launcher)
-                .crossFade()
-                .listener(new RequestListener<String, GlideDrawable>() {
-                    @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        if (e != null)
-                        Log.d("glide","onException--" + e.getMessage());
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        Log.d("glide","onResourceReady--");
-                        return false;
-                    }
-                })
-                .into(imageView);
-
+        imageView.setVideoURI(Uri.fromFile(new File("/sdcard/cc00.mp4")));
+        imageView.start();
+        imageView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                Toast.makeText(TestActivity.this,"video is finish",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }
