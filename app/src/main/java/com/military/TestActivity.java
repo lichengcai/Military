@@ -1,6 +1,7 @@
 package com.military;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ public class TestActivity extends Activity {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 Toast.makeText(TestActivity.this,"video is finish",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(TestActivity.this,MainActivity.class));
+                finish();
             }
         });
 
