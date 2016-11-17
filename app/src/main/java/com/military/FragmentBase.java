@@ -1,4 +1,4 @@
-package com.military.widget.shapeLoading;
+package com.military;
 
 import android.support.v4.app.Fragment;
 
