@@ -15,7 +15,6 @@
 
     
     <RadioGroup
-        android:visibility="gone"
         android:id="@+id/radioBottom"
         android:layout_alignParentBottom="true"
         android:background="@color/gray_light"
@@ -28,7 +27,7 @@
             android:text="@string/home"
             style="@style/RadioTxtButton" />
         <RadioButton
-            android:drawableTop="@drawable/home_radio_selector"
+            android:drawableTop="@drawable/news_radio_selector"
             android:id="@+id/radio_second"
             android:text="@string/home"
             style="@style/RadioTxtButton" />
