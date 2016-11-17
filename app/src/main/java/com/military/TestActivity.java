@@ -24,7 +24,7 @@ import java.io.IOException;
  * Created by lichengcai on 2016/11/16.
  */
 
-public class TestActivity extends Activity {
+public class TestActivity extends BaseActivity {
     TextView textView;
     private Handler handler=new Handler() {
         @Override
