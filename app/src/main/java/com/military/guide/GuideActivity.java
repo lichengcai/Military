@@ -13,7 +13,7 @@ import com.military.bean.GuideBean;
 import com.military.guide.adapter.GuideListAdapter;
 import com.military.listener.OnItemClickListener;
 import com.military.ui.activity.BaseActivity;
-import com.military.ui.activity.MilitaryActivity;
+import com.military.soldier.MilitaryActivity;
 
 import java.util.ArrayList;
 
@@ -29,6 +29,11 @@ public class GuideActivity extends BaseActivity {
     RecyclerView mRecyclerView;
     private GuideListAdapter mAdapter;
     private ArrayList<GuideBean> mData= new ArrayList<>();
+    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int CORE_POOL_COUNT = CPU_COUNT+1;
+    private static final int MAXNUM_POOL_COUNT = CPU_COUNT*2+1;
+    private static final long KEEP_TIME = 10L;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
