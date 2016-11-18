@@ -1,8 +1,8 @@
-package com.military;
+package com.military.ui.activity;
 
 import android.os.Bundle;
-import android.widget.RelativeLayout;
 
+import com.military.R;
 import com.military.bean.Test;
 import com.military.widget.convenientbanner.ConvenientBanner;
 import com.military.widget.convenientbanner.holder.CBViewHolderCreator;

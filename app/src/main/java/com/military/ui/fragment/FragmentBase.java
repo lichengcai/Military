@@ -1,4 +1,4 @@
-package com.military;
+package com.military.ui.fragment;
 
 import android.support.v4.app.Fragment;
 

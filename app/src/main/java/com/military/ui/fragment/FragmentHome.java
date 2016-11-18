@@ -1,4 +1,4 @@
-package com.military;
+package com.military.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,12 +10,11 @@ import android.view.ViewGroup;
  * Created by lichengcai on 2016/11/17.
  */
 
-public class FragmentNews extends FragmentBase {
+public class FragmentHome extends FragmentBase {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news,container,false);
-        return view;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override

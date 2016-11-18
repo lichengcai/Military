@@ -1,17 +1,13 @@
-package com.military;
+package com.military.ui.activity;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
 
+
+import com.military.R;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

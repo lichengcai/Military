@@ -1,4 +1,4 @@
-package com.military;
+package com.military.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
