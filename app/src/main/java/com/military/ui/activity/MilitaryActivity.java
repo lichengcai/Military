@@ -10,7 +10,7 @@ import com.military.widget.convenientbanner.holderview.NetworkImageHolderView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends BaseActivity {
+public class MilitaryActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +24,7 @@ public class MainActivity extends BaseActivity {
         banner.setPages(new CBViewHolderCreator() {
             @Override
             public Object createHolder() {
-                return new NetworkImageHolderView();
+                return new NetworkImageHolderView();//guide
             }
         },array);
 

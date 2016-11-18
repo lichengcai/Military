@@ -40,7 +40,7 @@ public class TestActivity extends BaseActivity {
                         }
 
                     }
-                    textView.setText(stringBuilder.toString());
+                    textView.setText(stringBuilder.toString());//Executor
                     break;
             }
         }

@@ -13,8 +13,22 @@
         android:supportsRtl="true"
         >
         <activity
+            android:launchMode="singleTop"
             android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:name=".ui.activity.MainActivity">
+            android:name=".ui.activity.MilitaryActivity">
+        </activity>
+
+        <activity
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:launchMode="singleTop"
+            android:name=".ui.activity.TestActivity">
+        </activity>
+
+        <activity
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:launchMode="singleTop"
+            android:name=".ui.activity.GuideActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,17 +36,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:launchMode="singleTop"
-            android:name=".ui.activity.TestActivity">
-
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
     </application>
 
 </manifest>
