@@ -1,15 +1,18 @@
 package com.military.widget.convenientbanner.adapter;
 
+import android.support.v4.util.ArrayMap;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
 
 import com.military.R;
+import com.military.bean.Test;
 import com.military.widget.convenientbanner.holder.CBViewHolderCreator;
 import com.military.widget.convenientbanner.holder.Holder;
 import com.military.widget.convenientbanner.view.CBLoopViewPager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -97,7 +100,7 @@ public class CBPageAdapter<T> extends PagerAdapter {
             holder = (Holder<T>) view.getTag(R.id.cb_item_tag);
         }
         if (mDatas != null && !mDatas.isEmpty())
-            holder.UpdateUI(container.getContext(), position, mDatas.get(position));
+            holder.UpdateUI(container.getContext(), position, ((Test)mDatas.get(position)).getImgUrl(),((Test)mDatas.get(position)).getTitle());
         return view;
     }
 

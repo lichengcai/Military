@@ -11,10 +11,10 @@
         <!--android:id="@+id/frameFragment"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"/>-->
-    <ImageView
-        android:id="@+id/image"
+    <com.military.widget.convenientbanner.ConvenientBanner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="170dp"/>
 
 
     
