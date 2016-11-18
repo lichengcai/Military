@@ -4,4 +4,8 @@
         <attr name="loadingText" format="string"/>
         <attr name="loadingTextAppearance" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="ConvenientBanner">
+        <attr name="canLoop" format="boolean" />
+    </declare-styleable>
 </resources>
