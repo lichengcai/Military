@@ -27,7 +27,7 @@
         <activity
             android:theme="@android:style/Theme.Light.NoTitleBar"
             android:launchMode="singleTop"
-            android:name=".ui.activity.GuideActivity">
+            android:name=".guide.GuideActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
