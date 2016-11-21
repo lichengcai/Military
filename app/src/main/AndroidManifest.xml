@@ -14,7 +14,7 @@
         >
         <activity
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:theme="@style/AppTheme"
             android:name=".soldier.MilitaryActivity">
         </activity>
 
