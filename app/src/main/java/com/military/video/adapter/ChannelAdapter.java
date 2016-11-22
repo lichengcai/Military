@@ -5,11 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.military.R;
 import com.military.bean.Channel;
 import com.military.listener.OnItemClickListener;
+import com.military.video.ChannelActivity;
 
 import java.util.ArrayList;
 
@@ -21,9 +24,22 @@ public class ChannelAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private ArrayList<Channel> mData;
     private OnItemClickListener onItemClickListener;
+    private boolean flag = false;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    public Channel getItem(int position) {
+        return mData.get(position);
+    }
+
+    public void addItem(Channel channel) {
+        if (channel != null) {
+            mData.add(channel);
+            flag = true;
+            notifyDataSetChanged();
+        }
     }
 
     public ChannelAdapter(Context mContext,ArrayList<Channel> mData) {
@@ -38,6 +54,7 @@ public class ChannelAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyChannelHolder) {
+
             Channel channel = mData.get(position);
             ((MyChannelHolder) holder).name.setText(channel.getName());
 
@@ -49,6 +66,12 @@ public class ChannelAdapter extends RecyclerView.Adapter {
                     }
                 }
             });
+
+            if (flag && position == mData.size()-1) {
+                Animation animation = AnimationUtils.loadAnimation(mContext,R.anim.channel_add_ani);
+                holder.itemView.startAnimation(animation);
+                flag = false;
+            }
         }
     }
 

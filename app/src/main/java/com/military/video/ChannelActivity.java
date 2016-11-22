@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.Toast;
 
 import com.military.R;
@@ -57,12 +60,15 @@ public class ChannelActivity extends BaseActivity {
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, final int position) {
-                Animation ani = new AlphaAnimation(1,0);
-                ani.setDuration(500);
+                Animation ani = AnimationUtils.loadAnimation(ChannelActivity.this,R.anim.channelani);
+                final Channel channel = mAdapter.getItem(position);
+                Log.d("channel","channel--" + channel.toString());
+
                 view.startAnimation(ani);
                 ani.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
+                        mAllAdapter.addItem(channel);
 
                     }
 
@@ -70,6 +76,8 @@ public class ChannelActivity extends BaseActivity {
                     public void onAnimationEnd(Animation animation) {
                         mData.remove(position);
                         mAdapter.notifyDataSetChanged();
+
+
                     }
 
                     @Override
@@ -94,7 +102,7 @@ public class ChannelActivity extends BaseActivity {
     private void initData() {
         mData.clear();
         for (int i=0; i<20; i++) {
-            Channel channel = new Channel("channel" + i,i);
+            Channel channel = new Channel("Cha" + i,i);
             mData.add(channel);
         }
 
