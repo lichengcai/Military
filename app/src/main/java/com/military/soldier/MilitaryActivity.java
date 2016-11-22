@@ -26,5 +26,6 @@ public class MilitaryActivity extends BaseActivity {
         PhotoView photoView = (PhotoView) findViewById(R.id.img);
         photoView.enable();
 
+
     }
 }

@@ -35,7 +35,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:launchMode="singleTop"
+            android:name=".video.ChannelActivity">
+        </activity>
     </application>
 
 </manifest>

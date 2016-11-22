@@ -5,14 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.military.R;
 import com.military.bean.GuideBean;
 import com.military.listener.OnItemClickListener;
 import com.military.widget.CircleImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -43,7 +42,7 @@ public class GuideListAdapter extends RecyclerView.Adapter {
         if (holder instanceof GuideHolder) {
             GuideBean guideBean = mData.get(position);
             ((GuideHolder) holder).textName.setText(guideBean.getName());
-            Glide.with(mContext).load(guideBean.getImgUrl()).into(((GuideHolder) holder).imageView);
+            Picasso.with(mContext).load(guideBean.getImgUrl()).into(((GuideHolder) holder).imageView);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

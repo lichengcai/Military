@@ -14,6 +14,7 @@ import com.military.guide.adapter.GuideListAdapter;
 import com.military.listener.OnItemClickListener;
 import com.military.ui.activity.BaseActivity;
 import com.military.soldier.MilitaryActivity;
+import com.military.video.ChannelActivity;
 
 import java.util.ArrayList;
 
@@ -55,6 +56,9 @@ public class GuideActivity extends BaseActivity {
                         case 0:
                             startActivity(new Intent(GuideActivity.this, MilitaryActivity.class));
                             break;
+                        case 1:
+                            startActivity(new Intent(GuideActivity.this, ChannelActivity.class));
+                            break;
                     }
                 }
             });
@@ -63,9 +67,10 @@ public class GuideActivity extends BaseActivity {
     }
 
     private void init() {
-        mData.add(new GuideBean("military","http://himg2.huanqiu.com/attachment2010/2016/1118/08/34/20161118083436763.jpg"));
+        mData.add(new GuideBean("Military","http://himg2.huanqiu.com/attachment2010/2016/1118/08/34/20161118083436763.jpg"));
+        mData.add(new GuideBean("Video","http://mvavatar1.meitudata.com/54dc1847cc6bc2367.jpg!thumb60"));
         mAdapter = new GuideListAdapter(this,mData);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
         mRecyclerView.setAdapter(mAdapter);
     }
 

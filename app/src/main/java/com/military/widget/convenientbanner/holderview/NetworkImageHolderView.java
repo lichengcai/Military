@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.military.R;
 import com.military.widget.convenientbanner.holder.Holder;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -34,7 +34,7 @@ public class NetworkImageHolderView implements Holder<String> {
     public void UpdateUI(Context context, int position, String data,String title) {
 //        imageView.setImageResource(R.drawable.icon_default_large);
         textView.setText(title);
-        Glide.with(context).load(data).into(imageView);
+        Picasso.with(context).load(data).into(imageView);
 
     }
 }
