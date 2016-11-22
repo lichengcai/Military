@@ -40,6 +40,11 @@
             android:launchMode="singleTop"
             android:name=".video.ChannelActivity">
         </activity>
+        <activity
+            android:theme="@style/AppTheme"
+            android:launchMode="singleTop"
+            android:name=".video.VideoActivity">
+        </activity>
     </application>
 
 </manifest>

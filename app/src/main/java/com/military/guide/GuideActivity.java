@@ -15,6 +15,7 @@ import com.military.listener.OnItemClickListener;
 import com.military.ui.activity.BaseActivity;
 import com.military.soldier.MilitaryActivity;
 import com.military.video.ChannelActivity;
+import com.military.video.VideoActivity;
 
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class GuideActivity extends BaseActivity {
                             startActivity(new Intent(GuideActivity.this, MilitaryActivity.class));
                             break;
                         case 1:
-                            startActivity(new Intent(GuideActivity.this, ChannelActivity.class));
+                            startActivity(new Intent(GuideActivity.this, VideoActivity.class));
                             break;
                     }
                 }
