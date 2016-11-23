@@ -31,22 +31,17 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
-
     //jsoup HTML parser library @ http://jsoup.org/
     compile 'org.jsoup:jsoup:1.10.1'
-
 //    compile 'com.github.bumptech.glide:glide:3.7.0'
-
     compile 'com.squareup.picasso:picasso:2.5.2'
-
     //butterKnife
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
     compile 'com.bm.photoview:library:1.4.1'
-
     //video lib
     compile 'fm.jiecao:jiecaovideoplayer:4.8.3'
+    
 }
 
 

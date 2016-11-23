@@ -44,6 +44,7 @@ public class GuideListAdapter extends RecyclerView.Adapter {
             ((GuideHolder) holder).textName.setText(guideBean.getName());
             Picasso.with(mContext).load(guideBean.getImgUrl()).into(((GuideHolder) holder).imageView);
 
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

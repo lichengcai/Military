@@ -69,7 +69,7 @@ public class GuideActivity extends BaseActivity {
 
     private void init() {
         mData.add(new GuideBean("Military","http://himg2.huanqiu.com/attachment2010/2016/1118/08/34/20161118083436763.jpg"));
-        mData.add(new GuideBean("Video","http://mvavatar1.meitudata.com/54dc1847cc6bc2367.jpg!thumb60"));
+        mData.add(new GuideBean("Video","http://mvimg11.meitudata.com/5833eae922e727344.jpg!thumb320"));
         mAdapter = new GuideListAdapter(this,mData);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
         mRecyclerView.setAdapter(mAdapter);

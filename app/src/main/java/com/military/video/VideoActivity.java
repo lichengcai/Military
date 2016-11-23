@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 
 import com.military.R;
 import com.military.ui.activity.BaseActivity;
+import com.military.video.adapter.VideoPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +21,7 @@ public class VideoActivity extends BaseActivity {
     TabLayout mTabLayout;
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
+    private VideoPagerAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +29,26 @@ public class VideoActivity extends BaseActivity {
         setContentView(R.layout.activity_video);
         ButterKnife.bind(this);
 
+        init();
+    }
+
+    private void init() {
+        initView();
+
+        mAdapter = new VideoPagerAdapter(getSupportFragmentManager());
+        mAdapter.addFragment(FragmentVideo.newInstance(1),getString(R.string.all_channel));
+        mAdapter.addFragment(FragmentVideo.newInstance(2),getString(R.string.all_channel));
+        mAdapter.addFragment(FragmentVideo.newInstance(3),getString(R.string.all_channel));
+
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setAdapter(mAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void initView() {
+        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.all_channel));
+        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.all_channel));
+        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.all_channel));
 
     }
 }
