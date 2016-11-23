@@ -21,7 +21,7 @@ public class VideoModelImpl implements VideoModel {
             @Override
             public void run() {
                 try {
-                    Document document = Jsoup.connect(url).get();
+                    Document document = Jsoup.connect(url).userAgent("Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)").get();
                     if (document != null) {
                         onLoadingListener.onSuccess(document);
                     }else {

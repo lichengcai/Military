@@ -32,28 +32,24 @@ public class VideoPresenter {
         mVideoModel.getVideoData(url, new OnLoadingListener() {
             @Override
             public void onSuccess(Document document) {
-                ArrayList<Video> arrayList = new ArrayList<>();
-                Elements links = document.select("div.f-video ");
-                Log.d("links","links--" + links.size());
-                for (Element element:links) {
-                    Log.d("element","data-video--" + element.attr("data-video"));
-                    Video video = new Video();
-                    video.setVideoUrl(element.attr("data-video"));
-                    Elements e = element.select("img");
-                    for (Element el : e) {
-                        Log.d("element","img--" + el.attr("src"));
-                        video.setImgUrl(el.attr("src"));
-                        video.setTitle(el.attr("alt"));
-                        Log.d("element","test--" + el.attr("alt"));
+
+                Elements videos = document.select("div[data-video]");
+                Elements images = document.select("[width=300]");
+                Elements titles = document.select("strong.js-convert-emoji");
+                ArrayList<Video> arrayList = new ArrayList<>(videos.size());
+
+                if (images.size() == videos.size()&& videos.size() == titles.size()) {
+                    for (int i=0; i<videos.size(); i++) {
+                        Video video = new Video();
+                        video.setVideoUrl(videos.get(i).attr("data-video"));
+                        video.setImgUrl(images.get(i).attr("src"));
+                        video.setTitle(titles.get(i).text());
+                        arrayList.add(video);
                     }
-                    arrayList.add(video);
-
                 }
 
-                for (int i=0; i<arrayList.size(); i++) {
-                    Log.d("array","arrayDocu---" + arrayList.get(i).toString());
-                }
                 mVideoView.setVideoData(arrayList);
+
             }
 
             @Override
