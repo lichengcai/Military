@@ -31,10 +31,7 @@ public class GuideActivity extends BaseActivity {
     RecyclerView mRecyclerView;
     private GuideListAdapter mAdapter;
     private ArrayList<GuideBean> mData= new ArrayList<>();
-    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
-    private static final int CORE_POOL_COUNT = CPU_COUNT+1;
-    private static final int MAXNUM_POOL_COUNT = CPU_COUNT*2+1;
-    private static final long KEEP_TIME = 10L;
+
 
 
     @Override
@@ -52,7 +49,6 @@ public class GuideActivity extends BaseActivity {
             mAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Toast.makeText(GuideActivity.this," position--" + position,Toast.LENGTH_SHORT).show();
                     switch (position) {
                         case 0:
                             startActivity(new Intent(GuideActivity.this, MilitaryActivity.class));
@@ -69,7 +65,7 @@ public class GuideActivity extends BaseActivity {
 
     private void init() {
         mData.add(new GuideBean("Military","http://himg2.huanqiu.com/attachment2010/2016/1118/08/34/20161118083436763.jpg"));
-        mData.add(new GuideBean("Video","http://mvimg11.meitudata.com/5833eae922e727344.jpg!thumb320"));
+        mData.add(new GuideBean("Video","http://www.meipai.com/favicon.ico?1"));
         mAdapter = new GuideListAdapter(this,mData);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
         mRecyclerView.setAdapter(mAdapter);
