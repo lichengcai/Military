@@ -1,9 +1,13 @@
 package com.military.video;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
 
 import com.military.R;
 import com.military.bean.Channel;
@@ -24,8 +28,10 @@ public class VideoActivity extends BaseActivity {
     TabLayout mTabLayout;
     @BindView(R.id.viewpager)
     ViewPager mViewPager;
+    @BindView(R.id.fab)
+    FloatingActionButton mFab;
+
     private VideoPagerAdapter mAdapter;
-    ArrayList<Channel> mArrayChannel = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,11 +40,15 @@ public class VideoActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         init();
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(VideoActivity.this,ChannelActivity.class),0);
+            }
+        });
     }
 
     private void init() {
-//        initView();
-
         if (mSelected.size() == 0) {
             Channel ch_joke = new Channel("joke",13);
             Channel ch_star = new Channel("star",16);
@@ -51,19 +61,19 @@ public class VideoActivity extends BaseActivity {
         for (int i=0; i<mSelected.size(); i++) {
             mAdapter.addFragment(FragmentVideo.newInstance(mSelected.get(i)),mSelected.get(i).getName());
         }
-//        mAdapter.addFragment(FragmentVideo.newInstance(1),getString(R.string.all_channel));
-//        mAdapter.addFragment(FragmentVideo.newInstance(2),getString(R.string.all_channel));
-//        mAdapter.addFragment(FragmentVideo.newInstance(3),getString(R.string.all_channel));
 
         mViewPager.setOffscreenPageLimit(mSelected.size());
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
-//    private void initView() {
-//        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.all_channel));
-//        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.all_channel));
-//        mTabLayout.addTab(mTabLayout.newTab().setText(R.string.all_channel));
-//
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 0) {
+            if (requestCode == 0) {
+                Log.d("onActivityResult","requestCode==0");
+            }
+        }
+    }
 }
