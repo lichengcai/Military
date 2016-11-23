@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.military.R;
 import com.military.bean.Video;
@@ -38,6 +39,7 @@ public class VideoAdapter extends RecyclerView.Adapter {
         if (holder instanceof VideoHolder) {
             Video video = mData.get(position);
             ((VideoHolder) holder).playerStandard.setUp(video.getVideoUrl(),JCVideoPlayer.SCREEN_LAYOUT_LIST,video.getTitle());
+            ((VideoHolder) holder).playerStandard.thumbImageView.setScaleType(ImageView.ScaleType.FIT_XY);
             Picasso.with(mContext).load(video.getImgUrl()).into(((VideoHolder) holder).playerStandard.thumbImageView);
         }
     }

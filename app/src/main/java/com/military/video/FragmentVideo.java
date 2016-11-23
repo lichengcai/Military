@@ -6,17 +6,16 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.military.R;
+import com.military.bean.Channel;
 import com.military.bean.Video;
 import com.military.ui.fragment.FragmentBase;
 import com.military.video.adapter.VideoAdapter;
 import com.military.video.presenter.VideoPresenter;
 import com.military.video.view.VideoView;
-import org.jsoup.nodes.Document;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -28,11 +27,13 @@ import butterknife.ButterKnife;
  */
 
 public class FragmentVideo extends FragmentBase implements VideoView{
+    private static String URL = "http://www.meipai.com/square/";
     @BindView(R.id.recyclerVideo)
     RecyclerView mRecyclerView;
 
     private VideoAdapter mAdapter;
     private int mType = -1;
+    private Channel mChannel;
     private VideoPresenter mPresenter;
     private static final int MSG_GET_DATA_SUCCESS = 0;
     private static final int MSG_GET_DATA_EMPTY = 1;
@@ -78,13 +79,15 @@ public class FragmentVideo extends FragmentBase implements VideoView{
         super.onViewCreated(view, savedInstanceState);
         mPresenter = new VideoPresenter(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mPresenter.getVideoInfo("http://www.meipai.com/square/19");
+        mPresenter.getVideoInfo(URL+"19");
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mType = getArguments().getInt("type");
+        mChannel = (Channel) getArguments().getSerializable("channel");
     }
 
 
@@ -92,6 +95,14 @@ public class FragmentVideo extends FragmentBase implements VideoView{
         FragmentVideo fragmentListNews = new FragmentVideo();
         Bundle bundle = new Bundle();
         bundle.putInt("type",type);
+        fragmentListNews.setArguments(bundle);
+        return fragmentListNews;
+    }
+
+    public static FragmentVideo newInstance(Channel channel) {
+        FragmentVideo fragmentListNews = new FragmentVideo();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("channel",channel);
         fragmentListNews.setArguments(bundle);
         return fragmentListNews;
     }
