@@ -1,6 +1,7 @@
 package com.military.video.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,10 +26,14 @@ public class ChannelAdapter extends RecyclerView.Adapter {
     private ArrayList<Channel> mData;
     private OnItemClickListener onItemClickListener;
     private boolean flag = false;
+    private int mTab = 0;
+    public static final int TAB_SELECTED = 100;
+    public static final int TAB_UNCHECKED = 101;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
 
     public Channel getItem(int position) {
         return mData.get(position);
@@ -39,9 +44,10 @@ public class ChannelAdapter extends RecyclerView.Adapter {
             notifyDataSetChanged();
     }
 
-    public ChannelAdapter(Context mContext,ArrayList<Channel> mData) {
+    public ChannelAdapter(Context mContext,ArrayList<Channel> mData,int tab) {
         this.mContext = mContext;
         this.mData = mData;
+        this.mTab = tab;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,7 +60,13 @@ public class ChannelAdapter extends RecyclerView.Adapter {
 
             Channel channel = mData.get(position);
             ((MyChannelHolder) holder).name.setText(channel.getName());
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (mTab == TAB_SELECTED) {
+                    ((MyChannelHolder) holder).name.setBackground(mContext.getDrawable(R.drawable.channel_selected_shape));
+                }else {
+                    ((MyChannelHolder) holder).name.setBackground(mContext.getDrawable(R.drawable.channel_shape));
+                }
+            }
             ((MyChannelHolder) holder).itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -47,8 +47,8 @@ public class ChannelActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         addAllChannel();
-        mAdapter = new ChannelAdapter(mContext, MilitaryApplication.mSelected);
-        mUnselectedAdapter = new ChannelAdapter(mContext,mArrayUnChecked);
+        mAdapter = new ChannelAdapter(mContext, MilitaryApplication.mSelected,ChannelAdapter.TAB_SELECTED);
+        mUnselectedAdapter = new ChannelAdapter(mContext,mArrayUnChecked,ChannelAdapter.TAB_UNCHECKED);
 
         mRecyclerMyChannel.setLayoutManager(new GridLayoutManager(mContext,4));
         mRecyclerMyChannel.addItemDecoration(new SpaceItemDecoration(0,0,dip2px(5),dip2px(5)));
@@ -122,18 +122,18 @@ public class ChannelActivity extends BaseActivity {
     }
 
     private void addAllChannel() {
-        Channel ch_joke = new Channel("joke",13);
-        Channel ch_star = new Channel("star",16);
-        Channel ch_beauty = new Channel("beauty",19);
-        Channel ch_dance = new Channel("dance",63);
-        Channel ch_music = new Channel("music",62);
-        Channel ch_food = new Channel("food",59);
-        Channel ch_meizhuang = new Channel("meizhuang",27);
-        Channel ch_nanshen = new Channel("nanshen",31);
-        Channel ch_baby = new Channel("baby",18);
-        Channel ch_habit = new Channel("habit",6);
-        Channel ch_chixiu = new Channel("chixiu",423);
-        Channel ch_shougong = new Channel("shougong",450);
+        Channel ch_joke = new Channel("搞笑",13);
+        Channel ch_star = new Channel("明星",16);
+        Channel ch_beauty = new Channel("女神",19);
+        Channel ch_dance = new Channel("舞蹈",63);
+        Channel ch_music = new Channel("音乐",62);
+        Channel ch_food = new Channel("美食",59);
+        Channel ch_meizhuang = new Channel("美妆",27);
+        Channel ch_nanshen = new Channel("男神",31);
+        Channel ch_baby = new Channel("宝宝",18);
+        Channel ch_habit = new Channel("宠物",6);
+        Channel ch_chixiu = new Channel("吃秀",423);
+        Channel ch_shougong = new Channel("手工",450);
 
         mArrayAll.add(ch_joke);
         mArrayAll.add(ch_star);

@@ -8,8 +8,7 @@
     <TextView
         android:padding="5dp"
         android:gravity="center"
-        android:background="@drawable/channel_shape"
         android:id="@+id/text_channel_name"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content" />
 </LinearLayout>

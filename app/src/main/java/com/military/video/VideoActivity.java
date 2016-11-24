@@ -7,18 +7,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-
 import com.military.MilitaryApplication;
 import com.military.R;
 import com.military.bean.Channel;
-import com.military.ui.activity.BaseActivity;
 import com.military.video.adapter.VideoPagerAdapter;
-
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -59,9 +52,9 @@ public class VideoActivity extends AppCompatActivity {
 
     private void init() {
         if (MilitaryApplication.mSelected.size() == 0) {
-            Channel ch_joke = new Channel("joke",13);
-            Channel ch_star = new Channel("star",16);
-            Channel ch_beauty = new Channel("beauty",19);
+            Channel ch_joke = new Channel("搞笑",13);
+            Channel ch_star = new Channel("明星",16);
+            Channel ch_beauty = new Channel("女神",19);
             MilitaryApplication.mSelected.add(ch_beauty);
             MilitaryApplication.mSelected.add(ch_star);
             MilitaryApplication.mSelected.add(ch_joke);
