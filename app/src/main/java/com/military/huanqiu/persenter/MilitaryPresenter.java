@@ -63,8 +63,14 @@ public class MilitaryPresenter {
         mModel.getMilitaryData(url, new OnLoadingListener() {
             @Override
             public void onSuccess(Document json) {
-                getBannerInfo(json);
-                getListInfo(json);
+                ArrayList<NewsBean> array_banner = getBannerInfo(json);
+                if (array_banner != null && array_banner.size() != 0) {
+                    mView.setBannerFocus(array_banner);
+                }
+                ArrayList<NewsBean> array_list = getListInfo(json);
+                if (array_list != null && array_list.size() !=0) {
+                    mView.setListFocus(array_list);
+                }
             }
 
             @Override
