@@ -38,7 +38,6 @@ public class TestActivity extends BaseActivity {
                             Log.d("title","title--" + element1.attr("title"));
                             stringBuilder.append(element1.attr("title")).append("\n");
                         }
-
                     }
                     textView.setText(stringBuilder.toString());//Executor
                     break;

@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.design.widget.AppBarLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            app:tabTextAppearance="@android:style/TextAppearance.Holo.Medium"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:tabTextColor="@color/colorPrimaryDark"
-            app:tabSelectedTextColor="@color/white"
-            app:tabIndicatorColor="@color/white"/>
-    </android.support.design.widget.AppBarLayout>
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                app:tabTextAppearance="@android:style/TextAppearance.Holo.Medium"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/black"
+                />
+        </android.support.design.widget.AppBarLayout>
 
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-</android.support.design.widget.CoordinatorLayout>
+        android:layout_margin="30dp"
+        android:src="@drawable/news"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:layout_anchorGravity="top|left"
+        />
+</RelativeLayout>

@@ -41,7 +41,7 @@
             android:name=".video.ChannelActivity">
         </activity>
         <activity
-            android:theme="@style/AppTheme"
+            android:theme="@style/VideoActivityTheme"
             android:launchMode="singleTop"
             android:name=".video.VideoActivity">
         </activity>

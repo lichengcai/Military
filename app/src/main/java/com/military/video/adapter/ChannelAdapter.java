@@ -34,12 +34,9 @@ public class ChannelAdapter extends RecyclerView.Adapter {
         return mData.get(position);
     }
 
-    public void addItem(Channel channel) {
-        if (channel != null) {
-            mData.add(channel);
+    public void addItem() {
             flag = true;
             notifyDataSetChanged();
-        }
     }
 
     public ChannelAdapter(Context mContext,ArrayList<Channel> mData) {
