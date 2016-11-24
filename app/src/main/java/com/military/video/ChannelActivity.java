@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.Toast;
 
+import com.military.MilitaryApplication;
 import com.military.R;
 import com.military.SpaceItemDecoration;
 import com.military.bean.Channel;
@@ -35,7 +36,7 @@ public class ChannelActivity extends BaseActivity {
     RecyclerView mRecyclerAllChannel;
 
     private ChannelAdapter mAdapter;
-    private ChannelAdapter mAllAdapter;
+    private ChannelAdapter mUnselectedAdapter;
     private ArrayList<Channel> mArrayUnChecked = new ArrayList<>();
     private ArrayList<Channel> mArrayAll = new ArrayList<>();
 
@@ -46,8 +47,8 @@ public class ChannelActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         addAllChannel();
-        mAdapter = new ChannelAdapter(mContext,mSelected);
-        mAllAdapter = new ChannelAdapter(mContext,mArrayUnChecked);
+        mAdapter = new ChannelAdapter(mContext, MilitaryApplication.mSelected);
+        mUnselectedAdapter = new ChannelAdapter(mContext,mArrayUnChecked);
 
         mRecyclerMyChannel.setLayoutManager(new GridLayoutManager(mContext,4));
         mRecyclerMyChannel.addItemDecoration(new SpaceItemDecoration(0,0,dip2px(5),dip2px(5)));
@@ -55,7 +56,7 @@ public class ChannelActivity extends BaseActivity {
 
         mRecyclerAllChannel.setLayoutManager(new GridLayoutManager(mContext,4));
         mRecyclerAllChannel.addItemDecoration(new SpaceItemDecoration(0,0,dip2px(5),dip2px(5)));
-        mRecyclerAllChannel.setAdapter(mAllAdapter);
+        mRecyclerAllChannel.setAdapter(mUnselectedAdapter);
 
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -68,17 +69,14 @@ public class ChannelActivity extends BaseActivity {
                 ani.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-                        mArrayAll.add(channel);
-                        mAllAdapter.addItem();
-
+                        mArrayUnChecked.add(channel);
+                        mUnselectedAdapter.addItem();
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        mSelected.remove(position);
+                        MilitaryApplication.mSelected.remove(position);//inspector
                         mAdapter.notifyDataSetChanged();
-
-
                     }
 
                     @Override
@@ -90,26 +88,26 @@ public class ChannelActivity extends BaseActivity {
             }
         });
 
-        mAllAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mUnselectedAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, final int position) {
                 Animation ani = AnimationUtils.loadAnimation(ChannelActivity.this,R.anim.channelani);
-                final Channel channel = mAdapter.getItem(position);
+                final Channel channel = mUnselectedAdapter.getItem(position);
                 Log.d("channel","channel--" + channel.toString());
 
                 view.startAnimation(ani);
                 ani.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-                        mSelected.add(channel);
+                        MilitaryApplication.mSelected.add(channel);
                         mAdapter.addItem();
 
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        mArrayAll.remove(position);
-                        mAllAdapter.notifyDataSetChanged();
+                        mArrayUnChecked.remove(position);
+                        mUnselectedAdapter.notifyDataSetChanged();
 
                     }
 
@@ -150,11 +148,18 @@ public class ChannelActivity extends BaseActivity {
         mArrayAll.add(ch_chixiu);
         mArrayAll.add(ch_shougong);
 
+
         for (int i=0; i<mArrayAll.size(); i++) {
-            for (int j=0; j<mSelected.size(); j++) {
-                if (!mArrayAll.get(i).equals(mSelected.get(j))) {
-                    mArrayUnChecked.add(mSelected.get(j));
+            boolean b = false;
+            for (int j=0; j<MilitaryApplication.mSelected.size(); j++) {
+                if (mArrayAll.get(i).equals(MilitaryApplication.mSelected.get(j))) {
+                    b = true;
+                    break;
                 }
+            }
+
+            if (!b) {
+                mArrayUnChecked.add(mArrayAll.get(i));
             }
         }
     }

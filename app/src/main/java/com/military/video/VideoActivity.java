@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 
+import com.military.MilitaryApplication;
 import com.military.R;
 import com.military.bean.Channel;
 import com.military.ui.activity.BaseActivity;
@@ -23,7 +26,7 @@ import butterknife.ButterKnife;
  * Created by lichengcai on 2016/11/22.
  */
 
-public class VideoActivity extends BaseActivity {
+public class VideoActivity extends AppCompatActivity {
     @BindView(R.id.tab_layout)
     TabLayout mTabLayout;
     @BindView(R.id.viewpager)
@@ -37,7 +40,13 @@ public class VideoActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         ButterKnife.bind(this);
+        getIntent();
 
         init();
         mFab.setOnClickListener(new View.OnClickListener() {
@@ -49,20 +58,20 @@ public class VideoActivity extends BaseActivity {
     }
 
     private void init() {
-        if (mSelected.size() == 0) {
+        if (MilitaryApplication.mSelected.size() == 0) {
             Channel ch_joke = new Channel("joke",13);
             Channel ch_star = new Channel("star",16);
             Channel ch_beauty = new Channel("beauty",19);
-            mSelected.add(ch_beauty);
-            mSelected.add(ch_star);
-            mSelected.add(ch_joke);
+            MilitaryApplication.mSelected.add(ch_beauty);
+            MilitaryApplication.mSelected.add(ch_star);
+            MilitaryApplication.mSelected.add(ch_joke);
         }
         mAdapter = new VideoPagerAdapter(getSupportFragmentManager());
-        for (int i=0; i<mSelected.size(); i++) {
-            mAdapter.addFragment(FragmentVideo.newInstance(mSelected.get(i)),mSelected.get(i).getName());
+        for (int i=0; i<MilitaryApplication.mSelected.size(); i++) {
+            mAdapter.addFragment(FragmentVideo.newInstance(MilitaryApplication.mSelected.get(i)),MilitaryApplication.mSelected.get(i).getName());
         }
 
-        mViewPager.setOffscreenPageLimit(mSelected.size());
+        mViewPager.setOffscreenPageLimit(MilitaryApplication.mSelected.size());
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }
@@ -72,7 +81,11 @@ public class VideoActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 0) {
             if (requestCode == 0) {
-                Log.d("onActivityResult","requestCode==0");
+                mAdapter.clearData();
+                for (int i=0; i<MilitaryApplication.mSelected.size(); i++) {
+                    mAdapter.addFragment(FragmentVideo.newInstance(MilitaryApplication.mSelected.get(i)),MilitaryApplication.mSelected.get(i).getName());
+                }
+                mAdapter.notifyDataSetChanged();
             }
         }
     }
