@@ -15,7 +15,7 @@
         <activity
             android:launchMode="singleTop"
             android:theme="@style/AppTheme"
-            android:name=".soldier.MilitaryActivity">
+            android:name=".huanqiu.MilitaryActivity">
         </activity>
 
         <activity
@@ -28,6 +28,11 @@
             android:theme="@android:style/Theme.Light.NoTitleBar"
             android:launchMode="singleTop"
             android:name=".guide.GuideActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:theme="@android:style/Theme.Light.NoTitleBar"
@@ -44,10 +49,7 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             android:name=".ui.activity.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
     </application>
 

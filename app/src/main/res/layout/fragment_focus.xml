@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.military.widget.CustomScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.military.widget.convenientbanner.ConvenientBanner
+            android:id="@+id/bannerFocus"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerFocus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</com.military.widget.CustomScrollView>
