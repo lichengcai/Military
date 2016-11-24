@@ -2,6 +2,7 @@ package com.military.video;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -56,6 +57,7 @@ public class ChannelActivity extends BaseActivity {
 
         mRecyclerAllChannel.setLayoutManager(new GridLayoutManager(mContext,4));
         mRecyclerAllChannel.addItemDecoration(new SpaceItemDecoration(0,0,dip2px(5),dip2px(5)));
+        mRecyclerAllChannel.setItemAnimator(new DefaultItemAnimator());
         mRecyclerAllChannel.setAdapter(mUnselectedAdapter);
 
         mAdapter.setOnItemClickListener(new OnItemClickListener() {

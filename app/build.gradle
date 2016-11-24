@@ -65,6 +65,7 @@ dependencies {
     compile 'com.bm.photoview:library:1.4.1'
     //video lib
     compile 'fm.jiecao:jiecaovideoplayer:4.8.3'
+    compile 'com.nightonke:boommenu:1.0.9'
     
 }
 

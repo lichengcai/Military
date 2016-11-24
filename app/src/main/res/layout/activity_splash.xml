@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:pv="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black">
+
+    <com.military.widget.particleview.ParticleView
+        android:id="@+id/pv_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        pv:pv_particle_text_size="60sp"
+        pv:pv_particle_text="Myself" />
+
+</FrameLayout>

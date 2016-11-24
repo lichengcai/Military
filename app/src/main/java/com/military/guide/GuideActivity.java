@@ -3,6 +3,7 @@ package com.military.guide;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,6 +17,11 @@ import com.military.ui.activity.BaseActivity;
 import com.military.soldier.MilitaryActivity;
 import com.military.video.ChannelActivity;
 import com.military.video.VideoActivity;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.Types.BoomType;
+import com.nightonke.boommenu.Types.ButtonType;
+import com.nightonke.boommenu.Types.PlaceType;
+import com.nightonke.boommenu.Util;
 
 import java.util.ArrayList;
 
@@ -26,13 +32,11 @@ import butterknife.ButterKnife;
  * Created by lichengcai on 2016/11/18.
  */
 
-public class GuideActivity extends BaseActivity {
+public class GuideActivity extends BaseActivity  {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     private GuideListAdapter mAdapter;
     private ArrayList<GuideBean> mData= new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,6 +74,7 @@ public class GuideActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
         mRecyclerView.setAdapter(mAdapter);
     }
+
 
 
 }

@@ -28,12 +28,6 @@
             android:theme="@android:style/Theme.Light.NoTitleBar"
             android:launchMode="singleTop"
             android:name=".guide.GuideActivity">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:theme="@android:style/Theme.Light.NoTitleBar"
@@ -44,6 +38,16 @@
             android:theme="@style/VideoActivityTheme"
             android:launchMode="singleTop"
             android:name=".video.VideoActivity">
+        </activity>
+
+        <activity
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:name=".ui.activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
