@@ -6,15 +6,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.military.R;
 import com.military.bean.GuideBean;
 import com.military.guide.adapter.GuideListAdapter;
+import com.military.huanqiu.MilitaryActivity;
 import com.military.listener.OnItemClickListener;
 import com.military.ui.activity.BaseActivity;
-import com.military.soldier.MilitaryActivity;
-import com.military.video.ChannelActivity;
 import com.military.video.VideoActivity;
 
 import java.util.ArrayList;
@@ -26,13 +24,12 @@ import butterknife.ButterKnife;
  * Created by lichengcai on 2016/11/18.
  */
 
-public class GuideActivity extends BaseActivity {
+public class GuideActivity extends BaseActivity  {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
+
     private GuideListAdapter mAdapter;
     private ArrayList<GuideBean> mData= new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,5 +68,9 @@ public class GuideActivity extends BaseActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
+
+    public void change(View view) {
+
+    }
 
 }

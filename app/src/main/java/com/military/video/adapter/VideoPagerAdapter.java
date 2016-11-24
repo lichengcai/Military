@@ -23,6 +23,10 @@ public class VideoPagerAdapter extends FragmentPagerAdapter {
         mFragmentTitles.add(title);
     }
 
+    public void clearData() {
+        mFragmentTitles.clear();
+        mFragments.clear();
+    }
     @Override
     public Fragment getItem(int position) {
         return mFragments.get(position);

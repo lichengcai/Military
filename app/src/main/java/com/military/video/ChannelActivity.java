@@ -2,6 +2,7 @@ package com.military.video;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.Toast;
 
+import com.military.MilitaryApplication;
 import com.military.R;
 import com.military.SpaceItemDecoration;
 import com.military.bean.Channel;
@@ -35,7 +37,7 @@ public class ChannelActivity extends BaseActivity {
     RecyclerView mRecyclerAllChannel;
 
     private ChannelAdapter mAdapter;
-    private ChannelAdapter mAllAdapter;
+    private ChannelAdapter mUnselectedAdapter;
     private ArrayList<Channel> mArrayUnChecked = new ArrayList<>();
     private ArrayList<Channel> mArrayAll = new ArrayList<>();
 
@@ -46,11 +48,11 @@ public class ChannelActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         addAllChannel();
-        Log.d("ArrayList"," mSelected--" + mSelected.size());
-        Log.d("ArrayList"," mALL--" + mArrayAll.size());
 
-        mAdapter = new ChannelAdapter(mContext,mSelected);
-        mAllAdapter = new ChannelAdapter(mContext,mArrayAll);
+        mAdapter = new ChannelAdapter(mContext,MilitaryApplication.mSelected,ChannelAdapter.TAB_SELECTED);
+        mUnselectedAdapter = new ChannelAdapter(mContext,mArrayAll,ChannelAdapter.TAB_UNCHECKED);
+        mAdapter = new ChannelAdapter(mContext, MilitaryApplication.mSelected,ChannelAdapter.TAB_SELECTED);
+        mUnselectedAdapter = new ChannelAdapter(mContext,mArrayUnChecked,ChannelAdapter.TAB_UNCHECKED);
 
         mRecyclerMyChannel.setLayoutManager(new GridLayoutManager(mContext,4));
         mRecyclerMyChannel.addItemDecoration(new SpaceItemDecoration(0,0,dip2px(5),dip2px(5)));
@@ -58,7 +60,8 @@ public class ChannelActivity extends BaseActivity {
 
         mRecyclerAllChannel.setLayoutManager(new GridLayoutManager(mContext,4));
         mRecyclerAllChannel.addItemDecoration(new SpaceItemDecoration(0,0,dip2px(5),dip2px(5)));
-        mRecyclerAllChannel.setAdapter(mAllAdapter);
+        mRecyclerAllChannel.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerAllChannel.setAdapter(mUnselectedAdapter);
 
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -71,13 +74,13 @@ public class ChannelActivity extends BaseActivity {
                 ani.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-                        mArrayAll.add(channel);
-                        mAllAdapter.addItem();
+                        mArrayUnChecked.add(channel);
+                        mUnselectedAdapter.addItem();
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        mSelected.remove(position);
+                        MilitaryApplication.mSelected.remove(position);//inspector
                         mAdapter.notifyDataSetChanged();
                     }
 
@@ -90,26 +93,26 @@ public class ChannelActivity extends BaseActivity {
             }
         });
 
-        mAllAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mUnselectedAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, final int position) {
                 Animation ani = AnimationUtils.loadAnimation(ChannelActivity.this,R.anim.channelani);
-                final Channel channel = mAdapter.getItem(position);
+                final Channel channel = mUnselectedAdapter.getItem(position);
                 Log.d("channel","channel--" + channel.toString());
 
                 view.startAnimation(ani);
                 ani.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-                        mSelected.add(channel);
+                        MilitaryApplication.mSelected.add(channel);
                         mAdapter.addItem();
 
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        mArrayAll.remove(position);
-                        mAllAdapter.notifyDataSetChanged();
+                        mArrayUnChecked.remove(position);
+                        mUnselectedAdapter.notifyDataSetChanged();
 
                     }
 
@@ -124,18 +127,18 @@ public class ChannelActivity extends BaseActivity {
     }
 
     private void addAllChannel() {
-        Channel ch_joke = new Channel("joke",13);
-        Channel ch_star = new Channel("star",16);
-        Channel ch_beauty = new Channel("beauty",19);
-        Channel ch_dance = new Channel("dance",63);
-        Channel ch_music = new Channel("music",62);
-        Channel ch_food = new Channel("food",59);
-        Channel ch_meizhuang = new Channel("meizhuang",27);
-        Channel ch_nanshen = new Channel("nanshen",31);
-        Channel ch_baby = new Channel("baby",18);
-        Channel ch_habit = new Channel("habit",6);
-        Channel ch_chixiu = new Channel("chixiu",423);
-        Channel ch_shougong = new Channel("shougong",450);
+        Channel ch_joke = new Channel("搞笑",13);
+        Channel ch_star = new Channel("明星",16);
+        Channel ch_beauty = new Channel("女神",19);
+        Channel ch_dance = new Channel("舞蹈",63);
+        Channel ch_music = new Channel("音乐",62);
+        Channel ch_food = new Channel("美食",59);
+        Channel ch_meizhuang = new Channel("美妆",27);
+        Channel ch_nanshen = new Channel("男神",31);
+        Channel ch_baby = new Channel("宝宝",18);
+        Channel ch_habit = new Channel("宠物",6);
+        Channel ch_chixiu = new Channel("吃秀",423);
+        Channel ch_shougong = new Channel("手工",450);
 
         mArrayAll.add(ch_joke);
         mArrayAll.add(ch_star);
@@ -150,11 +153,18 @@ public class ChannelActivity extends BaseActivity {
         mArrayAll.add(ch_chixiu);
         mArrayAll.add(ch_shougong);
 
+
         for (int i=0; i<mArrayAll.size(); i++) {
-            for (int j=0; j<mSelected.size(); j++) {
-                if (!mArrayAll.get(i).equals(mSelected.get(j))) {
-                    mArrayUnChecked.add(mSelected.get(j));
+            boolean b = false;
+            for (int j=0; j<MilitaryApplication.mSelected.size(); j++) {
+                if (mArrayAll.get(i).equals(MilitaryApplication.mSelected.get(j))) {
+                    b = true;
+                    break;
                 }
+            }
+
+            if (!b) {
+                mArrayUnChecked.add(mArrayAll.get(i));
             }
         }
     }

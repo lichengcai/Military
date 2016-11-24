@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -16,6 +20,26 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        //输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
+//                        def fileName = "military.apk"
+                        def fileName = "military_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
+    }
+
+    productFlavors {
+
+        guanfang {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "000000"]
+
         }
     }
 }
@@ -41,6 +65,7 @@ dependencies {
     compile 'com.bm.photoview:library:1.4.1'
     //video lib
     compile 'fm.jiecao:jiecaovideoplayer:4.8.3'
+    compile 'com.nightonke:boommenu:1.0.9'
     
 }
 

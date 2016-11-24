@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
 import com.military.R;
 import com.military.bean.Channel;
 import com.military.bean.Video;
@@ -30,9 +32,10 @@ public class FragmentVideo extends FragmentBase implements VideoView{
     private static String URL = "http://www.meipai.com/square/";
     @BindView(R.id.recyclerVideo)
     RecyclerView mRecyclerView;
+    @BindView(R.id.layout_loading)
+    LinearLayout mLayoutLoading;
 
     private VideoAdapter mAdapter;
-    private int mType = -1;
     private Channel mChannel;
     private VideoPresenter mPresenter;
     private static final int MSG_GET_DATA_SUCCESS = 0;
@@ -56,6 +59,8 @@ public class FragmentVideo extends FragmentBase implements VideoView{
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_GET_DATA_SUCCESS:
+                    if (frg.mLayoutLoading != null)
+                        frg.mLayoutLoading.setVisibility(View.GONE);
                     ArrayList<Video> array = (ArrayList<Video>) msg.obj;
                     if (array != null) {
                         frg.mAdapter = new VideoAdapter(frg.getActivity(),array);
@@ -79,25 +84,16 @@ public class FragmentVideo extends FragmentBase implements VideoView{
         super.onViewCreated(view, savedInstanceState);
         mPresenter = new VideoPresenter(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mPresenter.getVideoInfo(URL+"19");
+        mPresenter.getVideoInfo(URL+mChannel.getId());
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mType = getArguments().getInt("type");
         mChannel = (Channel) getArguments().getSerializable("channel");
     }
 
-
-    public static FragmentVideo newInstance(int type) {
-        FragmentVideo fragmentListNews = new FragmentVideo();
-        Bundle bundle = new Bundle();
-        bundle.putInt("type",type);
-        fragmentListNews.setArguments(bundle);
-        return fragmentListNews;
-    }
 
     public static FragmentVideo newInstance(Channel channel) {
         FragmentVideo fragmentListNews = new FragmentVideo();

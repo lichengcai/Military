@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 
 public class BaseActivity extends FragmentActivity {
     protected BaseActivity mContext;
-    protected ArrayList<Channel> mSelected = new ArrayList<>();
 
     @Override
     protected void onStart() {

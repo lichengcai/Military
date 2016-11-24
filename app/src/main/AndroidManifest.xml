@@ -14,8 +14,8 @@
         >
         <activity
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme"
-            android:name=".soldier.MilitaryActivity">
+            android:theme="@style/VideoActivityTheme"
+            android:name=".huanqiu.MilitaryActivity">
         </activity>
 
         <activity
@@ -31,7 +31,6 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -44,6 +43,13 @@
             android:theme="@style/VideoActivityTheme"
             android:launchMode="singleTop"
             android:name=".video.VideoActivity">
+        </activity>
+
+        <activity
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:name=".ui.activity.SplashActivity">
+
         </activity>
     </application>
 

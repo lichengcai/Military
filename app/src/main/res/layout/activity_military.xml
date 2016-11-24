@@ -18,17 +18,17 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <!--<android.support.v4.view.ViewPager-->
-        <!--android:id="@+id/viewPager"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
-
-    <com.bm.library.PhotoView
-        android:id="@+id/img"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerInside"
-        android:src="@drawable/banner" />
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <!--<com.bm.library.PhotoView-->
+        <!--android:id="@+id/img"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scaleType="centerInside"-->
+        <!--android:src="@drawable/banner" />-->
 
 </android.support.design.widget.CoordinatorLayout>
