@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.military.huanqiu.view.MilitaryView;
 import com.military.ui.fragment.FragmentBase;
 import com.military.video.FragmentVideo;
 import com.military.widget.convenientbanner.ConvenientBanner;
+import com.military.widget.convenientbanner.holder.CBViewHolderCreator;
+import com.military.widget.convenientbanner.holderview.NetworkImageHolderView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -54,7 +57,16 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_GET_BANNER_SUCCESS:
-
+                    ArrayList<NewsBean> arrayList = (ArrayList<NewsBean>) msg.obj;
+                    Log.d("array"," array_banner--" + arrayList.size());
+                    frg.mBanner.setPages(new CBViewHolderCreator() {
+                        @Override
+                        public Object createHolder() {
+                            return new NetworkImageHolderView();
+                        }
+                    },arrayList);
+                    frg.mBanner.startTurning(5000);//设置轮播开始自动循环
+                    frg.mBanner.setScrollDuration(2000);//设置滑动速度
                     break;
                 case MSG_GET_LIST_SUCCESS:
 
