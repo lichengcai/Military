@@ -1,21 +1,29 @@
 package com.military.huanqiu;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.military.R;
-import com.military.bean.Channel;
 import com.military.bean.NewsBean;
+import com.military.bean.Video;
+import com.military.huanqiu.adapter.NewsListAdapter;
 import com.military.huanqiu.persenter.NewsListPresenter;
 import com.military.huanqiu.view.NewsListView;
 import com.military.ui.fragment.FragmentBase;
 import com.military.video.FragmentVideo;
+import com.military.video.adapter.VideoAdapter;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -23,8 +31,40 @@ import butterknife.ButterKnife;
  */
 
 public class FragmentNewsList extends FragmentBase implements NewsListView{
+    @BindView(R.id.recyclerVideo)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.layout_loading)
+    LinearLayout mLayoutLoading;
+
+    private NewsListAdapter mAdapter;
     private String url = null;
     private NewsListPresenter mPresenter;
+    private NewsListHandler mHandler = new NewsListHandler(this);
+
+    private static final int MSG_GET_DATA_SUCCESS = 0;
+    private static class NewsListHandler extends Handler {
+        private WeakReference<FragmentNewsList> ref;
+        private FragmentNewsList frg;
+
+        NewsListHandler(FragmentNewsList fragment) {
+            ref = new WeakReference<>(fragment);
+            frg = ref.get();
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_GET_DATA_SUCCESS:
+                    if (frg.mLayoutLoading != null)
+                        frg.mLayoutLoading.setVisibility(View.GONE);
+
+                    frg.mRecyclerView.setAdapter(frg.mAdapter);
+                    break;
+            }
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +99,11 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
 
     @Override
     public void setNewsList(ArrayList<NewsBean> arrayList) {
-
+        if (arrayList.size() != 0) {
+            mAdapter = new NewsListAdapter(getActivity(),arrayList);
+            if (mHandler != null) {
+                mHandler.sendEmptyMessage(MSG_GET_DATA_SUCCESS);
+            }
+        }
     }
 }

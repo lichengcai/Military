@@ -12,6 +12,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.ArrayList;
+
 /**
  * Created by lichengcai on 2016/11/28.
  */
@@ -25,28 +27,40 @@ public class NewsListPresenter {
         mModel = new NewsListModelImpl();
     }
 
+    public ArrayList<NewsBean> getNewsList(Document document) {
+        ArrayList<NewsBean> arrayList = new ArrayList<>();
+        Elements elements = document.select("div.fallsFlow");
+        for (Element element : elements) {
+
+            Elements elements1 =  element.select("h3");
+            Elements elements2 =  element.select("h5");
+            Elements elements3 =  element.select("h6");
+            if (elements1.size() == elements2.size() && elements2.size() == elements3.size()) {
+                for (int i=0; i<elements1.size(); i++) {
+                    NewsBean newsBean = new NewsBean();
+                    newsBean.setLinkUrl(elements1.get(i).select("a").attr("href"));
+                    newsBean.setTitle(elements1.get(i).text());
+                    newsBean.setDetailTitle(elements2.get(i).text());
+                    newsBean.setTime(elements3.get(i).text());
+                    arrayList.add(newsBean);
+                }
+
+            }
+        }
+
+        for (int i=0; i<arrayList.size(); i++) {
+            Log.d("setNewsList","array--" + arrayList.get(i).toString());
+        }
+        return arrayList;
+    }
     public void setNewsList(String url) {
         mModel.getListData(url, new OnLoadingListener() {
             @Override
             public void onSuccess(Document json) {
-                Elements elements = json.select("div.fallsFlow");
-                Log.d("setNewsList","elements--" + elements.size());
-                for (Element element : elements) {
-                    Elements hrefs =  element.select("h3");
-                    for (Element element1 : hrefs) {
-                        Log.d("setNewsList"," href--" + element1.attr("a[href]"));
-                    }
+                ArrayList<NewsBean> arrayList = getNewsList(json);
+                if (arrayList.size() != 0) {
+                    mView.setNewsList(arrayList);
                 }
-//                for (Element element : elements) {
-//                    Elements links = element.select("a");
-//                    for (Element element1 : links) {
-//                        NewsBean newsBean = new NewsBean();
-//                        newsBean.setTitle(element1.attr("title"));
-//                        newsBean.setLinkUrl(element1.attr("href"));
-//                        Log.d("setNewsList","title--" + element1.attr("title"));
-//                        Log.d("setNewsList","href--" + element1.attr("href"));
-//                    }
-//                }
             }
 
             @Override
