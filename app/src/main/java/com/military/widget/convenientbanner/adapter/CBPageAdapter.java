@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 
 import com.military.R;
+import com.military.bean.NewsBean;
 import com.military.bean.Test;
 import com.military.widget.convenientbanner.holder.CBViewHolderCreator;
 import com.military.widget.convenientbanner.holder.Holder;
@@ -100,7 +101,7 @@ public class CBPageAdapter<T> extends PagerAdapter {
             holder = (Holder<T>) view.getTag(R.id.cb_item_tag);
         }
         if (mDatas != null && !mDatas.isEmpty())
-            holder.UpdateUI(container.getContext(), position, ((Test)mDatas.get(position)).getImgUrl(),((Test)mDatas.get(position)).getTitle());
+            holder.UpdateUI(container.getContext(), position, ((NewsBean)mDatas.get(position)).getImgUrl(),((NewsBean)mDatas.get(position)).getTitle());
         return view;
     }
 

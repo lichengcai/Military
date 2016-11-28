@@ -29,13 +29,13 @@ public class MilitaryPresenter {
 
     private ArrayList<NewsBean> getBannerInfo(Document document) {
         ArrayList<NewsBean> arrayList = new ArrayList<>();
-        Elements images = document.select("[width=300]");
+        Elements images = document.select("[width=560]");
         Elements titles = document.select("div.imgTitle");
         if (images.size() == titles.size()) {
             for (int i=0; i<images.size(); i++) {
                 NewsBean newsBean = new NewsBean();
-                newsBean.setTitle(titles.text());
-                newsBean.setImgUrl(images.attr("src"));
+                newsBean.setTitle(titles.get(i).text());
+                newsBean.setImgUrl(images.get(i).attr("src"));
                 arrayList.add(newsBean);
             }
         }
@@ -64,6 +64,7 @@ public class MilitaryPresenter {
             @Override
             public void onSuccess(Document json) {
                 ArrayList<NewsBean> array_banner = getBannerInfo(json);
+                Log.d("getFocusData"," array_banner--" + array_banner.size());
                 if (array_banner != null && array_banner.size() != 0) {
                     mView.setBannerFocus(array_banner);
                 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.military.R;
 import com.military.bean.Channel;
 import com.military.bean.NewsBean;
+import com.military.huanqiu.adapter.FocusListAdapter;
 import com.military.huanqiu.persenter.MilitaryPresenter;
 import com.military.huanqiu.view.MilitaryView;
 import com.military.ui.fragment.FragmentBase;
@@ -41,6 +43,7 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
     private static final int MSG_GET_LIST_SUCCESS = 1;
     private String url = "http://mil.huanqiu.com/";
     private MilitaryPresenter mPresenter;
+    private FocusListAdapter mListAdapter;
 
     private FocusHandler mHandler = new FocusHandler(this);
     private static class FocusHandler extends Handler {
@@ -59,6 +62,9 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
                 case MSG_GET_BANNER_SUCCESS:
                     ArrayList<NewsBean> arrayList = (ArrayList<NewsBean>) msg.obj;
                     Log.d("array"," array_banner--" + arrayList.size());
+                    for (int i=0; i<arrayList.size(); i++) {
+                        Log.d("array"," array_banner--" + arrayList.get(i).toString());
+                    }
                     frg.mBanner.setPages(new CBViewHolderCreator() {
                         @Override
                         public Object createHolder() {
@@ -69,7 +75,8 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
                     frg.mBanner.setScrollDuration(2000);//设置滑动速度
                     break;
                 case MSG_GET_LIST_SUCCESS:
-
+                    frg.mRecycler.setLayoutManager(new LinearLayoutManager(frg.getActivity()));
+                    frg.mRecycler.setAdapter(frg.mListAdapter);
                     break;
             }
         }
@@ -99,6 +106,7 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
     @Override
     public void setListFocus(ArrayList<NewsBean> arrayList) {
         if (mHandler != null)
+            mListAdapter = new FocusListAdapter(getActivity(),arrayList);
             mHandler.obtainMessage(MSG_GET_LIST_SUCCESS,arrayList).sendToTarget();
     }
 }

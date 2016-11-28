@@ -48,6 +48,9 @@ public class ChannelActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         addAllChannel();
+
+        mAdapter = new ChannelAdapter(mContext,MilitaryApplication.mSelected,ChannelAdapter.TAB_SELECTED);
+        mUnselectedAdapter = new ChannelAdapter(mContext,mArrayAll,ChannelAdapter.TAB_UNCHECKED);
         mAdapter = new ChannelAdapter(mContext, MilitaryApplication.mSelected,ChannelAdapter.TAB_SELECTED);
         mUnselectedAdapter = new ChannelAdapter(mContext,mArrayUnChecked,ChannelAdapter.TAB_UNCHECKED);
 
