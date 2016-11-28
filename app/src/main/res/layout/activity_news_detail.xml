@@ -48,6 +48,8 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:backgroundTint="@color/gray"
+        app:rippleColor="@color/gray_light"
+        app:srcCompat="@drawable/icon_share" />
 
 </android.support.design.widget.CoordinatorLayout>

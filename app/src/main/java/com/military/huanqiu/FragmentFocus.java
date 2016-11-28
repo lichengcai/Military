@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,8 +65,9 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
                     frg.mListAdapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
-                            Toast.makeText(frg.getActivity()," item position--" + position,Toast.LENGTH_SHORT).show();
-                            frg.startActivity(new Intent(frg.getActivity(),NewsDetailActivity.class));
+                            Intent intent = new Intent(frg.getActivity(),NewsDetailActivity.class);
+                            intent.putExtra("newsBean",frg.mListAdapter.getListItem(position));
+                            frg.startActivity(intent);
                         }
                     });
                     break;

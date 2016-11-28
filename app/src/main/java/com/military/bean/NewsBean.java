@@ -1,10 +1,12 @@
 package com.military.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by lichengcai on 2016/11/24.
  */
 
-public class NewsBean {
+public class NewsBean implements Serializable{
     private String title;
     private String imgUrl;
     private String linkUrl;

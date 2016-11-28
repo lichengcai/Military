@@ -3,6 +3,7 @@ package com.military.huanqiu;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,8 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.military.R;
+import com.military.bean.NewsBean;
 import com.military.huanqiu.persenter.NewsDetailPresenter;
 import com.military.huanqiu.view.NewsDetailView;
 import com.squareup.picasso.Picasso;
@@ -31,6 +34,8 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
     ImageView mImgDetail;
     @BindView(R.id.text_content)
     TextView mContent;
+    @BindView(R.id.toolbar_layout)
+    CollapsingToolbarLayout mToolbarLayout;
 
     private ArrayList<String> mArrayImgs = new ArrayList<>();
     private static final int MSG_GET_CONTENT_SUCCESSFUL = 0;
@@ -59,8 +64,10 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
                     }
                     break;
                 case MSG_GET_IMG_SUCCESSFUL:
+                    if (act.mArrayImgs.size() != 0) {
+                        Picasso.with(act).load(act.mArrayImgs.get(0)).into(act.mImgDetail);
+                    }
 
-                    Picasso.with(act).load(act.mArrayImgs.get(0)).into(act.mImgDetail);
                     break;
             }
         }
@@ -71,11 +78,20 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
         setContentView(R.layout.activity_news_detail);
         ButterKnife.bind(this);
 
+        NewsBean newsBean = (NewsBean) getIntent().getSerializableExtra("newsBean");
+
         setSupportActionBar(mToolbar);
         setAllListener();
 
-        mPresenter = new NewsDetailPresenter(this);
-        mPresenter.getDetailInfo("http://mil.huanqiu.com/observation/2016-11/9738339.html");
+        if (newsBean != null) {
+            mPresenter = new NewsDetailPresenter(this);
+            mPresenter.getDetailInfo(newsBean.getLinkUrl());
+            mToolbarLayout.setTitle(newsBean.getTitle());
+        }else {
+            Toast.makeText(this,"get detail fail",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+
     }
 
     private void setAllListener() {
