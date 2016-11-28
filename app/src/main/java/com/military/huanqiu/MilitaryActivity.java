@@ -32,6 +32,8 @@ public class MilitaryActivity extends AppCompatActivity {
 
         mAdapter = new VideoPagerAdapter(getSupportFragmentManager());
         mAdapter.addFragment(new FragmentFocus(),"Focus");
+        mAdapter.addFragment(FragmentNewsList.newInstance("http://mil.huanqiu.com/china/"),"China");
+        mAdapter.addFragment(FragmentNewsList.newInstance("http://mil.huanqiu.com/world/"),"World");
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

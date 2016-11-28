@@ -90,7 +90,6 @@ public class FragmentVideo extends FragmentBase implements VideoView{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mChannel = (Channel) getArguments().getSerializable("channel");
     }
 

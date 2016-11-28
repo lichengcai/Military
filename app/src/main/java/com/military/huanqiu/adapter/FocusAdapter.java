@@ -45,6 +45,7 @@ public class FocusAdapter extends RecyclerView.Adapter {
     public NewsBean getBannerItem(int position) {
         return mDataFocus.get(position);
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEADER) {
