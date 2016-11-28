@@ -9,6 +9,5 @@ import java.util.ArrayList;
  */
 
 public interface MilitaryView {
-    void setBannerFocus(ArrayList<NewsBean> arrayList);
-    void setListFocus(ArrayList<NewsBean> arrayList);
+    void setFocus(ArrayList<NewsBean> array_banner,ArrayList<NewsBean> array_list);
 }

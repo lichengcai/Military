@@ -7,6 +7,7 @@
     <!-- 基础色 -->
     <color name="transparent">#00000000</color>
     <color name="gray">#808080</color>
+    <color name="bg_top_search_layout">#e8e8e8</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="red">#ff0000</color>
