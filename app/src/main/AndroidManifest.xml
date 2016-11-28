@@ -2,55 +2,48 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.military">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-        >
+        android:supportsRtl="true">
         <activity
+            android:name=".huanqiu.MilitaryActivity"
             android:launchMode="singleTop"
-            android:theme="@style/VideoActivityTheme"
-            android:name=".huanqiu.MilitaryActivity">
-        </activity>
-
+            android:theme="@style/VideoActivityTheme"></activity>
         <activity
-            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:name=".ui.activity.TestActivity"
             android:launchMode="singleTop"
-            android:name=".ui.activity.TestActivity">
-        </activity>
-
+            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
         <activity
-            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:name=".guide.GuideActivity"
             android:launchMode="singleTop"
-            android:name=".guide.GuideActivity">
-
+            android:theme="@android:style/Theme.Light.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:theme="@android:style/Theme.Light.NoTitleBar"
+            android:name=".video.ChannelActivity"
             android:launchMode="singleTop"
-            android:name=".video.ChannelActivity">
-        </activity>
+            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
         <activity
-            android:theme="@style/VideoActivityTheme"
+            android:name=".video.VideoActivity"
             android:launchMode="singleTop"
-            android:name=".video.VideoActivity">
-        </activity>
-
+            android:theme="@style/VideoActivityTheme"></activity>
         <activity
+            android:name=".ui.activity.SplashActivity"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
-            android:name=".ui.activity.SplashActivity">
-
-        </activity>
+            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
+        <activity
+            android:name=".huanqiu.NewsDetailActivity"
+            android:label="@string/title_activity_news_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

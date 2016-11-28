@@ -1,5 +1,6 @@
 package com.military.huanqiu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -64,6 +65,7 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
                         @Override
                         public void onItemClick(View view, int position) {
                             Toast.makeText(frg.getActivity()," item position--" + position,Toast.LENGTH_SHORT).show();
+                            frg.startActivity(new Intent(frg.getActivity(),NewsDetailActivity.class));
                         }
                     });
                     break;
