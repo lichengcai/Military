@@ -6,6 +6,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,6 @@ import butterknife.ButterKnife;
  */
 
 public class FragmentFocus extends FragmentBase implements MilitaryView{
-    @BindView(R.id.bannerFocus)
     ConvenientBanner mBanner;
     @BindView(R.id.recyclerFocus)
     RecyclerView mRecycler;
@@ -86,6 +86,8 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_focus,container,false);
         ButterKnife.bind(this,view);
+        mBanner = (ConvenientBanner) LayoutInflater.from(getActivity()).inflate(R.layout.header_focus,null).findViewById(R.id.bannerFocus);
+
         return view;
     }
 
