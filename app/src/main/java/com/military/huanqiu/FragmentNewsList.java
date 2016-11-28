@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +61,7 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
                     if (frg.mLayoutLoading != null)
                         frg.mLayoutLoading.setVisibility(View.GONE);
 
+                    frg.mRecyclerView.setLayoutManager(new LinearLayoutManager(frg.getContext()));
                     frg.mRecyclerView.setAdapter(frg.mAdapter);
                     break;
             }
@@ -99,7 +102,11 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
 
     @Override
     public void setNewsList(ArrayList<NewsBean> arrayList) {
+        for (int i=0; i<arrayList.size(); i++) {
+            Log.d("NewsList","array size---" + arrayList.get(i).toString());
+        }
         if (arrayList.size() != 0) {
+
             mAdapter = new NewsListAdapter(getActivity(),arrayList);
             if (mHandler != null) {
                 mHandler.sendEmptyMessage(MSG_GET_DATA_SUCCESS);
