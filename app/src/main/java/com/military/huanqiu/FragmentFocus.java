@@ -1,28 +1,25 @@
 package com.military.huanqiu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.military.R;
-import com.military.bean.Channel;
 import com.military.bean.NewsBean;
-import com.military.huanqiu.adapter.FocusListAdapter;
+import com.military.huanqiu.adapter.FocusAdapter;
 import com.military.huanqiu.persenter.MilitaryPresenter;
 import com.military.huanqiu.view.MilitaryView;
+import com.military.listener.OnItemClickListener;
 import com.military.ui.fragment.FragmentBase;
-import com.military.video.FragmentVideo;
-import com.military.widget.convenientbanner.ConvenientBanner;
-import com.military.widget.convenientbanner.holder.CBViewHolderCreator;
-import com.military.widget.convenientbanner.holderview.NetworkImageHolderView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -35,15 +32,15 @@ import butterknife.ButterKnife;
  */
 
 public class FragmentFocus extends FragmentBase implements MilitaryView{
-    ConvenientBanner mBanner;
+    @BindView(R.id.layout_loading)
+    LinearLayout mLayout_loading;
     @BindView(R.id.recyclerFocus)
     RecyclerView mRecycler;
 
-    private static final int MSG_GET_BANNER_SUCCESS =0;
     private static final int MSG_GET_LIST_SUCCESS = 1;
     private String url = "http://mil.huanqiu.com/";
     private MilitaryPresenter mPresenter;
-    private FocusListAdapter mListAdapter;
+    private FocusAdapter mListAdapter;
 
     private FocusHandler mHandler = new FocusHandler(this);
     private static class FocusHandler extends Handler {
@@ -59,24 +56,19 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
-                case MSG_GET_BANNER_SUCCESS:
-                    ArrayList<NewsBean> arrayList = (ArrayList<NewsBean>) msg.obj;
-                    Log.d("array"," array_banner--" + arrayList.size());
-                    for (int i=0; i<arrayList.size(); i++) {
-                        Log.d("array"," array_banner--" + arrayList.get(i).toString());
-                    }
-                    frg.mBanner.setPages(new CBViewHolderCreator() {
-                        @Override
-                        public Object createHolder() {
-                            return new NetworkImageHolderView();
-                        }
-                    },arrayList);
-                    frg.mBanner.startTurning(5000);//设置轮播开始自动循环
-                    frg.mBanner.setScrollDuration(2000);//设置滑动速度
-                    break;
                 case MSG_GET_LIST_SUCCESS:
+                    if (frg.mLayout_loading != null)
+                        frg.mLayout_loading.setVisibility(View.GONE);
                     frg.mRecycler.setLayoutManager(new LinearLayoutManager(frg.getActivity()));
                     frg.mRecycler.setAdapter(frg.mListAdapter);
+                    frg.mListAdapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            Intent intent = new Intent(frg.getActivity(),NewsDetailActivity.class);
+                            intent.putExtra("newsBean",frg.mListAdapter.getListItem(position));
+                            frg.startActivity(intent);
+                        }
+                    });
                     break;
             }
         }
@@ -86,8 +78,6 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_focus,container,false);
         ButterKnife.bind(this,view);
-        mBanner = (ConvenientBanner) LayoutInflater.from(getActivity()).inflate(R.layout.header_focus,null).findViewById(R.id.bannerFocus);
-
         return view;
     }
 
@@ -100,15 +90,11 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
 
 
     @Override
-    public void setBannerFocus(ArrayList<NewsBean> arrayList) {
+    public void setFocus(ArrayList<NewsBean> array_banner,ArrayList<NewsBean> array_list) {
         if (mHandler != null)
-            mHandler.obtainMessage(MSG_GET_BANNER_SUCCESS,arrayList).sendToTarget();
-    }
-
-    @Override
-    public void setListFocus(ArrayList<NewsBean> arrayList) {
-        if (mHandler != null)
-            mListAdapter = new FocusListAdapter(getActivity(),arrayList);
-            mHandler.obtainMessage(MSG_GET_LIST_SUCCESS,arrayList).sendToTarget();
+            mListAdapter = new FocusAdapter(getActivity(),array_banner,array_list);
+        if (mHandler != null) {
+            mHandler.sendEmptyMessage(MSG_GET_LIST_SUCCESS);
+        }
     }
 }

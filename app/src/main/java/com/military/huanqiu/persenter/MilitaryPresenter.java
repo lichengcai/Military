@@ -59,18 +59,15 @@ public class MilitaryPresenter {
         }
         return arrayList;
     }
+
     public void getFocusData(String url) {
         mModel.getMilitaryData(url, new OnLoadingListener() {
             @Override
             public void onSuccess(Document json) {
                 ArrayList<NewsBean> array_banner = getBannerInfo(json);
-                Log.d("getFocusData"," array_banner--" + array_banner.size());
-                if (array_banner != null && array_banner.size() != 0) {
-                    mView.setBannerFocus(array_banner);
-                }
                 ArrayList<NewsBean> array_list = getListInfo(json);
-                if (array_list != null && array_list.size() !=0) {
-                    mView.setListFocus(array_list);
+                if (array_banner.size() != 0 && array_list.size() != 0) {
+                    mView.setFocus(array_banner,array_list);
                 }
             }
 
