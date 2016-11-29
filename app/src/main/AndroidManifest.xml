@@ -13,11 +13,11 @@
         <activity
             android:name=".huanqiu.MilitaryActivity"
             android:launchMode="singleTop"
-            android:theme="@style/VideoActivityTheme"></activity>
+            android:theme="@style/VideoActivityTheme"/>
         <activity
             android:name=".ui.activity.TestActivity"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Light.NoTitleBar"/>
         <activity
             android:name=".guide.GuideActivity"
             android:launchMode="singleTop"
@@ -31,19 +31,24 @@
         <activity
             android:name=".video.ChannelActivity"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Light.NoTitleBar"/>
         <activity
             android:name=".video.VideoActivity"
             android:launchMode="singleTop"
-            android:theme="@style/VideoActivityTheme"></activity>
+            android:theme="@style/VideoActivityTheme"/>
         <activity
             android:name=".ui.activity.SplashActivity"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Light.NoTitleBar"/>
         <activity
             android:name=".huanqiu.NewsDetailActivity"
-            android:label="@string/title_activity_news_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".huanqiu.WeaponActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
