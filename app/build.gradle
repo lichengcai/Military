@@ -78,5 +78,5 @@ dependencies {
 
 repositories {
     mavenCentral() // jcenter() works as well because it pulls from Maven Central
-    maven { url 'http://maven.koolearn-inc.com/nexus/content/repositories/ydcx_release' }
+//    maven { url 'http://maven.koolearn-inc.com/nexus/content/repositories/ydcx_release' }
 }

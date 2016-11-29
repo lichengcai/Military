@@ -23,11 +23,10 @@ android {
 
 dependencies {
 
-    compile 'com.koolearn:libammsdk:1.0@jar'
+//    compile 'com.koolearn:libammsdk:1.0@jar'
 }
 
 repositories {
-    mavenCentral() // jcenter() works as well because it pulls from Maven Central
     maven { url 'http://maven.koolearn-inc.com/nexus/content/repositories/ydcx_release' }
 }
 

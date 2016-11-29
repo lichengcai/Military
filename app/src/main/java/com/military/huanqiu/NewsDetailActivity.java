@@ -79,7 +79,9 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
         ButterKnife.bind(this);
 
         NewsBean newsBean = (NewsBean) getIntent().getSerializableExtra("newsBean");
-
+        if (newsBean != null) {
+            Log.d("newsBean"," toString--" + newsBean.toString());
+        }
         setSupportActionBar(mToolbar);
         setAllListener();
 

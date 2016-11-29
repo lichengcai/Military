@@ -27,7 +27,7 @@ public class NewsDetailPresenter {
     }
 
     private String getContent(Document document) {
-        Elements contents = document.select("div#text p:gt(2)");//表示 div 中包含 2 个以上的 p
+        Elements contents = document.select("div#text p:gt(0)");//表示 div 中包含 2 个以上的 p
         String content = contents.text();
         Log.d("getDetailInfo"," content---" + content);
         return content;
