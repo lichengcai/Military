@@ -1,4 +1,5 @@
 *.iml
+military.jks
 .gradle
 /local.properties
 /.idea/workspace.xml

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 
 import com.military.R;
+import com.snalib.ShareFactory;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
