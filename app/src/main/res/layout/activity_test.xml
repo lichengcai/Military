@@ -3,20 +3,4 @@
     android:layout_width="match_parent"
     android:layout_height="300dp">
 
-    <ImageView
-        android:id="@+id/image"
-        android:scaleType="fitXY"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-    <TextView
-        android:layout_alignParentBottom="true"
-        android:id="@+id/title"
-        android:background="#0effffff"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:text="this is title this is title"
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
 </RelativeLayout>

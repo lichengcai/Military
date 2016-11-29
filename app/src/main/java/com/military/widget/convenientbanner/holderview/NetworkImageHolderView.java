@@ -1,6 +1,7 @@
 package com.military.widget.convenientbanner.holderview;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,7 +25,7 @@ public class NetworkImageHolderView implements Holder<String> {
 //        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
 //        return imageView;
 
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_test,null);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_banner,null);
         imageView = (ImageView) view.findViewById(R.id.image);
         textView = (TextView) view.findViewById(R.id.title);
         return view;
@@ -33,8 +34,13 @@ public class NetworkImageHolderView implements Holder<String> {
     @Override
     public void UpdateUI(Context context, int position, String data,String title) {
 //        imageView.setImageResource(R.drawable.icon_default_large);
-        textView.setText(title);
-        Picasso.with(context).load(data).into(imageView);
+        if (!TextUtils.isEmpty(title)) {
+            textView.setText(title);
+        }
+        if (!TextUtils.isEmpty(data)) {
+            Picasso.with(context).load(data).into(imageView);
+        }
+
 
     }
 }

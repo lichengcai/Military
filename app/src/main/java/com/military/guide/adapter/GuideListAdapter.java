@@ -2,6 +2,7 @@ package com.military.guide.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +43,19 @@ public class GuideListAdapter extends RecyclerView.Adapter {
         if (holder instanceof GuideHolder) {
             GuideBean guideBean = mData.get(position);
             ((GuideHolder) holder).textName.setText(guideBean.getName());
-            Picasso.with(mContext).load(guideBean.getImgUrl()).into(((GuideHolder) holder).imageView);
+            if (!TextUtils.isEmpty(guideBean.getImgUrl())) {
+                Picasso.with(mContext).load(guideBean.getImgUrl()).into(((GuideHolder) holder).imageView);
+            }else {
+                switch (position) {
+                    case 2:
+                        ((GuideHolder) holder).imageView.setImageResource(R.drawable.icon_add);
+                        break;
+                    case 3:
+                        ((GuideHolder) holder).imageView.setImageResource(R.drawable.icon_share);
+                        break;
+                }
 
+            }
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
