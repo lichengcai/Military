@@ -113,6 +113,8 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
 
             }
         });
+
+//        frame.setEnabled(false);
         return view;
     }
 
