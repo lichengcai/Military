@@ -11,10 +11,9 @@ import com.military.R;
 import com.military.bean.GuideBean;
 import com.military.guide.adapter.GuideListAdapter;
 import com.military.huanqiu.MilitaryActivity;
-import com.military.huanqiu.WeaponActivity;
+import com.military.huanqiu.weapon.WeaponActivity;
 import com.military.listener.OnItemClickListener;
 import com.military.ui.activity.BaseActivity;
-import com.military.ui.activity.TestActivity;
 import com.military.video.VideoActivity;
 
 import java.util.ArrayList;

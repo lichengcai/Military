@@ -1,10 +1,12 @@
-package com.military.huanqiu;
+package com.military.huanqiu.weapon;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.military.R;
 import com.military.ui.activity.BaseActivity;
+
+import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
 /**
  * Created by lichengcai on 2016/11/29.

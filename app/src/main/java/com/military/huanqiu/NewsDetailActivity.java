@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,6 +25,13 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.header.MaterialHeader;
+import in.srain.cube.views.ptr.header.StoreHouseHeader;
+
+import static java.security.AccessController.getContext;
 
 public class NewsDetailActivity extends AppCompatActivity implements NewsDetailView{
     @BindView(R.id.toolbar)
@@ -78,7 +86,7 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
         setContentView(R.layout.activity_news_detail);
         ButterKnife.bind(this);
 
-        NewsBean newsBean = (NewsBean) getIntent().getSerializableExtra("newsBean");
+        final NewsBean newsBean = (NewsBean) getIntent().getSerializableExtra("newsBean");
         if (newsBean != null) {
             Log.d("newsBean"," toString--" + newsBean.toString());
         }
