@@ -12,6 +12,7 @@ import com.military.bean.GuideBean;
 import com.military.guide.adapter.GuideListAdapter;
 import com.military.huanqiu.MilitaryActivity;
 import com.military.huanqiu.weapon.WeaponActivity;
+import com.military.huanqiu.weapon.WeaponDetailActivity;
 import com.military.listener.OnItemClickListener;
 import com.military.ui.activity.BaseActivity;
 import com.military.video.VideoActivity;
@@ -55,7 +56,7 @@ public class GuideActivity extends BaseActivity  {
                             startActivity(new Intent(GuideActivity.this, VideoActivity.class));
                             break;
                         case 2:
-                            startActivity(new Intent(GuideActivity.this, WeaponActivity.class));
+                            startActivity(new Intent(GuideActivity.this, WeaponDetailActivity.class));
                             break;
                     }
                 }
