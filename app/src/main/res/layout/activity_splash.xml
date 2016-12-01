@@ -3,13 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:pv="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black">
+    >
 
-    <com.military.widget.particleview.ParticleView
-        android:id="@+id/pv_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        pv:pv_particle_text_size="60sp"
-        pv:pv_particle_text="Myself" />
+   <ScrollView
+       android:background="@color/black"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+      <TextView
+          android:text="@string/large_text"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+   </ScrollView>
 
 </FrameLayout>

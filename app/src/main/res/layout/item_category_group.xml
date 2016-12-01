@@ -7,13 +7,16 @@
 
     <TextView
         android:textSize="20sp"
-        android:textColor="@color/divider"
+        android:textColor="@color/black"
         android:id="@+id/text_group"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <ImageView
-        android:src="@drawable/arrow_up"
+        android:id="@+id/image"
+        android:layout_centerVertical="true"
+        android:src="@drawable/down_arrow"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

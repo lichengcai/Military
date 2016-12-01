@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.military.R;
@@ -74,8 +75,15 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_category_group,parent,false);
         }
         TextView textView = ViewHolder.get(convertView,R.id.text_group);
+        ImageView imageView = ViewHolder.get(convertView,R.id.image);
 
         textView.setText(mGroupData.get(groupPosition));
+
+        if (isExpanded) {
+            imageView.setImageResource(R.drawable.up_arrow);
+        }else {
+            imageView.setImageResource(R.drawable.down_arrow);
+        }
         return convertView;
     }
 

@@ -49,10 +49,9 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar"
             android:name=".huanqiu.weapon.WeaponDetailActivity"
-            />
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
