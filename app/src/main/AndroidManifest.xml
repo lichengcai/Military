@@ -47,7 +47,7 @@
         <activity
             android:name=".huanqiu.weapon.WeaponActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name=".huanqiu.weapon.WeaponDetailActivity"
             android:launchMode="singleTop"

@@ -20,7 +20,6 @@ public class WeaponActivity extends BaseActivity {
     @BindView(R.id.list_category)
     ExpandableListView mListCategory;
 
-    private CategoryAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,11 +27,16 @@ public class WeaponActivity extends BaseActivity {
         setContentView(R.layout.activity_weapon);
         ButterKnife.bind(this);
 
-        mListCategory.setGroupIndicator(null);
-        mAdapter = new CategoryAdapter(mContext,CategoryBean.getCategoryData());
-        mListCategory.setAdapter(mAdapter);
+        setWeaponCategoryList();
+
 
     }
 
+    private void setWeaponCategoryList() {
+        CategoryAdapter mAdapter;
+        mListCategory.setGroupIndicator(null);
+        mAdapter = new CategoryAdapter(mContext,CategoryBean.getCategoryData());
+        mListCategory.setAdapter(mAdapter);
+    }
 
 }

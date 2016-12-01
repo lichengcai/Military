@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-   <ExpandableListView
-       android:id="@+id/list_category"
+    android:layout_height="match_parent" >
+   <FrameLayout
+       android:background="@color/white"
+       android:id="@+id/frameLayout"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"/>
-</LinearLayout>
+       android:layout_height="match_parent" >
+
+   </FrameLayout>
+   <LinearLayout
+       android:gravity="center"
+       android:background="@color/blue"
+       android:id="@+id/linearLayout"
+       android:layout_width="300dp"
+       android:layout_height="match_parent"
+       android:layout_gravity="start"
+       android:orientation="vertical" >
+      <ExpandableListView
+          android:id="@+id/list_category"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+   </LinearLayout>
+</android.support.v4.widget.DrawerLayout>
