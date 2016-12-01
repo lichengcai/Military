@@ -56,7 +56,7 @@ public class GuideActivity extends BaseActivity  {
                             startActivity(new Intent(GuideActivity.this, VideoActivity.class));
                             break;
                         case 2:
-                            startActivity(new Intent(GuideActivity.this, WeaponDetailActivity.class));
+                            startActivity(new Intent(GuideActivity.this, WeaponActivity.class));
                             break;
                     }
                 }

@@ -9,6 +9,10 @@ public class CategoryBean {
     private String linkUrl;
     private String imgUrl;
 
+    public CategoryBean(String name, String linkUrl) {
+        this.name = name;
+        this.linkUrl = linkUrl;
+    }
 
     @Override
     public String toString() {
@@ -43,3 +47,4 @@ public class CategoryBean {
         this.imgUrl = imgUrl;
     }
 }
+
