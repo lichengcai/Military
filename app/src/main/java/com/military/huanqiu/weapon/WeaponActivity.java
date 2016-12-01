@@ -17,13 +17,8 @@ import com.military.huanqiu.view.WeaponView;
 import com.military.ui.activity.BaseActivity;
 import com.military.utils.FileUtils;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.lang.ref.WeakReference;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +36,7 @@ public class WeaponActivity extends BaseActivity implements WeaponView{
 
     private static final String url = "http://weapon.huanqiu.com/weaponlist/";
     private String fileName  = FileUtils.hashKeyForDisk(url);
+    private String fileTime = FileUtils.hashKeyForDisk(url + "time");
     private WeaponPresenter mPresenter;
     private WeaponHandler mHandler = new WeaponHandler(this);
     private static final int MSG_GET_WEAPON_DATA = 0;
@@ -66,68 +62,53 @@ public class WeaponActivity extends BaseActivity implements WeaponView{
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            act.writeFiles(content);
+                            FileUtils.writeFiles(act,content,act.fileName);
+                            FileUtils.writeFiles(act,String.valueOf(System.currentTimeMillis()),act.fileTime);
                         }
                     }).start();
                     break;
             }
         }
     }
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weapon);
         ButterKnife.bind(this);
 
-        mPresenter = new WeaponPresenter(this,this);
-        setWeaponCategoryList();
-
-        String content = readFiles();
-        if (content != null) {
-            mContent.setText(content);
-            Log.d("WeaponActivity"," file");
-        }else {
-            mPresenter.getWeaponListData(url);
-            Log.d("WeaponActivity"," internet");
-        }
-
-        for (String name : this.fileList()) {
-            Log.d("WeaponActivity"," name---" + name);
-        }
+//        mPresenter = new WeaponPresenter(this,this);
+//        setWeaponCategoryList();
+//
+//
+//        String time = FileUtils.readFiles(this,fileTime);
+//        if (time != null) {
+//            if ((System.currentTimeMillis() - Long.parseLong(time))/1000 > 100) {
+//                this.deleteFile(fileName);
+//                this.deleteFile(fileTime);
+//
+//                mPresenter.getWeaponListData(url);
+//                Log.d("WeaponActivity"," internet again");
+//
+//            }else {
+//                String content = FileUtils.readFiles(this,fileName);
+//                if (content != null) {
+//                    mContent.setText(content);
+//                    Log.d("WeaponActivity"," file");
+//                }
+//            }
+//        }else {
+//            mPresenter.getWeaponListData(url);
+//            Log.d("WeaponActivity"," internet");
+//        }
+//
+//        for (String name : this.fileList()) {
+//            Log.d("WeaponActivity"," name---" + name);
+//        }
     }
 
-
-    private void writeFiles(String content) {
-        try {
-            // 打开文件获取输出流，文件不存在则自动创建
-            FileOutputStream fos = openFileOutput(fileName,
-                    Context.MODE_PRIVATE);
-            fos.write(content.getBytes());
-            fos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // 读取文件内容
-    private String readFiles() {
-        String content = null;
-        try {
-            FileInputStream fis = openFileInput(fileName);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int len = 0;
-            while ((len = fis.read(buffer)) != -1) {
-                baos.write(buffer, 0, len);
-            }
-            content = baos.toString();
-            fis.close();
-            baos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return content;
-    }
 
     private void setWeaponCategoryList() {
         CategoryAdapter mAdapter;
