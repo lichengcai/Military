@@ -29,5 +29,21 @@ public class TestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Document document = Jsoup.connect("http://weapon.huanqiu.com/weaponlist/").get();
+                    Log.d("thread"," document --" + document.toString());
+                    Log.d("thread"," document --" + document.outerHtml());
+                    Document document1 = new Document("");
+                    document1.html(document.html());
+                    Log.d("thread"," document1 --" + document1.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
     }
 }

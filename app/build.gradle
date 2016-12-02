@@ -74,6 +74,7 @@ dependencies {
     //刷新控件
     compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile files('libs/crittercism_v3_0_3_sdkonly.jar')
+    compile 'dom4j:dom4j:20040902.021138'
 }
 
 

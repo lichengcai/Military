@@ -1,5 +1,6 @@
 package com.military.huanqiu.persenter;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.military.huanqiu.model.WeaponModel;
@@ -17,7 +18,7 @@ public class WeaponPresenter {
     private WeaponModel mModel;
     private WeaponView mView;
 
-    public WeaponPresenter(Context context,WeaponView view){
+    public WeaponPresenter(Activity context, WeaponView view){
         this.mView = view;
         mModel = new WeaponModelImpl(context);
     }
