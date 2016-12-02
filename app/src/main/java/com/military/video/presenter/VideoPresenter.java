@@ -1,5 +1,6 @@
 package com.military.video.presenter;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.military.bean.Video;
@@ -23,9 +24,9 @@ public class VideoPresenter {
     private VideoView mVideoView;
     private VideoModel mVideoModel;
 
-    public VideoPresenter(VideoView videoView) {
+    public VideoPresenter(Activity activity,VideoView videoView) {
         this.mVideoView = videoView;
-        mVideoModel = new VideoModelImpl();
+        mVideoModel = new VideoModelImpl(activity);
     }
 
     public void getVideoInfo(String url) {

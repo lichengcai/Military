@@ -82,7 +82,7 @@ public class FragmentVideo extends FragmentBase implements VideoView{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter = new VideoPresenter(this);
+        mPresenter = new VideoPresenter(getActivity(),this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mPresenter.getVideoInfo(URL+mChannel.getId());
     }
