@@ -48,6 +48,7 @@ public class WeaponListAdapter extends RecyclerView.Adapter {
             ((WeaponListHolder) holder).text_weapon_name.setText(weaponBean.getName());
             ((WeaponListHolder) holder).text_country_name.setText(weaponBean.getCountryName());
             ((WeaponListHolder) holder).text_describe.setText(weaponBean.getDescribe());
+            ((WeaponListHolder) holder).text_category.setText(weaponBean.getCategory());
 
             if (onItemClickListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +72,7 @@ public class WeaponListAdapter extends RecyclerView.Adapter {
         ImageView img_country;
         TextView text_country_name;
         TextView text_describe;
+        TextView text_category;
 
         WeaponListHolder(View itemView) {
             super(itemView);
@@ -79,6 +81,7 @@ public class WeaponListAdapter extends RecyclerView.Adapter {
             img_country = (ImageView) itemView.findViewById(R.id.img_country);
             text_country_name = (TextView) itemView.findViewById(R.id.text_country_name);
             text_describe = (TextView) itemView.findViewById(R.id.text_describe);
+            text_category = (TextView) itemView.findViewById(R.id.text_category);
         }
     }
 }
