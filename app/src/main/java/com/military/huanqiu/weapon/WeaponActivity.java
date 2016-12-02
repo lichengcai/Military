@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,7 +36,7 @@ import butterknife.ButterKnife;
  * Created by lichengcai on 2016/11/29.
  */
 
-public class WeaponActivity extends BaseActivity implements WeaponView{
+public class WeaponActivity extends AppCompatActivity implements WeaponView{
 //    @BindView(R.id.list_category)
 //    ExpandableListView mListCategory;
     @BindView(R.id.recyclerWeaponList)
@@ -92,12 +93,15 @@ public class WeaponActivity extends BaseActivity implements WeaponView{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weapon);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         ButterKnife.bind(this);
 
         mPresenter = new WeaponPresenter(this,this);
 //        setWeaponCategoryList();
         CategoryAdapter mAdapter;
-        mAdapter = new CategoryAdapter(mContext,CategoryBean.getCategoryData());
+        mAdapter = new CategoryAdapter(WeaponActivity.this,CategoryBean.getCategoryData());
         CategoryBean categoryBean = mAdapter.getCategoryBean(1,0);
 
         mPresenter.getWeaponListData(categoryBean.getLinkUrl());
