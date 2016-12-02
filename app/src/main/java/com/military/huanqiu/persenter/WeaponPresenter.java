@@ -1,16 +1,13 @@
 package com.military.huanqiu.persenter;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.military.bean.WeaponBean;
 import com.military.huanqiu.model.WeaponModel;
 import com.military.huanqiu.model.WeaponModelImpl;
 import com.military.huanqiu.view.WeaponView;
 import com.military.listener.OnLoadingListener;
-
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
@@ -45,6 +42,7 @@ public class WeaponPresenter {
                         WeaponBean weaponBean = new WeaponBean();
                         weaponBean.setName(weapon.get(i).select("img").attr("alt"));
                         weaponBean.setImgUrl(weapon.get(i).select("img").attr("src"));
+                        weaponBean.setLinkUrl("http://weapon.huanqiu.com" + weapon.get(i).select("a").attr("href"));
                         weaponBean.setDescribe(weapon.get(i).text());
                         weaponBean.setCountryName(country.get(i).select("img").attr("alt"));
                         weaponBean.setContryImg(country.get(i).select("img").attr("src"));

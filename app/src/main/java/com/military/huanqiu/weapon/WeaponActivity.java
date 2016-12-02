@@ -68,7 +68,6 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_GET_WEAPON_DATA:
-
                     act.mLayoutManager = new GridLayoutManager(act,2);
                     act.mRecyclerView.setLayoutManager(act.mLayoutManager);
                     act.mRecyclerView.setAdapter(act.mAdapter);
@@ -119,6 +118,9 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
 
     @Override
     public void setWeaponList(ArrayList<WeaponBean> arrayList) {
+        for (int i=0; i<arrayList.size(); i++) {
+            Log.d("setWeaponList"," array to string--" + arrayList.get(i).toString());
+        }
         mAdapter = new WeaponListAdapter(WeaponActivity.this,arrayList);
         if (mHandler != null)
             mHandler.sendEmptyMessage(MSG_GET_WEAPON_DATA);

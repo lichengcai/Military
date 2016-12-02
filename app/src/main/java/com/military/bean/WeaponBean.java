@@ -11,7 +11,7 @@ public class WeaponBean {
     private String countryImg;
     private String category;
     private String describe;
-
+    private String linkUrl;
 
     @Override
     public String toString() {
@@ -22,9 +22,17 @@ public class WeaponBean {
                 ", countryImg='" + countryImg + '\'' +
                 ", category='" + category + '\'' +
                 ", describe='" + describe + '\'' +
+                ", linkUrl='" + linkUrl + '\'' +
                 '}';
     }
 
+    public String getLinkUrl() {
+        return linkUrl;
+    }
+
+    public void setLinkUrl(String linkUrl) {
+        this.linkUrl = linkUrl;
+    }
     public String getName() {
         return name;
     }

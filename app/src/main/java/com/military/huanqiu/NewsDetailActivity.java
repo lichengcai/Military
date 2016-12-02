@@ -6,13 +6,12 @@ import android.os.Message;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +19,6 @@ import com.military.R;
 import com.military.bean.NewsBean;
 import com.military.huanqiu.persenter.NewsDetailPresenter;
 import com.military.huanqiu.view.NewsDetailView;
-import com.military.listener.AppBarStateChangeListener;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
@@ -28,9 +26,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
 public class NewsDetailActivity extends AppCompatActivity implements NewsDetailView{
@@ -46,8 +41,8 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
     CollapsingToolbarLayout mToolbarLayout;
     @BindView(R.id.app_bar)
     AppBarLayout mAppBar;
-    @BindView(R.id.frame)
-    PtrClassicFrameLayout mFrame;
+    @BindView(R.id.layout_loading)
+    LinearLayout mLayoutLoading;
 
     private ArrayList<String> mArrayImgs = new ArrayList<>();
     private static final int MSG_GET_CONTENT_SUCCESSFUL = 0;
@@ -69,8 +64,8 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_GET_CONTENT_SUCCESSFUL:
-                    if (act.mFrame != null)
-                        act.mFrame.refreshComplete();
+                    if (act.mLayoutLoading != null)
+                        act.mLayoutLoading.setVisibility(View.GONE);
                     String content = (String) msg.obj;
                     if (content != null) {
                         Log.d("handleMessage"," content--"  + content);
@@ -114,34 +109,34 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
         header.setBackgroundColor(getResources().getColor(R.color.black));
         header.setTextColor(getResources().getColor(R.color.white));
 
-        mFrame.setDurationToCloseHeader(1500);
-        mFrame.setHeaderView(header);
-        mFrame.addPtrUIHandler(header);
-
-        mFrame.setPtrHandler(new PtrDefaultHandler() {
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                if (newsBean != null && !TextUtils.isEmpty(newsBean.getLinkUrl())) {
-                    mPresenter.getDetailInfo(newsBean.getLinkUrl());
-                }
-            }
-        });
-        mAppBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                Log.d("STATE", state.name());
-                if( state == State.EXPANDED ) {//展开状态
-                    mFrame.setEnabled(true);
-
-                }else if(state == State.COLLAPSED){//折叠状态
-                    mFrame.setEnabled(false);
-
-                }else {//中间状态
-                    mFrame.setEnabled(false);
-
-                }
-            }
-        });
+//        mFrame.setDurationToCloseHeader(1500);
+//        mFrame.setHeaderView(header);
+//        mFrame.addPtrUIHandler(header);
+//
+//        mFrame.setPtrHandler(new PtrDefaultHandler() {
+//            @Override
+//            public void onRefreshBegin(PtrFrameLayout frame) {
+//                if (newsBean != null && !TextUtils.isEmpty(newsBean.getLinkUrl())) {
+//                    mPresenter.getDetailInfo(newsBean.getLinkUrl());
+//                }
+//            }
+//        });
+//        mAppBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+//            @Override
+//            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+//                Log.d("STATE", state.name());
+//                if( state == State.EXPANDED ) {//展开状态
+//                    mFrame.setEnabled(true);
+//
+//                }else if(state == State.COLLAPSED){//折叠状态
+//                    mFrame.setEnabled(false);
+//
+//                }else {//中间状态
+//                    mFrame.setEnabled(false);
+//
+//                }
+//            }
+//        });
     }
 
     private void setAllListener() {

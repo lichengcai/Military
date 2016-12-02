@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<in.srain.cube.views.ptr.PtrClassicFrameLayout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/frame"
-    android:background="@color/black"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    cube_ptr:ptr_duration_to_close="200"
-    cube_ptr:ptr_duration_to_close_header="1000"
-    cube_ptr:ptr_keep_header_when_refresh="true"
-    cube_ptr:ptr_pull_to_fresh="false"
-    cube_ptr:ptr_ratio_of_header_height_to_refresh="1.2"
-    cube_ptr:ptr_resistance="1.7">
 
-<android.support.design.widget.CoordinatorLayout
-    android:background="@color/white"
+<android.support.design.widget.CoordinatorLayout android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.military.huanqiu.NewsDetailActivity"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -54,6 +42,10 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_news_detail" />
+    <include
+        layout="@layout/layout_loading"
+        android:id="@+id/layout_loading"
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -62,10 +54,9 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:backgroundTint="@color/gray"
+        app:backgroundTint="@color/red"
         app:rippleColor="@color/gray_light"
         app:srcCompat="@drawable/icon_share" />
 
 </android.support.design.widget.CoordinatorLayout>
 
-</in.srain.cube.views.ptr.PtrClassicFrameLayout>
