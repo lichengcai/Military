@@ -1,5 +1,6 @@
 package com.military.huanqiu.persenter;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.military.bean.NewsBean;
@@ -22,9 +23,9 @@ public class MilitaryPresenter {
     private MilitaryModel mModel;
     private MilitaryView mView;
 
-    public MilitaryPresenter(MilitaryView view) {
+    public MilitaryPresenter(Activity activity, MilitaryView view) {
         this.mView = view;
-        mModel = new MilitaryModelImpl();
+        mModel = new MilitaryModelImpl(activity);
     }
 
     private ArrayList<NewsBean> getBannerInfo(Document document) {

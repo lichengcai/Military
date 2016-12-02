@@ -127,7 +127,7 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter = new NewsListPresenter(this);
+        mPresenter = new NewsListPresenter(getActivity(),this);
         if (url != null) {
             mPresenter.setNewsList(url);
         }

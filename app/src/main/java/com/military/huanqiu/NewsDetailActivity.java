@@ -100,7 +100,7 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
         setAllListener();
 
         if (newsBean != null) {
-            mPresenter = new NewsDetailPresenter(this);
+            mPresenter = new NewsDetailPresenter(this,this);
             mPresenter.getDetailInfo(newsBean.getLinkUrl());
             mToolbarLayout.setTitle(newsBean.getTitle());
         }else {

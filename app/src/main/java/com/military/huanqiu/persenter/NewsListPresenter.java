@@ -1,5 +1,6 @@
 package com.military.huanqiu.persenter;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.military.bean.NewsBean;
@@ -22,9 +23,9 @@ public class NewsListPresenter {
     private NewsListModel mModel;
     private NewsListView mView;
 
-    public NewsListPresenter(NewsListView mView){
+    public NewsListPresenter(Activity activity,NewsListView mView){
         this.mView = mView;
-        mModel = new NewsListModelImpl();
+        mModel = new NewsListModelImpl(activity);
     }
 
     public ArrayList<NewsBean> getNewsList(Document document) {

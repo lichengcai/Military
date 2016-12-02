@@ -84,7 +84,7 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter = new MilitaryPresenter(this);
+        mPresenter = new MilitaryPresenter(getActivity(),this);
         mPresenter.getFocusData(url);
     }
 

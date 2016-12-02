@@ -1,6 +1,9 @@
 package com.military.huanqiu.model;
 
+import android.app.Activity;
+
 import com.military.MilitaryApplication;
+import com.military.ModelImpl;
 import com.military.listener.OnLoadingListener;
 
 import org.jsoup.Jsoup;
@@ -12,25 +15,16 @@ import java.io.IOException;
  * Created by lichengcai on 2016/11/28.
  */
 
-public class NewsListModelImpl implements NewsListModel {
+public class NewsListModelImpl extends ModelImpl implements NewsListModel {
+    private Activity activity;
+
+    public NewsListModelImpl(Activity activity) {
+        this.activity = activity;
+    }
 
     @Override
     public void getListData(final String url, final OnLoadingListener onLoadingListener) {
-        MilitaryApplication.executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Document document = Jsoup.connect(url).get();
-                    if (document != null) {
-                        onLoadingListener.onSuccess(document);
-                    }else {
-                        onLoadingListener.onFail();
-                    }
+        getDocument(activity,url,onLoadingListener);
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 }

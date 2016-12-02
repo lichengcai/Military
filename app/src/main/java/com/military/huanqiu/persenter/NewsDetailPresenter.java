@@ -1,5 +1,6 @@
 package com.military.huanqiu.persenter;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.military.huanqiu.model.NewsDetailModel;
@@ -21,9 +22,9 @@ public class NewsDetailPresenter {
     private NewsDetailModel mModel;
     private NewsDetailView mView;
 
-    public NewsDetailPresenter(NewsDetailView newsDetailView) {
+    public NewsDetailPresenter(Activity activity,NewsDetailView newsDetailView) {
         this.mView = newsDetailView;
-        mModel = new NewsDetailModelImpl();
+        mModel = new NewsDetailModelImpl(activity);
     }
 
     private String getContent(Document document) {
