@@ -36,14 +36,16 @@ import butterknife.ButterKnife;
  */
 
 public class WeaponActivity extends BaseActivity implements WeaponView{
-    @BindView(R.id.list_category)
-    ExpandableListView mListCategory;
+//    @BindView(R.id.list_category)
+//    ExpandableListView mListCategory;
     @BindView(R.id.recyclerWeaponList)
     RecyclerView mRecyclerView;
     @BindView(R.id.layout_loading)
     LinearLayout mLayoutLoading;
+    @BindView(R.id.text_category)
+    TextView mTextCategory;
 
-    private static final String url = "http://weapon.huanqiu.com/weaponlist/";
+    private static final String url = "http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0";
     private WeaponPresenter mPresenter;
     private WeaponListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -93,19 +95,23 @@ public class WeaponActivity extends BaseActivity implements WeaponView{
         ButterKnife.bind(this);
 
         mPresenter = new WeaponPresenter(this,this);
-        setWeaponCategoryList();
-
-        mPresenter.getWeaponListData(url);
-
-    }
-
-
-    private void setWeaponCategoryList() {
+//        setWeaponCategoryList();
         CategoryAdapter mAdapter;
-        mListCategory.setGroupIndicator(null);
         mAdapter = new CategoryAdapter(mContext,CategoryBean.getCategoryData());
-        mListCategory.setAdapter(mAdapter);
+        CategoryBean categoryBean = mAdapter.getCategoryBean(1,0);
+
+        mPresenter.getWeaponListData(categoryBean.getLinkUrl());
+        mTextCategory.setText(categoryBean.getName());
+
     }
+
+
+//    private void setWeaponCategoryList() {
+//        CategoryAdapter mAdapter;
+//        mListCategory.setGroupIndicator(null);
+//        mAdapter = new CategoryAdapter(mContext,CategoryBean.getCategoryData());
+//        mListCategory.setAdapter(mAdapter);
+//    }
 
     @Override
     public void setWeaponList(ArrayList<WeaponBean> arrayList) {

@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.military.R;
@@ -21,6 +23,7 @@ public class NewsListAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private ArrayList<NewsBean> mData;
     private OnItemClickListener onItemClickListener;
+    private int mLastItem = -1;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -42,6 +45,12 @@ public class NewsListAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof NewsListHolder) {
+            if (position > mLastItem) {
+                Animation animation = AnimationUtils.loadAnimation(mContext,R.anim.item_slide_in_bottom);
+                holder.itemView.setAnimation(animation);
+                mLastItem = position;
+            }
+
             NewsBean newsBean = mData.get(position);
             ((NewsListHolder) holder).text_detail_title.setText(newsBean.getDetailTitle());
             ((NewsListHolder) holder).text_title.setText(newsBean.getTitle());

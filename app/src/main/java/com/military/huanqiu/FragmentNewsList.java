@@ -44,8 +44,8 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
     RecyclerView mRecyclerView;
     @BindView(R.id.layout_loading)
     LinearLayout mLayoutLoading;
-    @BindView(R.id.frame)
-    PtrClassicFrameLayout frame;
+//    @BindView(R.id.frame)
+//    PtrClassicFrameLayout frame;
 
     private NewsListAdapter mAdapter;
     private String url = null;
@@ -67,9 +67,9 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_GET_DATA_SUCCESS:
-                    if (frg.frame != null) {
-                        frg.frame.refreshComplete();
-                    }
+//                    if (frg.frame != null) {
+//                        frg.frame.refreshComplete();
+//                    }
                     if (frg.mLayoutLoading != null)
                         frg.mLayoutLoading.setVisibility(View.GONE);
 
@@ -94,25 +94,25 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
         View view = inflater.inflate(R.layout.fragment_video,container,false);
         ButterKnife.bind(this,view);
 
-        StoreHouseHeader header = new StoreHouseHeader(getContext());
-        header.setPadding(0, 60, 0, 60);
-        header.initWithString("English");
-//        header.setBackgroundColor(getResources().getColor(R.color.black));
-        header.setTextColor(getResources().getColor(R.color.black));
-
-        frame.setDurationToCloseHeader(1500);
-        frame.setHeaderView(header);
-        frame.addPtrUIHandler(header);
-
-        frame.setPtrHandler(new PtrDefaultHandler() {
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                if (TextUtils.isEmpty(url)) {
-                    mPresenter.setNewsList(url);
-                }
-
-            }
-        });
+//        StoreHouseHeader header = new StoreHouseHeader(getContext());
+//        header.setPadding(0, 60, 0, 60);
+//        header.initWithString("English");
+////        header.setBackgroundColor(getResources().getColor(R.color.black));
+//        header.setTextColor(getResources().getColor(R.color.black));
+//
+//        frame.setDurationToCloseHeader(1500);
+//        frame.setHeaderView(header);
+//        frame.addPtrUIHandler(header);
+//
+//        frame.setPtrHandler(new PtrDefaultHandler() {
+//            @Override
+//            public void onRefreshBegin(PtrFrameLayout frame) {
+//                if (TextUtils.isEmpty(url)) {
+//                    mPresenter.setNewsList(url);
+//                }
+//
+//            }
+//        });
 
 //        frame.setEnabled(false);
         return view;

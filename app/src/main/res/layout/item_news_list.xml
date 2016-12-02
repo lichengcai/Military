@@ -38,6 +38,6 @@
     <LinearLayout
         android:background="@color/gray_light"
         android:layout_width="match_parent"
-        android:layout_height="3dp"/>
+        android:layout_height="1dp"/>
 
 </LinearLayout>

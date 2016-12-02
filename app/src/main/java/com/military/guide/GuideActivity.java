@@ -14,7 +14,6 @@ import com.military.huanqiu.MilitaryActivity;
 import com.military.huanqiu.weapon.WeaponActivity;
 import com.military.listener.OnItemClickListener;
 import com.military.ui.activity.BaseActivity;
-import com.military.ui.activity.TestActivity;
 import com.military.video.VideoActivity;
 
 import java.util.ArrayList;

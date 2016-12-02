@@ -34,6 +34,9 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
 
     }
 
+    public CategoryBean getCategoryBean(int groupPosition,int childPosition) {
+        return mChildData.get(groupPosition).get(childPosition);
+    }
     @Override
     public int getGroupCount() {
         return mGroupData.size();

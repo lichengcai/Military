@@ -10,6 +10,7 @@
 
 
     <style name="VideoActivityTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/black</item>
     </style>
     <!-- 主页下部按钮样式 -->
