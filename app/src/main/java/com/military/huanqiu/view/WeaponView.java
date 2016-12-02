@@ -1,9 +1,13 @@
 package com.military.huanqiu.view;
 
+import com.military.bean.WeaponBean;
+
+import java.util.ArrayList;
+
 /**
  * Created by lichengcai on 2016/12/1.
  */
 
 public interface WeaponView {
-    void setWeaponList(String content);
+    void setWeaponList(ArrayList<WeaponBean> arrayList);
 }

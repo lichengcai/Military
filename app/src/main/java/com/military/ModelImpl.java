@@ -19,6 +19,7 @@ public class ModelImpl {
     private Document document = null;
     private Document documentDetail = null;
 
+    //新闻详情，不需重新拉取
     protected Document getNewsDetailDocument(final Activity activity,
                                    final String url,
                                    final OnLoadingListener onLoadingListener) {

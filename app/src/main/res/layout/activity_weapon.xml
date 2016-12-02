@@ -10,14 +10,19 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent" >
 
-      <ScrollView
+      <RelativeLayout
+          android:padding="12dp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
-         <TextView
-             android:id="@+id/content"
+         <android.support.v7.widget.RecyclerView
+             android:id="@+id/recyclerWeaponList"
              android:layout_width="match_parent"
-             android:layout_height="match_parent" />
-      </ScrollView>
+             android:layout_height="wrap_content"/>
+
+         <include
+             android:id="@+id/layout_loading"
+            layout="@layout/layout_loading"/>
+      </RelativeLayout>
 
    </FrameLayout>
    <LinearLayout
