@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -51,16 +52,17 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
 
     private ExpandableListView mListCategory;
 
-    private static final String url = "http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0";
+    private String url = "http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0";
     //http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0
     //http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0_0_0_2
     //http://weapon.huanqiu.com/weaponlist/aircraft/list_1_1_0_0_2
     private WeaponPresenter mPresenter;
     private WeaponListAdapter mAdapter;
     private CategoryAdapter mCategoryAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager;
     private WeaponHandler mHandler = new WeaponHandler(this);
     private static final int MSG_GET_WEAPON_DATA = 0;
+    private static final int MSG_GET_WEAPON_MORE = 1;
 
 
     private static class WeaponHandler extends Handler {
@@ -91,6 +93,13 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
                         }
                     });
                     break;
+                case MSG_GET_WEAPON_MORE:
+                    ArrayList<WeaponBean> array = (ArrayList<WeaponBean>) msg.obj;
+                    for (int i=0; i<array.size(); i++) {
+                        Log.d("handleMessage"," array--" + array.get(i).toString());
+                    }
+                    act.mAdapter.loadMore(array);
+                    break;
             }
         }
     }
@@ -108,13 +117,11 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
 
         mPresenter = new WeaponPresenter(this,this);
 
-
-
         mCategoryAdapter = new CategoryAdapter(this,CategoryBean.getCategoryData());
-
         CategoryBean categoryBean = mCategoryAdapter.getCategoryBean(0,0);
 
-        mPresenter.getWeaponListData(categoryBean.getLinkUrl());
+        url = categoryBean.getLinkUrl();
+        mPresenter.getWeaponListData(url,false);
         mTextCategory.setText(categoryBean.getName());
 
         setAllListener();
@@ -126,6 +133,23 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
             @Override
             public void onClick(View v) {
                 setSelect();
+            }
+        });
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            private int lastVisibleItem;
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAdapter.getItemCount() && mAdapter.isShowFooter()) {
+                    mPresenter.getWeaponListData(url,true);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
             }
         });
     }
@@ -144,11 +168,24 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
                 mListCategory.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
                     @Override
                     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
-                        Toast.makeText(WeaponActivity.this,"group--" + groupPosition + "   child--" + childPosition,Toast.LENGTH_SHORT).show();
-                        mPresenter.getWeaponListData(mCategoryAdapter.getCategoryBean(groupPosition,childPosition).getLinkUrl());
+                        if (mLayoutLoading != null)
+                            mLayoutLoading.setVisibility(View.VISIBLE);
+                        mTextCategory.setText(mCategoryAdapter.getCategoryBean(groupPosition,childPosition).getName());
+                        url = mCategoryAdapter.getCategoryBean(groupPosition,childPosition).getLinkUrl();
+                        mPresenter.getWeaponListData(url,false);
                         mDialog.disMiss();
                         return true;
+                    }
+                });
+
+                mListCategory.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                    @Override
+                    public void onGroupExpand(int groupPosition) {
+                        for (int i = 0; i < mCategoryAdapter.getGroupCount(); i++) {
+                            if (i != groupPosition) {
+                                mListCategory.collapseGroup(i);
+                            }
+                        }
                     }
                 });
             }
@@ -160,9 +197,27 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
     }
 
     @Override
-    public void setWeaponList(ArrayList<WeaponBean> arrayList) {
-        mAdapter = new WeaponListAdapter(WeaponActivity.this,arrayList);
-        if (mHandler != null)
-            mHandler.sendEmptyMessage(MSG_GET_WEAPON_DATA);
+    public void setWeaponList(ArrayList<WeaponBean> arrayList,boolean loadMore) {
+        for (int i=0; i<arrayList.size(); i++) {
+            Log.d("setWeaponList"," array--"+ arrayList.get(i).toString());
+        }
+
+        if (mHandler != null) {
+
+            if (loadMore) {
+                mHandler.obtainMessage(MSG_GET_WEAPON_MORE,arrayList).sendToTarget();
+
+            }else {
+                mAdapter = new WeaponListAdapter(WeaponActivity.this,arrayList);
+                mHandler.sendEmptyMessage(MSG_GET_WEAPON_DATA);
+            }
+
+            if (arrayList.size() == 0) {
+                mAdapter.setIsShowFooter(false);
+            }else {
+                mAdapter.setIsShowFooter(true);
+            }
+        }
+
     }
 }

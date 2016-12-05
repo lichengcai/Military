@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.military.R;
@@ -42,6 +43,12 @@ public class GuideActivity extends BaseActivity  {
 
         init();
         setAllListener();
+        int i = 1831;
+        int units = i%10;
+        int tens = (i/10)%10;
+        int hundred = (i/100)%10;
+        int thousands =(i/1000)%10;
+        Log.d("GuideActivity"," units--" + units + "tens--" + tens + "hundred--" + hundred + " th--" + thousands);
     }
 
     private void setAllListener() {

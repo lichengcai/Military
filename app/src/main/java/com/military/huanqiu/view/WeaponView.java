@@ -9,5 +9,5 @@ import java.util.ArrayList;
  */
 
 public interface WeaponView {
-    void setWeaponList(ArrayList<WeaponBean> arrayList);
+    void setWeaponList(ArrayList<WeaponBean> arrayList,boolean loadMore);
 }

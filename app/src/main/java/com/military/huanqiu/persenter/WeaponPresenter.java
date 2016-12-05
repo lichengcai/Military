@@ -1,6 +1,7 @@
 package com.military.huanqiu.persenter;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.military.bean.WeaponBean;
 import com.military.huanqiu.model.WeaponModel;
@@ -20,14 +21,27 @@ import java.util.ArrayList;
 public class WeaponPresenter {
     private WeaponModel mModel;
     private WeaponView mView;
+    private int mCurrentPage = 1;
 
     public WeaponPresenter(Activity context, WeaponView view){
         this.mView = view;
         mModel = new WeaponModelImpl(context);
     }
 
-    public void getWeaponListData(String url) {
-        mModel.getWeaponData(url, new OnLoadingListener() {
+    public void getWeaponListData(String url, final boolean loadMore) {
+        String linkUrl ;
+        if (loadMore) {
+            mCurrentPage ++;
+            int units = mCurrentPage%10;
+            int tens = (mCurrentPage/10)%10;
+            int hundred = (mCurrentPage/100)%10;
+
+            linkUrl = url + "_" + hundred + "_" + tens + "_" + units;
+        }else {
+            linkUrl = url;
+        }
+        Log.d("getWeaponListData","linkUrl--" + linkUrl);
+        mModel.getWeaponData(linkUrl, new OnLoadingListener() {
             @Override
             public void onSuccess(Document json) {
                 ArrayList<WeaponBean> arrayList = new ArrayList<>();
@@ -51,7 +65,7 @@ public class WeaponPresenter {
                     }
 
                 }
-                mView.setWeaponList(arrayList);
+                mView.setWeaponList(arrayList,loadMore);
 
             }
 
@@ -71,4 +85,6 @@ public class WeaponPresenter {
             }
         });
     }
+
+
 }
