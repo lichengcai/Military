@@ -2,6 +2,7 @@ package com.military.bean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -52,7 +53,7 @@ public class CategoryBean {
     }
 
     public static Map<String,ArrayList<CategoryBean>> getCategoryData() {
-        Map<String, ArrayList<CategoryBean>> map = new HashMap<>();
+        Map<String, ArrayList<CategoryBean>> map = new LinkedHashMap<>();
 
         ArrayList<CategoryBean> array_airCraft = new ArrayList<>();
         array_airCraft.add(new CategoryBean("战斗机","http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0"));
@@ -160,13 +161,13 @@ public class CategoryBean {
         array_space.add(new CategoryBean("宇宙飞船","http://weapon.huanqiu.com/weaponlist/spaceship/list_10_0"));
 
 
-        map.put("Aircraft",array_airCraft);
-        map.put("WarShip",array_warship);
-        map.put("Tank",array_tank);
-        map.put("Gun",array_guns);
-        map.put("Artillery",array_artillery);
-        map.put("Missile",array_missile);
-        map.put("Space",array_space);
+        map.put("舰船舰艇",array_warship);
+        map.put("导弹武器",array_missile);
+        map.put("坦克装甲车辆",array_tank);
+        map.put("枪械与单兵",array_guns);
+        map.put("飞行器",array_airCraft);
+        map.put("火炮",array_artillery);
+        map.put("航空航天",array_space);
         return map;
     }
 }

@@ -132,4 +132,8 @@ public class BottomDialog extends BaseBottomDialog {
         show(mFragmentManager);
         return this;
     }
+
+    public void disMiss() {
+        dismiss();
+    }
 }

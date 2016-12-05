@@ -14,6 +14,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.military.R;
 import com.military.bean.CategoryBean;
@@ -39,8 +40,6 @@ import butterknife.ButterKnife;
  */
 
 public class WeaponActivity extends AppCompatActivity implements WeaponView{
-//    @BindView(R.id.list_category)
-//    ExpandableListView mListCategory;
     @BindView(R.id.recyclerWeaponList)
     RecyclerView mRecyclerView;
     @BindView(R.id.layout_loading)
@@ -53,8 +52,12 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
     private ExpandableListView mListCategory;
 
     private static final String url = "http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0";
+    //http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0
+    //http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0_0_0_2
+    //http://weapon.huanqiu.com/weaponlist/aircraft/list_1_1_0_0_2
     private WeaponPresenter mPresenter;
     private WeaponListAdapter mAdapter;
+    private CategoryAdapter mCategoryAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private WeaponHandler mHandler = new WeaponHandler(this);
     private static final int MSG_GET_WEAPON_DATA = 0;
@@ -104,46 +107,60 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
         ButterKnife.bind(this);
 
         mPresenter = new WeaponPresenter(this,this);
-        CategoryAdapter mAdapter;
-        mAdapter = new CategoryAdapter(WeaponActivity.this,CategoryBean.getCategoryData());
-        CategoryBean categoryBean = mAdapter.getCategoryBean(1,0);
+
+
+
+        mCategoryAdapter = new CategoryAdapter(this,CategoryBean.getCategoryData());
+
+        CategoryBean categoryBean = mCategoryAdapter.getCategoryBean(0,0);
 
         mPresenter.getWeaponListData(categoryBean.getLinkUrl());
         mTextCategory.setText(categoryBean.getName());
 
+        setAllListener();
+
+    }
+
+    private void setAllListener() {
         mImgSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final BottomDialog mDialog = BottomDialog.create(getSupportFragmentManager());
-
-                mDialog.setViewListener(new BottomDialog.ViewListener() {
-                    @Override
-                    public void bindView(View v) {
-                        mListCategory = (ExpandableListView) v.findViewById(R.id.mListCategory);
-                        setWeaponCategoryList();
-                    }
-                })
-                        .setLayoutRes(R.layout.layout_test)
-                        .setDimAmount(0.6f)
-                        .setTag("BottomDialog")
-                        .show();
+                setSelect();
             }
         });
     }
 
 
-    private void setWeaponCategoryList() {
-        CategoryAdapter mAdapter;
-        mListCategory.setGroupIndicator(null);
-        mAdapter = new CategoryAdapter(this,CategoryBean.getCategoryData());
-        mListCategory.setAdapter(mAdapter);
+    private void setSelect() {
+        final BottomDialog mDialog = BottomDialog.create(getSupportFragmentManager());
+
+        mDialog.setViewListener(new BottomDialog.ViewListener() {
+            @Override
+            public void bindView(View v) {
+                mListCategory = (ExpandableListView) v.findViewById(R.id.mListCategory);
+                mListCategory.setGroupIndicator(null);
+                mListCategory.setAdapter(mCategoryAdapter);
+
+                mListCategory.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                    @Override
+                    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+                        Toast.makeText(WeaponActivity.this,"group--" + groupPosition + "   child--" + childPosition,Toast.LENGTH_SHORT).show();
+                        mPresenter.getWeaponListData(mCategoryAdapter.getCategoryBean(groupPosition,childPosition).getLinkUrl());
+                        mDialog.disMiss();
+                        return true;
+                    }
+                });
+            }
+        })
+                .setLayoutRes(R.layout.layout_test)
+                .setDimAmount(0.6f)
+                .setTag("BottomDialog")
+                .show();
     }
 
     @Override
     public void setWeaponList(ArrayList<WeaponBean> arrayList) {
-        for (int i=0; i<arrayList.size(); i++) {
-            Log.d("setWeaponList"," array to string--" + arrayList.get(i).toString());
-        }
         mAdapter = new WeaponListAdapter(WeaponActivity.this,arrayList);
         if (mHandler != null)
             mHandler.sendEmptyMessage(MSG_GET_WEAPON_DATA);

@@ -1,6 +1,7 @@
 package com.military.huanqiu.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +29,17 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
     public CategoryAdapter(Context context,Map<String,ArrayList<CategoryBean>> mData) {
         this.mContext = context;
         for (String key : mData.keySet()) {
+            Log.d("CategoryAdapter","map--key--" + key);
             mGroupData.add(key);
             mChildData.add(mData.get(key));
         }
+
+        for (int i=0; i<mGroupData.size(); i++) {
+            Log.d("CategoryAdapter","mGroupData--" + mGroupData.get(i));
+            Log.d("CategoryAdapter","mChildData--" + mChildData.get(i).toString());
+
+        }
+
 
     }
 
