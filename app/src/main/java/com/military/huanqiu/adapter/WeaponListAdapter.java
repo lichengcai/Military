@@ -60,6 +60,9 @@ public class WeaponListAdapter extends RecyclerView.Adapter {
 
     }
 
+    public WeaponBean getItem(int position) {
+        return mData.get(position);
+    }
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof WeaponListHolder) {

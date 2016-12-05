@@ -1,10 +1,12 @@
 package com.military.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by lichengcai on 2016/12/2.
  */
 
-public class WeaponBean {
+public class WeaponBean implements Serializable{
     private String name;
     private String imgUrl;
     private String countryName;

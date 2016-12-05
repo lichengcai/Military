@@ -1,6 +1,7 @@
 package com.military.huanqiu.weapon;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -89,15 +90,15 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
                     act.mAdapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
+                            Intent intent = new Intent(act,WeaponDetailActivity.class);
+                            intent.putExtra("weaponBean",act.mAdapter.getItem(position));
 
+                            act.startActivity(intent);
                         }
                     });
                     break;
                 case MSG_GET_WEAPON_MORE:
                     ArrayList<WeaponBean> array = (ArrayList<WeaponBean>) msg.obj;
-                    for (int i=0; i<array.size(); i++) {
-                        Log.d("handleMessage"," array--" + array.get(i).toString());
-                    }
                     act.mAdapter.loadMore(array);
                     break;
             }
@@ -198,9 +199,6 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
 
     @Override
     public void setWeaponList(ArrayList<WeaponBean> arrayList,boolean loadMore) {
-        for (int i=0; i<arrayList.size(); i++) {
-            Log.d("setWeaponList"," array--"+ arrayList.get(i).toString());
-        }
 
         if (mHandler != null) {
 

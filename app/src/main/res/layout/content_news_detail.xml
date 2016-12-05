@@ -12,7 +12,6 @@
     <TextView
         android:padding="10dp"
         android:textSize="15sp"
-        android:text="@string/large_text"
         android:id="@+id/text_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

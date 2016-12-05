@@ -32,6 +32,15 @@ public class TestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+//        Document document = (Document) msg.obj;
+//        Elements elements = document.select("div.intron");
+//        Log.d("elements","elements--" + elements);
+//        Elements elements1 = document.select("div.otherList");
+//        for (Element element : elements1) {
+//            Log.d("elements","name--" + element.select("h3.title_").get(0).text());
+//        }
+//        Log.d("elements","elements1==" + elements1.size() + "\n " + elements1.get(0).text());
+
     }
 
     public void test(View view) {
