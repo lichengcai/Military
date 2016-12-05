@@ -50,6 +50,8 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
     @BindView(R.id.img_select)
     ImageView mImgSelect;
 
+    private ExpandableListView mListCategory;
+
     private static final String url = "http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0";
     private WeaponPresenter mPresenter;
     private WeaponListAdapter mAdapter;
@@ -117,6 +119,8 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
                 mDialog.setViewListener(new BottomDialog.ViewListener() {
                     @Override
                     public void bindView(View v) {
+                        mListCategory = (ExpandableListView) v.findViewById(R.id.mListCategory);
+                        setWeaponCategoryList();
                     }
                 })
                         .setLayoutRes(R.layout.layout_test)
@@ -128,12 +132,12 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
     }
 
 
-//    private void setWeaponCategoryList() {
-//        CategoryAdapter mAdapter;
-//        mListCategory.setGroupIndicator(null);
-//        mAdapter = new CategoryAdapter(mContext,CategoryBean.getCategoryData());
-//        mListCategory.setAdapter(mAdapter);
-//    }
+    private void setWeaponCategoryList() {
+        CategoryAdapter mAdapter;
+        mListCategory.setGroupIndicator(null);
+        mAdapter = new CategoryAdapter(this,CategoryBean.getCategoryData());
+        mListCategory.setAdapter(mAdapter);
+    }
 
     @Override
     public void setWeaponList(ArrayList<WeaponBean> arrayList) {
