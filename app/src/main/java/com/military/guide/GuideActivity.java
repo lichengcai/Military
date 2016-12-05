@@ -15,6 +15,7 @@ import com.military.huanqiu.weapon.WeaponActivity;
 import com.military.huanqiu.weapon.WeaponDetailActivity;
 import com.military.listener.OnItemClickListener;
 import com.military.ui.activity.BaseActivity;
+import com.military.ui.activity.TestActivity;
 import com.military.video.VideoActivity;
 
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class GuideActivity extends BaseActivity  {
                             startActivity(new Intent(GuideActivity.this, WeaponActivity.class));
                             break;
                         case 3:
-                            startActivity(new Intent(GuideActivity.this, WeaponDetailActivity.class));
+                            startActivity(new Intent(GuideActivity.this, TestActivity.class));
                             break;
                     }
                 }

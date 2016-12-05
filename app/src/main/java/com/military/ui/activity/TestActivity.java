@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.military.R;
+import com.military.widget.customdialog.BottomDialog;
 import com.snalib.ShareFactory;
 
 import org.jsoup.Jsoup;
@@ -29,21 +32,9 @@ public class TestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Document document = Jsoup.connect("http://weapon.huanqiu.com/weaponlist/").get();
-                    Log.d("thread"," document --" + document.toString());
-                    Log.d("thread"," document --" + document.outerHtml());
-                    Document document1 = new Document("");
-                    document1.html(document.html());
-                    Log.d("thread"," document1 --" + document1.toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    }
 
-            }
-        }).start();
+    public void test(View view) {
+
     }
 }

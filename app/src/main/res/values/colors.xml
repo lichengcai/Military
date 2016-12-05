@@ -20,4 +20,5 @@
     <color name="orange">#ff6600</color>
     <color name="divider_for_edt">#b4b5b5</color>
     <color name="divider">#0e7145</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
 </resources>

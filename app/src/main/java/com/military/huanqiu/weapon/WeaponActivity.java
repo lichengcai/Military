@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import com.military.huanqiu.view.WeaponView;
 import com.military.listener.OnItemClickListener;
 import com.military.ui.activity.BaseActivity;
 import com.military.utils.FileUtils;
+import com.military.widget.customdialog.BottomDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -45,6 +47,8 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
     LinearLayout mLayoutLoading;
     @BindView(R.id.text_category)
     TextView mTextCategory;
+    @BindView(R.id.img_select)
+    ImageView mImgSelect;
 
     private static final String url = "http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0";
     private WeaponPresenter mPresenter;
@@ -98,7 +102,6 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
         ButterKnife.bind(this);
 
         mPresenter = new WeaponPresenter(this,this);
-//        setWeaponCategoryList();
         CategoryAdapter mAdapter;
         mAdapter = new CategoryAdapter(WeaponActivity.this,CategoryBean.getCategoryData());
         CategoryBean categoryBean = mAdapter.getCategoryBean(1,0);
@@ -106,6 +109,22 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
         mPresenter.getWeaponListData(categoryBean.getLinkUrl());
         mTextCategory.setText(categoryBean.getName());
 
+        mImgSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final BottomDialog mDialog = BottomDialog.create(getSupportFragmentManager());
+
+                mDialog.setViewListener(new BottomDialog.ViewListener() {
+                    @Override
+                    public void bindView(View v) {
+                    }
+                })
+                        .setLayoutRes(R.layout.layout_test)
+                        .setDimAmount(0.6f)
+                        .setTag("BottomDialog")
+                        .show();
+            }
+        });
     }
 
 
