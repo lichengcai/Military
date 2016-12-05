@@ -2,6 +2,7 @@ package com.military.guide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +50,7 @@ public class GuideActivity extends BaseActivity  {
         int hundred = (i/100)%10;
         int thousands =(i/1000)%10;
         Log.d("GuideActivity"," units--" + units + "tens--" + tens + "hundred--" + hundred + " th--" + thousands);
+        Log.d("GuideActivity"," path--" + Environment.getExternalStorageDirectory());
     }
 
     private void setAllListener() {

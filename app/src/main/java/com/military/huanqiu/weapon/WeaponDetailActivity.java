@@ -27,6 +27,7 @@ import com.military.huanqiu.adapter.CommonTabPagerAdapter;
 import com.military.ui.activity.BaseActivity;
 import com.military.video.adapter.VideoAdapter;
 import com.military.video.adapter.VideoPagerAdapter;
+import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -53,7 +54,7 @@ public class WeaponDetailActivity extends BaseActivity implements CommonTabPager
     @BindView(R.id.viewpager)
     ViewPager viewpager;
     @BindView(R.id.ad_view)
-    ImageView mAdView;
+    ImageView mImage;
 
     private CommonTabPagerAdapter adapter;
 
@@ -72,6 +73,7 @@ public class WeaponDetailActivity extends BaseActivity implements CommonTabPager
 
         WeaponBean weaponBean = (WeaponBean) getIntent().getSerializableExtra("weaponBean");
         if (weaponBean != null) {
+            Picasso.with(this).load(weaponBean.getImgUrl()).into(mImage);
             setTitle(weaponBean.getName());
             collapsingToolbar.setTitle(weaponBean.getName());
             collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的
