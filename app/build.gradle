@@ -71,6 +71,11 @@ dependencies {
     compile 'com.nightonke:boommenu:1.0.9'
     //snslib
     compile project(':snslib')
+
+    //LeakCanary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }
 
 

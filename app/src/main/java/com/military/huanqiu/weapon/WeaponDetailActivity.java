@@ -11,8 +11,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.military.R;
@@ -47,6 +49,8 @@ public class WeaponDetailActivity extends BaseActivity implements CommonTabPager
     ViewPager viewpager;
     @BindView(R.id.ad_view)
     ImageView mImage;
+    @BindView(R.id.layout_loading)
+    LinearLayout mLayoutLoading;
 
     private CommonTabPagerAdapter adapter;
 
@@ -69,11 +73,13 @@ public class WeaponDetailActivity extends BaseActivity implements CommonTabPager
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_GET_DETAIL_SUCCESS:
+                    if (act.mLayoutLoading != null)
+                        act.mLayoutLoading.setVisibility(View.GONE);
                     Document document = (Document) msg.obj;
                     mDocument = document;
                     if (document != null) {
                         Elements elements = document.select("div.maxPic");
-                        if (elements.get(0).select("img").size() != 0) {
+                        if (elements.size() != 0) {
                             String imgUrl = elements.get(0).select("img").get(0).attr("src");
                             Picasso.with(act.mContext).load(imgUrl).into(act.mImage);
                         }

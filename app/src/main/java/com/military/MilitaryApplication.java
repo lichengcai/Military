@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.military.bean.Channel;
 import com.military.utils.CrashHandler;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
@@ -30,6 +31,13 @@ public class MilitaryApplication extends Application {
 
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(this);
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     public static MilitaryApplication getInstance() {

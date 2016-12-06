@@ -2,6 +2,7 @@ package com.military.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;

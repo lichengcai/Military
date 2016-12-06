@@ -75,5 +75,9 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <include
 
+        layout="@layout/layout_loading"
+        android:id="@+id/layout_loading"
+        />
 </android.support.design.widget.CoordinatorLayout>
