@@ -9,15 +9,20 @@ import android.view.ViewGroup;
 
 import com.military.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by lichengcai on 2016/12/5.
  */
 
 public class FragmentWeaponDetail extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weapon_detail,container,false);
+        ButterKnife.bind(this,view);
         return view;
     }
 
