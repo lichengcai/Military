@@ -3,6 +3,7 @@ package com.military;
 import android.app.Application;
 
 import com.military.bean.Channel;
+import com.military.utils.CrashHandler;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
@@ -26,9 +27,13 @@ public class MilitaryApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(this);
     }
 
     public static MilitaryApplication getInstance() {
         return mInstance;
     }
+
 }

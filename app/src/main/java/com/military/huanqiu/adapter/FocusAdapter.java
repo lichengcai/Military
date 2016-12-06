@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.military.R;
 import com.military.bean.NewsBean;
 import com.military.listener.OnItemClickListener;
+import com.military.transforms.CubeOutTransformer;
+import com.military.transforms.TransformerItem;
 import com.military.widget.convenientbanner.ConvenientBanner;
 import com.military.widget.convenientbanner.holder.CBViewHolderCreator;
 import com.military.widget.convenientbanner.holderview.NetworkImageHolderView;
@@ -77,6 +79,13 @@ public class FocusAdapter extends RecyclerView.Adapter {
                     },mDataFocus);
             ((HeaderHolder) holder).mBanner.startTurning(5000);//设置轮播开始自动循环
             ((HeaderHolder) holder).mBanner.setScrollDuration(2000);//设置滑动速度
+            try {
+                ((HeaderHolder) holder).mBanner.getViewPager().setPageTransformer(true,new TransformerItem(CubeOutTransformer.class).clazz.newInstance());//设置轮播动画
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
     }
 

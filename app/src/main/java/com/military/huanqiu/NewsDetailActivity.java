@@ -67,7 +67,6 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
                         act.mLayoutLoading.setVisibility(View.GONE);
                     String content = (String) msg.obj;
                     if (content != null) {
-                        Log.d("handleMessage"," content--"  + content);
                         act.mContent.setText(content);
                     }
                     break;

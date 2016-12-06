@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.military.R;
 import com.military.bean.GuideBean;
+import com.military.bean.WeaponBean;
 import com.military.guide.adapter.GuideListAdapter;
 import com.military.huanqiu.MilitaryActivity;
 import com.military.huanqiu.weapon.WeaponActivity;
@@ -44,13 +45,6 @@ public class GuideActivity extends BaseActivity  {
 
         init();
         setAllListener();
-        int i = 1831;
-        int units = i%10;
-        int tens = (i/10)%10;
-        int hundred = (i/100)%10;
-        int thousands =(i/1000)%10;
-        Log.d("GuideActivity"," units--" + units + "tens--" + tens + "hundred--" + hundred + " th--" + thousands);
-        Log.d("GuideActivity"," path--" + Environment.getExternalStorageDirectory());
     }
 
     private void setAllListener() {
@@ -68,6 +62,8 @@ public class GuideActivity extends BaseActivity  {
                         case 2:
                             startActivity(new Intent(GuideActivity.this, WeaponActivity.class));
                             break;
+                        case 3:
+                            break;
                     }
                 }
             });
@@ -79,6 +75,7 @@ public class GuideActivity extends BaseActivity  {
         mData.add(new GuideBean("军事环球","http://himg2.huanqiu.com/attachment2010/2016/1118/08/34/20161118083436763.jpg"));
         mData.add(new GuideBean("视频","http://www.meipai.com/favicon.ico?1"));
         mData.add(new GuideBean("武器库","http://images.huanqiu.com/sarons/2014/03/991a6d96550e9c189e19b62471d9d01f.jpg"));
+
         mAdapter = new GuideListAdapter(this,mData);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
         mRecyclerView.setAdapter(mAdapter);
