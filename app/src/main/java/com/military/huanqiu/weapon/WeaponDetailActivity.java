@@ -108,9 +108,9 @@ public class WeaponDetailActivity extends BaseActivity implements CommonTabPager
         WeaponBean weaponBean = (WeaponBean) getIntent().getSerializableExtra("weaponBean");
         if (weaponBean != null) {
             Picasso.with(this).load(weaponBean.getImgUrl()).into(mImage);
-//            setTitle(weaponBean.getName());
             collapsingToolbar.setTitle(weaponBean.getName());
-            collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的
+            collapsingToolbar.setExpandedTitleColor(Color.WHITE);//设置Toolbar上字体的颜色
+            collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
             getDetailDocument(weaponBean);
         }else {
             finish();

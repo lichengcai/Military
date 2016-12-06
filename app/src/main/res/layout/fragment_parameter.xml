@@ -11,6 +11,7 @@
     tools:showIn="@layout/activity_news_detail">
 
     <TextView
+        android:padding="10dp"
         android:textSize="15sp"
         android:id="@+id/textParameter"
         android:layout_width="match_parent"

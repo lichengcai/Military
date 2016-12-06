@@ -68,9 +68,6 @@ public class GuideActivity extends BaseActivity  {
                         case 2:
                             startActivity(new Intent(GuideActivity.this, WeaponActivity.class));
                             break;
-                        case 3:
-                            startActivity(new Intent(GuideActivity.this, TestActivity.class));
-                            break;
                     }
                 }
             });
@@ -82,15 +79,9 @@ public class GuideActivity extends BaseActivity  {
         mData.add(new GuideBean("Military","http://himg2.huanqiu.com/attachment2010/2016/1118/08/34/20161118083436763.jpg"));
         mData.add(new GuideBean("Video","http://www.meipai.com/favicon.ico?1"));
         mData.add(new GuideBean("Weapon","http://images.huanqiu.com/sarons/2014/03/991a6d96550e9c189e19b62471d9d01f.jpg"));
-        mData.add(new GuideBean("Test","http://images.huanqiu.com/sarons/2014/03/991a6d96550e9c189e19b62471d9d01f.jpg"));
         mAdapter = new GuideListAdapter(this,mData);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-
-    public void change(View view) {
-
     }
 
 }
