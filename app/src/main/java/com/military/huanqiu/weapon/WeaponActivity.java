@@ -23,12 +23,17 @@ import com.military.bean.CategoryBean;
 import com.military.bean.WeaponBean;
 import com.military.huanqiu.adapter.CategoryAdapter;
 import com.military.huanqiu.adapter.WeaponListAdapter;
+import com.military.huanqiu.model.NewsDetailModel;
+import com.military.huanqiu.model.NewsDetailModelImpl;
 import com.military.huanqiu.persenter.WeaponPresenter;
 import com.military.huanqiu.view.WeaponView;
 import com.military.listener.OnItemClickListener;
+import com.military.listener.OnLoadingListener;
 import com.military.ui.activity.BaseActivity;
 import com.military.utils.FileUtils;
 import com.military.widget.customdialog.BottomDialog;
+
+import org.jsoup.nodes.Document;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -61,6 +66,7 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
     private WeaponListAdapter mAdapter;
     private CategoryAdapter mCategoryAdapter;
     private LinearLayoutManager mLayoutManager;
+
     private WeaponHandler mHandler = new WeaponHandler(this);
     private static final int MSG_GET_WEAPON_DATA = 0;
     private static final int MSG_GET_WEAPON_MORE = 1;
@@ -90,9 +96,9 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
                     act.mAdapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
+                            WeaponBean weaponBean = act.mAdapter.getItem(position);
                             Intent intent = new Intent(act,WeaponDetailActivity.class);
-                            intent.putExtra("weaponBean",act.mAdapter.getItem(position));
-
+                            intent.putExtra("weaponBean",weaponBean);
                             act.startActivity(intent);
                         }
                     });

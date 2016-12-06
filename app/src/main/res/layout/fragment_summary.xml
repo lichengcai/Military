@@ -12,7 +12,7 @@
 
     <TextView
         android:textSize="15sp"
-        android:id="@+id/textDetail"
+        android:id="@+id/textSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

@@ -11,32 +11,24 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.military.MilitaryApplication;
 import com.military.R;
 import com.military.bean.WeaponBean;
-import com.military.huanqiu.FragmentFocus;
 import com.military.huanqiu.FragmentNewsList;
+import com.military.huanqiu.FragmentWeaponDetail;
 import com.military.huanqiu.adapter.CommonTabPagerAdapter;
+import com.military.huanqiu.model.NewsDetailModelImpl;
+import com.military.listener.OnLoadingListener;
 import com.military.ui.activity.BaseActivity;
-import com.military.video.adapter.VideoAdapter;
-import com.military.video.adapter.VideoPagerAdapter;
 import com.squareup.picasso.Picasso;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import butterknife.BindView;
@@ -58,6 +50,47 @@ public class WeaponDetailActivity extends BaseActivity implements CommonTabPager
 
     private CommonTabPagerAdapter adapter;
 
+    public static Document mDocument = null;
+    private static final int MSG_GET_DETAIL_SUCCESS = 0;
+    private static final int MSG_GET_DETAIL_FAIL = 1;
+
+    private WeaponDetailHandler mHandler = new WeaponDetailHandler(this);
+
+    private static class WeaponDetailHandler extends Handler {
+        private WeakReference<WeaponDetailActivity> ref;
+        private WeaponDetailActivity act;
+
+        WeaponDetailHandler(WeaponDetailActivity activity) {
+            ref = new WeakReference<>(activity);
+            act = ref.get();
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_GET_DETAIL_SUCCESS:
+                    Document document = (Document) msg.obj;
+                    mDocument = document;
+                    if (document != null) {
+                        Elements elements = document.select("div.maxPic");
+                        String imgUrl = elements.get(0).select("img").get(0).attr("src");
+                        Picasso.with(act.mContext).load(imgUrl).into(act.mImage);
+                        act.adapter = new CommonTabPagerAdapter(act.getSupportFragmentManager()
+                                , 3, Arrays.asList("简介", "详情", "参数"), act);
+                        act.adapter.setListener(act);
+                        act.viewpager.setAdapter(act.adapter);
+                        act.tabLayout.setupWithViewPager(act.viewpager);
+                        act.tabLayout.setTabMode(TabLayout.MODE_FIXED);
+                    }
+                    break;
+                case MSG_GET_DETAIL_FAIL:
+                    act.finish();
+                    Toast.makeText(act,"获取详情失败",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //当系统版本为4.4或者4.4以上时可以使用沉浸式状态栏
@@ -71,32 +104,58 @@ public class WeaponDetailActivity extends BaseActivity implements CommonTabPager
         setContentView(R.layout.activity_weapon_detail);
         ButterKnife.bind(this);
 
+
         WeaponBean weaponBean = (WeaponBean) getIntent().getSerializableExtra("weaponBean");
         if (weaponBean != null) {
             Picasso.with(this).load(weaponBean.getImgUrl()).into(mImage);
-            setTitle(weaponBean.getName());
+//            setTitle(weaponBean.getName());
             collapsingToolbar.setTitle(weaponBean.getName());
             collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的
-            adapter = new CommonTabPagerAdapter(getSupportFragmentManager()
-                    , 3, Arrays.asList("详情", "参数", "图集"), this);
-            adapter.setListener(this);
-            viewpager.setAdapter(adapter);
-            tabLayout.setupWithViewPager(viewpager);
-            tabLayout.setTabMode(TabLayout.MODE_FIXED);
+            getDetailDocument(weaponBean);
         }else {
-            Toast.makeText(this,"获取详情失败",Toast.LENGTH_SHORT).show();
             finish();
+            Toast.makeText(this,"获取详情失败",Toast.LENGTH_SHORT).show();
         }
 
 
-    }
 
+    }
+    private void getDetailDocument(WeaponBean weaponBean) {
+        NewsDetailModelImpl mDocumentDetail = new NewsDetailModelImpl(this);
+        mDocumentDetail.getDetailInfo(weaponBean.getLinkUrl(), new OnLoadingListener() {
+            @Override
+            public void onSuccess(Document json) {
+                if (mHandler != null) {
+                    mHandler.obtainMessage(MSG_GET_DETAIL_SUCCESS,json).sendToTarget();
+                }
+            }
+
+            @Override
+            public void onFail() {
+                if (mHandler != null) {
+                    mHandler.sendEmptyMessage(MSG_GET_DETAIL_FAIL);
+                }
+            }
+
+            @Override
+            public void onEmpty() {
+
+            }
+
+            @Override
+            public void onLoading() {
+
+            }
+        });
+    }
     @Override
     public Fragment getFragment(int position) {
         if (position == 0) {
-            return FragmentNewsList.newInstance("http://mil.huanqiu.com/world/");
+            return new FragmentSummary();
+        }else if (position == 1){
+            return new FragmentWeaponDetail();
         }else {
-            return FragmentNewsList.newInstance("http://mil.huanqiu.com/china/");
+            return new FragmentParameter();
         }
     }
 }
