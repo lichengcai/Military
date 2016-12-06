@@ -3,14 +3,9 @@ package com.military.utils;
 import android.app.Activity;
 import android.content.Context;
 
-import com.military.huanqiu.weapon.WeaponActivity;
-
-import org.dom4j.DocumentHelper;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.StringReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

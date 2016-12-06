@@ -8,8 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,24 +15,17 @@ import android.widget.LinearLayout;
 
 import com.military.R;
 import com.military.bean.NewsBean;
-import com.military.bean.Video;
 import com.military.huanqiu.adapter.NewsListAdapter;
 import com.military.huanqiu.persenter.NewsListPresenter;
 import com.military.huanqiu.view.NewsListView;
 import com.military.listener.OnItemClickListener;
 import com.military.ui.fragment.FragmentBase;
-import com.military.video.FragmentVideo;
-import com.military.video.adapter.VideoAdapter;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
 /**
  * Created by lichengcai on 2016/11/28.

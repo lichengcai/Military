@@ -26,7 +26,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
 public class NewsDetailActivity extends AppCompatActivity implements NewsDetailView{
     @BindView(R.id.toolbar)
@@ -103,40 +102,6 @@ public class NewsDetailActivity extends AppCompatActivity implements NewsDetailV
             finish();
         }
 
-        StoreHouseHeader header = new StoreHouseHeader(this);
-        header.setPadding(0, 60, 0, 60);
-        header.initWithString("English");
-        header.setBackgroundColor(getResources().getColor(R.color.black));
-        header.setTextColor(getResources().getColor(R.color.white));
-
-//        mFrame.setDurationToCloseHeader(1500);
-//        mFrame.setHeaderView(header);
-//        mFrame.addPtrUIHandler(header);
-//
-//        mFrame.setPtrHandler(new PtrDefaultHandler() {
-//            @Override
-//            public void onRefreshBegin(PtrFrameLayout frame) {
-//                if (newsBean != null && !TextUtils.isEmpty(newsBean.getLinkUrl())) {
-//                    mPresenter.getDetailInfo(newsBean.getLinkUrl());
-//                }
-//            }
-//        });
-//        mAppBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-//            @Override
-//            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-//                Log.d("STATE", state.name());
-//                if( state == State.EXPANDED ) {//展开状态
-//                    mFrame.setEnabled(true);
-//
-//                }else if(state == State.COLLAPSED){//折叠状态
-//                    mFrame.setEnabled(false);
-//
-//                }else {//中间状态
-//                    mFrame.setEnabled(false);
-//
-//                }
-//            }
-//        });
     }
 
     private void setAllListener() {
