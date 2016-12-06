@@ -31,9 +31,9 @@ public class MilitaryActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mAdapter = new VideoPagerAdapter(getSupportFragmentManager());
-        mAdapter.addFragment(new FragmentFocus(),"Focus");
-        mAdapter.addFragment(FragmentNewsList.newInstance("http://mil.huanqiu.com/china/"),"China");
-        mAdapter.addFragment(FragmentNewsList.newInstance("http://mil.huanqiu.com/world/"),"World");
+        mAdapter.addFragment(new FragmentFocus(),"关注");
+        mAdapter.addFragment(FragmentNewsList.newInstance("http://mil.huanqiu.com/china/"),"国内");
+        mAdapter.addFragment(FragmentNewsList.newInstance("http://mil.huanqiu.com/world/"),"国外");
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,6 +35,8 @@ public class FragmentVideo extends FragmentBase implements VideoView{
     RecyclerView mRecyclerView;
     @BindView(R.id.layout_loading)
     LinearLayout mLayoutLoading;
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipeRefresh;
 
     private VideoAdapter mAdapter;
     private Channel mChannel;
@@ -59,6 +62,8 @@ public class FragmentVideo extends FragmentBase implements VideoView{
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_GET_DATA_SUCCESS:
+                    if (frg.mSwipeRefresh != null)
+                        frg.mSwipeRefresh.setRefreshing(false);
                     if (frg.mLayoutLoading != null)
                         frg.mLayoutLoading.setVisibility(View.GONE);
                     ArrayList<Video> array = (ArrayList<Video>) msg.obj;
@@ -85,6 +90,15 @@ public class FragmentVideo extends FragmentBase implements VideoView{
         mPresenter = new VideoPresenter(getActivity(),this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mPresenter.getVideoInfo(URL+mChannel.getId());
+
+        if (isAdded())
+            mSwipeRefresh.setColorSchemeColors(getResources().getColor(R.color.divider));
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getVideoInfo(URL+mChannel.getId());
+            }
+        });
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,6 +37,8 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
     LinearLayout mLayout_loading;
     @BindView(R.id.recyclerFocus)
     RecyclerView mRecycler;
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipeRefresh;
 
     private static final int MSG_GET_LIST_SUCCESS = 1;
     private String url = "http://mil.huanqiu.com/";
@@ -57,6 +60,8 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_GET_LIST_SUCCESS:
+                    if (frg.mSwipeRefresh != null)
+                        frg.mSwipeRefresh.setRefreshing(false);
                     if (frg.mLayout_loading != null)
                         frg.mLayout_loading.setVisibility(View.GONE);
                     frg.mRecycler.setLayoutManager(new LinearLayoutManager(frg.getActivity()));
@@ -86,6 +91,17 @@ public class FragmentFocus extends FragmentBase implements MilitaryView{
         super.onViewCreated(view, savedInstanceState);
         mPresenter = new MilitaryPresenter(getActivity(),this);
         mPresenter.getFocusData(url);
+        if (isAdded()) {
+            mSwipeRefresh.setColorSchemeColors(getResources().getColor(R.color.divider));
+        }
+
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getFocusData(url);
+            }
+        });
+
     }
 
 

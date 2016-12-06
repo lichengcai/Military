@@ -73,8 +73,12 @@ public class WeaponDetailActivity extends BaseActivity implements CommonTabPager
                     mDocument = document;
                     if (document != null) {
                         Elements elements = document.select("div.maxPic");
-                        String imgUrl = elements.get(0).select("img").get(0).attr("src");
-                        Picasso.with(act.mContext).load(imgUrl).into(act.mImage);
+                        if (elements.get(0).select("img").size() != 0) {
+                            String imgUrl = elements.get(0).select("img").get(0).attr("src");
+                            Picasso.with(act.mContext).load(imgUrl).into(act.mImage);
+                        }
+
+
                         act.adapter = new CommonTabPagerAdapter(act.getSupportFragmentManager()
                                 , 3, Arrays.asList("简介", "详情", "参数"), act);
                         act.adapter.setListener(act);

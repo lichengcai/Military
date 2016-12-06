@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -44,8 +45,8 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
     RecyclerView mRecyclerView;
     @BindView(R.id.layout_loading)
     LinearLayout mLayoutLoading;
-//    @BindView(R.id.frame)
-//    PtrClassicFrameLayout frame;
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipeRefresh;
 
     private NewsListAdapter mAdapter;
     private String url = null;
@@ -67,11 +68,10 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_GET_DATA_SUCCESS:
-//                    if (frg.frame != null) {
-//                        frg.frame.refreshComplete();
-//                    }
                     if (frg.mLayoutLoading != null)
                         frg.mLayoutLoading.setVisibility(View.GONE);
+                    if (frg.mSwipeRefresh != null)
+                        frg.mSwipeRefresh.setRefreshing(false);
 
                     frg.mRecyclerView.setLayoutManager(new LinearLayoutManager(frg.getContext()));
                     frg.mRecyclerView.setAdapter(frg.mAdapter);
@@ -94,27 +94,6 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
         View view = inflater.inflate(R.layout.fragment_video,container,false);
         ButterKnife.bind(this,view);
 
-//        StoreHouseHeader header = new StoreHouseHeader(getContext());
-//        header.setPadding(0, 60, 0, 60);
-//        header.initWithString("English");
-////        header.setBackgroundColor(getResources().getColor(R.color.black));
-//        header.setTextColor(getResources().getColor(R.color.black));
-//
-//        frame.setDurationToCloseHeader(1500);
-//        frame.setHeaderView(header);
-//        frame.addPtrUIHandler(header);
-//
-//        frame.setPtrHandler(new PtrDefaultHandler() {
-//            @Override
-//            public void onRefreshBegin(PtrFrameLayout frame) {
-//                if (TextUtils.isEmpty(url)) {
-//                    mPresenter.setNewsList(url);
-//                }
-//
-//            }
-//        });
-
-//        frame.setEnabled(false);
         return view;
     }
 
@@ -131,7 +110,16 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
         if (url != null) {
             mPresenter.setNewsList(url);
         }
+        if (isAdded()) {
+            mSwipeRefresh.setColorSchemeColors(getResources().getColor(R.color.divider));
+        }
 
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.setNewsList(url);
+            }
+        });
     }
 
     public static FragmentNewsList newInstance(String url) {
@@ -144,11 +132,7 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
 
     @Override
     public void setNewsList(ArrayList<NewsBean> arrayList) {
-        for (int i=0; i<arrayList.size(); i++) {
-            Log.d("NewsList","array size---" + arrayList.get(i).toString());
-        }
         if (arrayList.size() != 0) {
-
             mAdapter = new NewsListAdapter(getActivity(),arrayList);
             if (mHandler != null) {
                 mHandler.sendEmptyMessage(MSG_GET_DATA_SUCCESS);

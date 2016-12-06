@@ -17,6 +17,7 @@
         app:civ_border_width="2dp"
         app:civ_border_color="@color/gray"/>
     <TextView
+        android:layout_marginTop="3dp"
         android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

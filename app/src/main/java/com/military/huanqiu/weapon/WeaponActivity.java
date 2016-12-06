@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -55,13 +56,12 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
     TextView mTextCategory;
     @BindView(R.id.img_select)
     ImageView mImgSelect;
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipeRefresh;
 
     private ExpandableListView mListCategory;
 
     private String url = "http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0";
-    //http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0
-    //http://weapon.huanqiu.com/weaponlist/aircraft/list_1_0_0_0_2
-    //http://weapon.huanqiu.com/weaponlist/aircraft/list_1_1_0_0_2
     private WeaponPresenter mPresenter;
     private WeaponListAdapter mAdapter;
     private CategoryAdapter mCategoryAdapter;
@@ -86,6 +86,8 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_GET_WEAPON_DATA:
+                    if (act.mSwipeRefresh != null)
+                        act.mSwipeRefresh.setRefreshing(false);
                     act.mLayoutManager = new GridLayoutManager(act,2);
                     act.mRecyclerView.setLayoutManager(act.mLayoutManager);
                     act.mRecyclerView.setAdapter(act.mAdapter);
@@ -131,6 +133,8 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
         mPresenter.getWeaponListData(url,false);
         mTextCategory.setText(categoryBean.getName());
 
+        mSwipeRefresh.setColorSchemeColors(getResources().getColor(R.color.divider));
+
         setAllListener();
 
     }
@@ -157,6 +161,13 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+            }
+        });
+
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getWeaponListData(url,false);
             }
         });
     }
