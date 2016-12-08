@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import com.military.R;
 import com.military.bean.NewsBean;
+import com.military.bean.WeaponBean;
 import com.military.huanqiu.adapter.NewsListAdapter;
 import com.military.huanqiu.persenter.NewsListPresenter;
 import com.military.huanqiu.view.NewsListView;
@@ -42,9 +43,11 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
     private NewsListAdapter mAdapter;
     private String url = null;
     private NewsListPresenter mPresenter;
+    private LinearLayoutManager mLayoutManager;
     private NewsListHandler mHandler = new NewsListHandler(this);
 
     private static final int MSG_GET_DATA_SUCCESS = 0;
+    private static final int MSG_GET_DATA_MORE = 1;
     private static class NewsListHandler extends Handler {
         private WeakReference<FragmentNewsList> ref;
         private FragmentNewsList frg;
@@ -64,7 +67,8 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
                     if (frg.mSwipeRefresh != null)
                         frg.mSwipeRefresh.setRefreshing(false);
 
-                    frg.mRecyclerView.setLayoutManager(new LinearLayoutManager(frg.getContext()));
+
+                    frg.mRecyclerView.setLayoutManager(frg.mLayoutManager);
                     frg.mRecyclerView.setAdapter(frg.mAdapter);
                     frg.mAdapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
@@ -74,6 +78,11 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
                             frg.startActivity(intent);
                         }
                     });
+                    break;
+
+                case MSG_GET_DATA_MORE:
+                    ArrayList<NewsBean> array = (ArrayList<NewsBean>) msg.obj;
+                    frg.mAdapter.loadMore(array);
                     break;
             }
         }
@@ -92,6 +101,7 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         url = (String) getArguments().getSerializable("url");
+        mLayoutManager = new LinearLayoutManager(getContext());
     }
 
     @Override
@@ -99,7 +109,7 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
         super.onViewCreated(view, savedInstanceState);
         mPresenter = new NewsListPresenter(getActivity(),this);
         if (url != null) {
-            mPresenter.setNewsList(url);
+            mPresenter.setNewsList(url,false);
         }
         if (isAdded()) {
             mSwipeRefresh.setColorSchemeColors(getResources().getColor(R.color.divider));
@@ -108,7 +118,24 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.setNewsList(url);
+                mPresenter.setNewsList(url,false);
+            }
+        });
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            private int lastVisibleItem;
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAdapter.getItemCount() && mAdapter.isShowFooter()) {
+                    mPresenter.setNewsList(url,true);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
             }
         });
     }
@@ -122,11 +149,19 @@ public class FragmentNewsList extends FragmentBase implements NewsListView{
     }
 
     @Override
-    public void setNewsList(ArrayList<NewsBean> arrayList) {
-        if (arrayList.size() != 0) {
-            mAdapter = new NewsListAdapter(getActivity(),arrayList);
-            if (mHandler != null) {
+    public void setNewsList(ArrayList<NewsBean> arrayList,boolean loadMore) {
+
+        if (mHandler != null) {
+            if (loadMore) {
+                mHandler.obtainMessage(MSG_GET_DATA_MORE,arrayList).sendToTarget();
+            }else {
+                mAdapter = new NewsListAdapter(getActivity(),arrayList);
                 mHandler.sendEmptyMessage(MSG_GET_DATA_SUCCESS);
+            }
+            if (arrayList.size() == 0) {
+                mAdapter.setIsShowFooter(false);
+            }else {
+                mAdapter.setIsShowFooter(true);
             }
         }
     }

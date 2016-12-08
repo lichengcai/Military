@@ -218,15 +218,12 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
     public void setWeaponList(ArrayList<WeaponBean> arrayList,boolean loadMore) {
 
         if (mHandler != null) {
-
             if (loadMore) {
                 mHandler.obtainMessage(MSG_GET_WEAPON_MORE,arrayList).sendToTarget();
-
             }else {
                 mAdapter = new WeaponListAdapter(WeaponActivity.this,arrayList);
                 mHandler.sendEmptyMessage(MSG_GET_WEAPON_DATA);
             }
-
             if (arrayList.size() == 0) {
                 mAdapter.setIsShowFooter(false);
             }else {

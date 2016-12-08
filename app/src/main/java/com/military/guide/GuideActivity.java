@@ -57,10 +57,10 @@ public class GuideActivity extends BaseActivity  {
                             startActivity(new Intent(GuideActivity.this, MilitaryActivity.class));
                             break;
                         case 1:
-                            startActivity(new Intent(GuideActivity.this, VideoActivity.class));
+                            startActivity(new Intent(GuideActivity.this, WeaponActivity.class));
                             break;
                         case 2:
-                            startActivity(new Intent(GuideActivity.this, WeaponActivity.class));
+                            startActivity(new Intent(GuideActivity.this, VideoActivity.class));
                             break;
                         case 3:
                             break;
@@ -73,8 +73,8 @@ public class GuideActivity extends BaseActivity  {
 
     private void init() {
         mData.add(new GuideBean("军事环球","http://himg2.huanqiu.com/attachment2010/2016/1118/08/34/20161118083436763.jpg"));
-        mData.add(new GuideBean("视频","http://www.meipai.com/favicon.ico?1"));
         mData.add(new GuideBean("武器库","http://images.huanqiu.com/sarons/2014/03/991a6d96550e9c189e19b62471d9d01f.jpg"));
+        mData.add(new GuideBean("视频","http://www.meipai.com/favicon.ico?1"));
 
         mAdapter = new GuideListAdapter(this,mData);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));

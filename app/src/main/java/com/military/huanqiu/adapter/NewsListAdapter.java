@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.military.R;
 import com.military.bean.NewsBean;
+import com.military.bean.WeaponBean;
+import com.military.huanqiu.FooterHolder;
 import com.military.listener.OnItemClickListener;
 
 import java.util.ArrayList;
@@ -20,11 +22,27 @@ import java.util.ArrayList;
  */
 
 public class NewsListAdapter extends RecyclerView.Adapter {
+    private static final int TYPE_ITEM =0;
+    private static final int TYPE_FOOTER = 1;
     private Context mContext;
     private ArrayList<NewsBean> mData;
     private OnItemClickListener onItemClickListener;
     private int mLastItem = -1;
+    private boolean mShowFooter = true;
 
+
+    public void loadMore(ArrayList<NewsBean> arrayList) {
+        mData.addAll(arrayList);
+        notifyDataSetChanged();
+    }
+
+    public void setIsShowFooter(boolean mShowFooter) {
+        this.mShowFooter = mShowFooter;
+    }
+
+    public boolean isShowFooter() {
+        return mShowFooter;
+    }
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
@@ -39,17 +57,22 @@ public class NewsListAdapter extends RecyclerView.Adapter {
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NewsListHolder(LayoutInflater.from(mContext).inflate(R.layout.item_news_list,parent,false));
+
+        if (viewType == TYPE_FOOTER) {
+            return new FooterHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_footer,parent,false));
+        }else {
+            return new NewsListHolder(LayoutInflater.from(mContext).inflate(R.layout.item_news_list,parent,false));
+        }
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof NewsListHolder) {
-            if (position > mLastItem) {
-                Animation animation = AnimationUtils.loadAnimation(mContext,R.anim.item_slide_in_bottom);
-                holder.itemView.setAnimation(animation);
-                mLastItem = position;
-            }
+//            if (holder.getAdapterPosition() > mLastItem) {
+//                Animation animation = AnimationUtils.loadAnimation(mContext,R.anim.item_slide_in_bottom);
+//                holder.itemView.setAnimation(animation);
+//                mLastItem = holder.getAdapterPosition();
+//            }
 
             NewsBean newsBean = mData.get(position);
             ((NewsListHolder) holder).text_detail_title.setText(newsBean.getDetailTitle());
@@ -69,7 +92,19 @@ public class NewsListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        int count = mShowFooter ? 1 : 0;
+        return mData.size() + count;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (!mShowFooter)
+            return TYPE_ITEM;
+        if (position + 1 == getItemCount()) {
+            return TYPE_FOOTER;
+        }else {
+            return TYPE_ITEM;
+        }
     }
 
     private class NewsListHolder extends RecyclerView.ViewHolder {

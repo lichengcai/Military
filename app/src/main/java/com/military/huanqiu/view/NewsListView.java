@@ -9,5 +9,5 @@ import java.util.ArrayList;
  */
 
 public interface NewsListView {
-    void setNewsList(ArrayList<NewsBean> arrayList);
+    void setNewsList(ArrayList<NewsBean> arrayList,boolean loadMore);
 }

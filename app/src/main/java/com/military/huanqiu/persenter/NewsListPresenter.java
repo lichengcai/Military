@@ -22,13 +22,49 @@ import java.util.ArrayList;
 public class NewsListPresenter {
     private NewsListModel mModel;
     private NewsListView mView;
+    private int mCurrentPage = 1;
 
     public NewsListPresenter(Activity activity,NewsListView mView){
         this.mView = mView;
         mModel = new NewsListModelImpl(activity);
     }
 
-    public ArrayList<NewsBean> getNewsList(Document document) {
+    public void setNewsList(String url, final boolean loadMore) {
+        String linkUrl ;
+        if (loadMore) {
+            mCurrentPage ++;
+
+            linkUrl = url + mCurrentPage + ".html" ;
+        }else {
+            linkUrl = url;
+        }
+        mModel.getListData(linkUrl, new OnLoadingListener() {
+            @Override
+            public void onSuccess(Document json) {
+                ArrayList<NewsBean> arrayList = getNewsList(json);
+                if (arrayList.size() != 0) {
+                    mView.setNewsList(arrayList,loadMore);
+                }
+            }
+
+            @Override
+            public void onFail() {
+
+            }
+
+            @Override
+            public void onEmpty() {
+
+            }
+
+            @Override
+            public void onLoading() {
+
+            }
+        });
+    }
+
+    private ArrayList<NewsBean> getNewsList(Document document) {
         ArrayList<NewsBean> arrayList = new ArrayList<>();
         Elements elements = document.select("div.fallsFlow");
         for (Element element : elements) {
@@ -53,31 +89,5 @@ public class NewsListPresenter {
             Log.d("setNewsList","array--" + arrayList.get(i).toString());
         }
         return arrayList;
-    }
-    public void setNewsList(String url) {
-        mModel.getListData(url, new OnLoadingListener() {
-            @Override
-            public void onSuccess(Document json) {
-                ArrayList<NewsBean> arrayList = getNewsList(json);
-                if (arrayList.size() != 0) {
-                    mView.setNewsList(arrayList);
-                }
-            }
-
-            @Override
-            public void onFail() {
-
-            }
-
-            @Override
-            public void onEmpty() {
-
-            }
-
-            @Override
-            public void onLoading() {
-
-            }
-        });
     }
 }

@@ -33,6 +33,8 @@ public class MilitaryActivity extends AppCompatActivity {
         mAdapter = new VideoPagerAdapter(getSupportFragmentManager());
         mAdapter.addFragment(new FragmentFocus(),"关注");
         mAdapter.addFragment(FragmentNewsList.newInstance("http://mil.huanqiu.com/china/"),"国内");
+        //http://mil.huanqiu.com/china/index.html
+        //http://mil.huanqiu.com/china/2.html
         mAdapter.addFragment(FragmentNewsList.newInstance("http://mil.huanqiu.com/world/"),"国外");
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mAdapter);

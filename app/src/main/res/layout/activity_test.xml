@@ -4,8 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:onClick="test"
+    <ImageView
+        android:layout_marginTop="50dp"
+        android:src="@drawable/banner"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="200dp" />
 </LinearLayout>
