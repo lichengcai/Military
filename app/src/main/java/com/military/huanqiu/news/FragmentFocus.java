@@ -1,4 +1,4 @@
-package com.military.huanqiu;
+package com.military.huanqiu.news;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.military.R;
 import com.military.bean.NewsBean;
+import com.military.huanqiu.NewsDetailActivity;
 import com.military.huanqiu.adapter.FocusAdapter;
 import com.military.huanqiu.persenter.MilitaryPresenter;
 import com.military.huanqiu.view.MilitaryView;

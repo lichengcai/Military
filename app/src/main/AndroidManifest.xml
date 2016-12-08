@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
         <activity
-            android:name=".huanqiu.MilitaryActivity"
+            android:name=".huanqiu.news.MilitaryActivity"
             android:launchMode="singleTop"
             android:theme="@style/VideoActivityTheme" />
         <activity
@@ -54,7 +54,11 @@
             android:name=".huanqiu.weapon.WeaponDetailActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".picture.PictureActivity"/>
+        <activity
+            android:launchMode="singleTop"
+            android:theme="@style/VideoActivityTheme"
+            android:name=".picture.PictureActivity"
+            />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

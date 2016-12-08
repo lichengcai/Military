@@ -8,23 +8,17 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.military.R;
 import com.military.bean.GuideBean;
-import com.military.bean.WeaponBean;
 import com.military.guide.adapter.GuideListAdapter;
-import com.military.huanqiu.MilitaryActivity;
+import com.military.huanqiu.news.MilitaryActivity;
 import com.military.huanqiu.weapon.WeaponActivity;
-import com.military.huanqiu.weapon.WeaponDetailActivity;
 import com.military.listener.OnItemClickListener;
+import com.military.picture.PictureActivity;
 import com.military.ui.activity.BaseActivity;
-import com.military.ui.activity.TestActivity;
 import com.military.video.VideoActivity;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
-import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 
 import java.util.ArrayList;
 
@@ -68,7 +62,7 @@ public class GuideActivity extends BaseActivity  {
                             startActivity(new Intent(GuideActivity.this, VideoActivity.class));
                             break;
                         case 3:
-                            startActivity(new Intent(GuideActivity.this, TestActivity.class));
+                            startActivity(new Intent(GuideActivity.this, PictureActivity.class));
                             break;
                     }
                 }

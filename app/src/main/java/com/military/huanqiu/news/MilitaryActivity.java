@@ -1,13 +1,12 @@
-package com.military.huanqiu;
+package com.military.huanqiu.news;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.bm.library.PhotoView;
 import com.military.R;
-import com.military.ui.activity.BaseActivity;
+import com.military.huanqiu.FragmentNewsList;
 import com.military.video.adapter.VideoPagerAdapter;
 
 import butterknife.BindView;

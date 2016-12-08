@@ -3,6 +3,7 @@ package com.military.picture.presenter;
 import android.app.Activity;
 import android.util.Log;
 
+import com.military.bean.Video;
 import com.military.listener.OnLoadingListener;
 import com.military.picture.model.PictureModel;
 import com.military.picture.model.PictureModelImpl;
@@ -11,6 +12,8 @@ import com.military.picture.view.PictureView;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.util.ArrayList;
 
 /**
  * Created by lichengcai on 2016/12/8.
@@ -25,14 +28,15 @@ public class PicturePresenter {
         mModel = new PictureModelImpl(activity);
     }
 
-    public void getPicture(String url,boolean loadMore){
+    public void getPicture(String url, final boolean loadMore){
         if (loadMore) {
 
         }
         mModel.getPicData(url, new OnLoadingListener() {
             @Override
             public void onSuccess(Document json) {
-                getPicBean(json);
+                ArrayList<Video> arrayList = getPicBean(json);
+                mView.setPicture(arrayList,loadMore);
             }
 
             @Override
@@ -52,11 +56,20 @@ public class PicturePresenter {
         });
     }
 
-    private void getPicBean(Document document) {
-        Elements elements = document.select("div.listPicBox");
+    private ArrayList<Video> getPicBean(Document document) {
+        ArrayList<Video> arrayList = new ArrayList<>();
+        Elements elements = document.select("div.fallsFlow").select("li.item");
         for (Element element : elements) {
-            Log.d("getPicBean","elements" + element.html());
+            Log.d("getPicBean", "img---" + element.select("img").get(0).attr("src"));
+            Log.d("getPicBean", "text---" + element.select("a").get(0).attr("title"));
+            Log.d("getPicBean", "url---" + element.select("a").get(0).attr("href"));
+            Video video = new Video();
+            video.setTitle(element.select("a").get(0).attr("title"));
+            video.setVideoUrl(element.select("a").get(0).attr("href"));
+            video.setImgUrl(element.select("img").get(0).attr("src"));
+            arrayList.add(video);
         }
 
+        return arrayList;
     }
 }
