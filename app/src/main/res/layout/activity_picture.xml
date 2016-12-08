@@ -30,18 +30,24 @@
             android:layout_width="50dp"
             android:layout_height="match_parent" />
     </RelativeLayout>
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
+    <RelativeLayout
+        android:layout_below="@+id/relative_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerPic"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerPic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-    <include
-        android:visibility="gone"
-        android:id="@+id/layout_loading"
-        layout="@layout/layout_loading"/>
+        <include
+            android:visibility="gone"
+            android:id="@+id/layout_loading"
+            layout="@layout/layout_loading"/>
+    </RelativeLayout>
+
 </RelativeLayout>
