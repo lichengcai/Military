@@ -7,10 +7,24 @@ package com.military.bean;
 public class GuideBean {
     private String name;
     private String imgUrl;
+    private int id;
 
     public GuideBean(String name, String imgUrl) {
         this.name = name;
         this.imgUrl = imgUrl;
+    }
+
+    public GuideBean(String name,int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getImgUrl() {

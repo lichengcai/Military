@@ -43,17 +43,13 @@ public class GuideListAdapter extends RecyclerView.Adapter {
         if (holder instanceof GuideHolder) {
             GuideBean guideBean = mData.get(position);
             ((GuideHolder) holder).textName.setText(guideBean.getName());
-            if (!TextUtils.isEmpty(guideBean.getImgUrl())) {
+            if (guideBean.getId() != 0) {
+                int id = guideBean.getId();
+                ((GuideHolder) holder).imageView.setImageResource(id);
+            }else if (!TextUtils.isEmpty(guideBean.getImgUrl())) {
                 Picasso.with(mContext).load(guideBean.getImgUrl()).into(((GuideHolder) holder).imageView);
-            }else {
-                switch (position) {
-                    case 2:
-                        ((GuideHolder) holder).imageView.setImageResource(R.drawable.icon_add);
-                        break;
-                    case 3:
-                        ((GuideHolder) holder).imageView.setImageResource(R.drawable.icon_share);
-                        break;
-                }
+            }else{
+                ((GuideHolder) holder).imageView.setImageResource(R.drawable.military);
 
             }
 
