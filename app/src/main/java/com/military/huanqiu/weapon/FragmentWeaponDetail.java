@@ -1,4 +1,4 @@
-package com.military.huanqiu;
+package com.military.huanqiu.weapon;
 
 import android.os.Bundle;
 import android.os.Handler;
