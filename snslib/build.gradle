@@ -22,8 +22,8 @@ android {
 }
 
 dependencies {
-
-//    compile 'com.koolearn:libammsdk:1.0@jar'
+    //    compile 'com.koolearn:libammsdk:1.0@jar'
+    compile files('libs/libammsdk.jar')
 }
 
 repositories {

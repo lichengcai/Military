@@ -25,6 +25,5 @@ public class MilitaryModelImpl extends ModelImpl implements MilitaryModel {
     @Override
     public void getMilitaryData(final String url, final OnLoadingListener onLoadingListener) {
         getDocument(activity,url,onLoadingListener);
-
     }
 }

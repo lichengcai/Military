@@ -1,6 +1,8 @@
 package com.military.guide;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -20,6 +22,9 @@ import com.military.listener.OnItemClickListener;
 import com.military.ui.activity.BaseActivity;
 import com.military.ui.activity.TestActivity;
 import com.military.video.VideoActivity;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 
 import java.util.ArrayList;
 
@@ -63,6 +68,7 @@ public class GuideActivity extends BaseActivity  {
                             startActivity(new Intent(GuideActivity.this, VideoActivity.class));
                             break;
                         case 3:
+                            startActivity(new Intent(GuideActivity.this, TestActivity.class));
                             break;
                     }
                 }
@@ -74,6 +80,7 @@ public class GuideActivity extends BaseActivity  {
     private void init() {
         mData.add(new GuideBean("军事环球",R.drawable.military));
         mData.add(new GuideBean("武器库",R.drawable.weapon));
+        mData.add(new GuideBean("视频",R.drawable.video));
         mData.add(new GuideBean("视频",R.drawable.video));
 
         mAdapter = new GuideListAdapter(this,mData);

@@ -19,8 +19,6 @@ import android.widget.Toast;
 
 import com.military.R;
 import com.military.bean.WeaponBean;
-import com.military.huanqiu.FragmentNewsList;
-import com.military.huanqiu.FragmentWeaponDetail;
 import com.military.huanqiu.adapter.CommonTabPagerAdapter;
 import com.military.huanqiu.model.NewsDetailModelImpl;
 import com.military.listener.OnLoadingListener;
