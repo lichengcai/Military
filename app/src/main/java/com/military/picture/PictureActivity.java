@@ -67,6 +67,9 @@ public class PictureActivity extends BaseActivity implements PictureView{
                 case MSG_GET_PICTURE_DATA_SUCCESS:
                     if (act.mLayoutLoading != null)
                         act.mLayoutLoading.setVisibility(View.GONE);
+                    if (act.mSwipeRefresh.isRefreshing()){
+                        act.mSwipeRefresh.setRefreshing(false);
+                    }
                     act.mRecyclerView.setAdapter(act.mAdapter);
 
                     act.mAdapter.setOnItemClickListener(new OnItemClickListener() {
@@ -77,7 +80,8 @@ public class PictureActivity extends BaseActivity implements PictureView{
                     });
                     break;
                 case MSG_GET_PICTURE_DATA_MORE:
-
+                    ArrayList<Video> array = (ArrayList<Video>) msg.obj;
+                    act.mAdapter.loadMore(array);
                     break;
             }
         }
@@ -123,15 +127,39 @@ public class PictureActivity extends BaseActivity implements PictureView{
                 mPresenter.getPicture(category.getLinkUrl(),false);
             }
         });
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            private int lastVisibleItem;
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mAdapter.getItemCount() && mAdapter.isShowFooter()) {
+                    mPresenter.getPicture(category.getLinkUrl(),true);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+            }
+        });
     }
 
     @Override
     public void setPicture(ArrayList<Video> arrayList,boolean loadMore) {
-        if (arrayList != null) {
-            mAdapter = new PictureAdapter(mContext,arrayList);
 
-            if (mHandler != null) {
+        if (mHandler != null) {
+            if (loadMore) {
+                mHandler.obtainMessage(MSG_GET_PICTURE_DATA_MORE,arrayList).sendToTarget();
+            }else {
+                mAdapter = new PictureAdapter(mContext,arrayList);
                 mHandler.sendEmptyMessage(MSG_GET_PICTURE_DATA_SUCCESS);
+            }
+            if (arrayList.size() == 0) {
+                mAdapter.setIsShowFooter(false);
+            }else {
+                mAdapter.setIsShowFooter(true);
             }
         }
     }

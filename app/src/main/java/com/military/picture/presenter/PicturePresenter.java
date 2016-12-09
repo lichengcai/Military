@@ -22,6 +22,7 @@ import java.util.ArrayList;
 public class PicturePresenter {
     private PictureModel mModel;
     private PictureView mView;
+    private int mCurrentPage = 1;
 
     public PicturePresenter(PictureView mView, Activity activity) {
         this.mView = mView;
@@ -29,10 +30,14 @@ public class PicturePresenter {
     }
 
     public void getPicture(String url, final boolean loadMore){
+        String linkUrl ;
         if (loadMore) {
-
+            mCurrentPage ++;
+            linkUrl = url + mCurrentPage + ".html";
+        }else {
+            linkUrl = url;
         }
-        mModel.getPicData(url, new OnLoadingListener() {
+        mModel.getPicData(linkUrl, new OnLoadingListener() {
             @Override
             public void onSuccess(Document json) {
                 ArrayList<Video> arrayList = getPicBean(json);

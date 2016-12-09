@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.military.R;
 import com.military.bean.Video;
+import com.military.bean.WeaponBean;
+import com.military.huanqiu.FooterHolder;
+import com.military.huanqiu.adapter.WeaponListAdapter;
 import com.military.listener.OnItemClickListener;
 import com.squareup.picasso.Picasso;
 
@@ -20,9 +23,21 @@ import java.util.ArrayList;
  */
 
 public class PictureAdapter extends RecyclerView.Adapter {
+    private static final int TYPE_ITEM =0;
+    private static final int TYPE_FOOTER = 1;
+    private boolean mShowFooter = true;
     private Context mContext;
     private ArrayList<Video> mData;
     private OnItemClickListener onItemClickListener;
+
+
+    public void setIsShowFooter(boolean mShowFooter) {
+        this.mShowFooter = mShowFooter;
+    }
+
+    public boolean isShowFooter() {
+        return mShowFooter;
+    }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -32,10 +47,17 @@ public class PictureAdapter extends RecyclerView.Adapter {
         this.mContext = context;
         this.mData = arrayList;
     }
-
+    public void loadMore(ArrayList<Video> arrayList) {
+        mData.addAll(arrayList);
+        notifyDataSetChanged();
+    }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new PictureHolder(LayoutInflater.from(mContext).inflate(R.layout.item_picture,parent,false));
+        if (viewType == TYPE_FOOTER) {
+            return new FooterHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_footer,parent,false));
+        }else {
+            return new PictureHolder(LayoutInflater.from(mContext).inflate(R.layout.item_picture,parent,false));
+        }
     }
 
     @Override
@@ -58,7 +80,19 @@ public class PictureAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        int count = mShowFooter ? 1 : 0;
+        return mData.size() + count;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (!mShowFooter)
+            return TYPE_ITEM;
+        if (position + 1 == getItemCount()) {
+            return TYPE_FOOTER;
+        }else {
+            return TYPE_ITEM;
+        }
     }
 
     private class PictureHolder extends RecyclerView.ViewHolder {

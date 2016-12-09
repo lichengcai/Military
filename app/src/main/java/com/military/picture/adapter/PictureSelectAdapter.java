@@ -25,12 +25,12 @@ public class PictureSelectAdapter extends BaseAdapter {
     public PictureSelectAdapter(Context context) {
         this.mContext = context;
         mData = new ArrayList<>();
-        mData.add(new CategoryBean("图讯","http://photo.huanqiu.com/photoview/?"));
-        mData.add(new CategoryBean("囧图","http://photo.huanqiu.com/funnypicture/?"));
+        mData.add(new CategoryBean("图讯","http://photo.huanqiu.com/photoview/"));
+        mData.add(new CategoryBean("囧图","http://photo.huanqiu.com/funnypicture/"));
 //        mData.add(new CategoryBean("独家","http://photo.huanqiu.com/exclusivegallery/?"));
-        mData.add(new CategoryBean("视界","http://photo.huanqiu.com/sight/?"));
+        mData.add(new CategoryBean("视界","http://photo.huanqiu.com/sight/"));
 //        mData.add(new CategoryBean("壹周","http://photo.huanqiu.com/weekinpicture/?"));
-        mData.add(new CategoryBean("世相","http://photo.huanqiu.com/photostory/?"));
+        mData.add(new CategoryBean("世相","http://photo.huanqiu.com/photostory/"));
     }
 
     @Override
