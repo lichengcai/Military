@@ -208,7 +208,7 @@ public class WeaponActivity extends AppCompatActivity implements WeaponView{
                 });
             }
         })
-                .setLayoutRes(R.layout.layout_test)
+                .setLayoutRes(R.layout.layout_weapon_select)
                 .setDimAmount(0.6f)
                 .setTag("BottomDialog")
                 .show();

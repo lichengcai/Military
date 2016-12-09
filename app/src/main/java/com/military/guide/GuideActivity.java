@@ -18,6 +18,7 @@ import com.military.huanqiu.weapon.WeaponActivity;
 import com.military.listener.OnItemClickListener;
 import com.military.picture.PictureActivity;
 import com.military.ui.activity.BaseActivity;
+import com.military.ui.activity.TestActivity;
 import com.military.video.VideoActivity;
 
 import java.util.ArrayList;
@@ -64,6 +65,9 @@ public class GuideActivity extends BaseActivity  {
                         case 3:
                             startActivity(new Intent(GuideActivity.this, PictureActivity.class));
                             break;
+                        case 4:
+                            startActivity(new Intent(GuideActivity.this, TestActivity.class));
+                            break;
                     }
                 }
             });
@@ -75,7 +79,8 @@ public class GuideActivity extends BaseActivity  {
         mData.add(new GuideBean("军事环球",R.drawable.military));
         mData.add(new GuideBean("武器库",R.drawable.weapon));
         mData.add(new GuideBean("视频",R.drawable.video));
-        mData.add(new GuideBean("图片",R.drawable.video));
+        mData.add(new GuideBean("图片",R.drawable.picture));
+        mData.add(new GuideBean("测试",R.drawable.video));
 
         mAdapter = new GuideListAdapter(this,mData);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));

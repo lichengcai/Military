@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.military.R;
 import com.military.bean.Video;
+import com.military.listener.OnItemClickListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,6 +22,11 @@ import java.util.ArrayList;
 public class PictureAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private ArrayList<Video> mData;
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public PictureAdapter(Context context,ArrayList<Video> arrayList) {
         this.mContext = context;
@@ -33,11 +39,20 @@ public class PictureAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof PictureHolder) {
             Video video = mData.get(position);
             Picasso.with(mContext).load(video.getImgUrl()).into(((PictureHolder) holder).imageView);
             ((PictureHolder) holder).title.setText(video.getTitle());
+
+            if (onItemClickListener != null) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onItemClickListener.onItemClick(holder.itemView,holder.getLayoutPosition());
+                    }
+                });
+            }
         }
     }
 

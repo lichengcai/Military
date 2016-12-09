@@ -45,7 +45,6 @@
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <include
-            android:visibility="gone"
             android:id="@+id/layout_loading"
             layout="@layout/layout_loading"/>
     </RelativeLayout>
