@@ -1,6 +1,7 @@
 package com.military.ui.activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -27,12 +28,18 @@ public class TestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_test);
+        setContentView(R.layout.activity_test);
         ButterKnife.bind(this);
 
 //        Picasso.with(this).load("http://himg2.huanqiu.com/attachment2010/2016/1207/09/35/20161207093512548.jpg").into(photoView);
         // 启用图片缩放功能
 
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wechatShare(0);
+            }
+        });
 
 
     }
@@ -52,7 +59,7 @@ public class TestActivity extends BaseActivity {
             WXMediaMessage msg = new WXMediaMessage(webpage);
 
                 //分享的链接
-                webpage.webpageUrl = "http://www.baidu.com";
+                webpage.webpageUrl = "http://photo.huanqiu.com/funnypicture/2016-12/2854188.html";
                 //分享标题--课程标题
                 msg.title = "test";
                 //分享内容--主讲老师

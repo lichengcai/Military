@@ -4,9 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
 
-    <com.bm.library.PhotoView
-        android:id="@+id/img"
-        android:src="@drawable/banner"
+    <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
