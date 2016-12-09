@@ -60,11 +60,11 @@ public class PictureDetailActivity extends BaseActivity implements PictureView {
                     ArrayList<View> arrayView = new ArrayList<>();
 
                     for (int i=0; i<array.size(); i++) {
-                        View view = LayoutInflater.from(act).inflate(R.layout.layout_test,null);
-                        ImageView image = (ImageView) view.findViewById(R.id.imageView);
+//                        View view = LayoutInflater.from(act).inflate(R.layout.layout_test,null);
+//                        ImageView image = (ImageView) view.findViewById(R.id.imageView);
+                        ImageView image = new ImageView(act);
                         Picasso.with(act).load(array.get(i).getImg_url()).into(image);
-                        arrayView.add(view);
-                        image.setOnTouchListener(new TouchListener(image));
+                        arrayView.add(image);
                     }
                     act.mAdapter = new PicDetailAdapter(arrayView);
                     act.mViewPager.setAdapter(act.mAdapter);

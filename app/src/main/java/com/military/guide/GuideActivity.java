@@ -80,7 +80,6 @@ public class GuideActivity extends BaseActivity  {
         mData.add(new GuideBean("武器库",R.drawable.weapon));
         mData.add(new GuideBean("视频",R.drawable.video));
         mData.add(new GuideBean("图片",R.drawable.picture));
-        mData.add(new GuideBean("测试",R.drawable.video));
 
         mAdapter = new GuideListAdapter(this,mData);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));

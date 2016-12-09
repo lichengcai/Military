@@ -7,9 +7,8 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/imageView"
         android:scaleType="matrix"
-        />  <!-- 指定为matrix类型 -->
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
