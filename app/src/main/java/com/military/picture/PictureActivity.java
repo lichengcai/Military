@@ -1,5 +1,6 @@
 package com.military.picture;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.military.R;
 import com.military.bean.CategoryBean;
+import com.military.bean.Picture;
 import com.military.bean.Video;
 import com.military.listener.OnItemClickListener;
 import com.military.picture.adapter.PictureAdapter;
@@ -75,7 +77,10 @@ public class PictureActivity extends BaseActivity implements PictureView{
                     act.mAdapter.setOnItemClickListener(new OnItemClickListener() {
                         @Override
                         public void onItemClick(View view, int position) {
-
+                            Intent intent = new Intent(act.mContext,PictureDetailActivity.class);
+                            Video video = act.mAdapter.getItemBean(position);
+                            intent.putExtra("Video", video);
+                            act.startActivity(intent);
                         }
                     });
                     break;
@@ -162,6 +167,11 @@ public class PictureActivity extends BaseActivity implements PictureView{
                 mAdapter.setIsShowFooter(true);
             }
         }
+    }
+
+    @Override
+    public void setPicDetail(ArrayList<Picture> arrayList) {
+
     }
 
     private void select(){

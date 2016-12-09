@@ -1,21 +1,20 @@
 package com.military.ui.activity;
-
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 
+import com.bm.library.PhotoView;
 import com.military.R;
-import com.military.utils.Util;
+import com.squareup.picasso.Picasso;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by lichengcai on 2016/11/16.
@@ -28,17 +27,13 @@ public class TestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.layout_test);
+        ButterKnife.bind(this);
 
-        wxApi = WXAPIFactory.createWXAPI(this, "wx1de1c9f054645e8c");
-        wxApi.registerApp("wx1de1c9f054645e8c");
+//        Picasso.with(this).load("http://himg2.huanqiu.com/attachment2010/2016/1207/09/35/20161207093512548.jpg").into(photoView);
+        // 启用图片缩放功能
 
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wechatShare(0);
-            }
-        });
+
 
     }
 
@@ -48,6 +43,9 @@ public class TestActivity extends BaseActivity {
      * @param flag
      */
     private void wechatShare(int flag) {
+        wxApi = WXAPIFactory.createWXAPI(this, "wx1de1c9f054645e8c");
+        wxApi.registerApp("wx1de1c9f054645e8c");
+
         //判断是否安装微信
         if(wxApi.isWXAppInstalled()) {
             WXWebpageObject webpage = new WXWebpageObject();

@@ -8,4 +8,5 @@ import com.military.listener.OnLoadingListener;
 
 public interface PictureModel {
     void getPicData(String url, OnLoadingListener onLoadingListener);
+    void getPicDataDetail(String url, OnLoadingListener onLoadingListener);
 }

@@ -19,7 +19,7 @@
         <activity
             android:name=".ui.activity.TestActivity"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name=".guide.GuideActivity"
             android:launchMode="singleTop"
@@ -55,16 +55,19 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:launchMode="singleTop"
-            android:theme="@style/VideoActivityTheme"
             android:name=".picture.PictureActivity"
-            />
+            android:launchMode="singleTop"
+            android:theme="@style/VideoActivityTheme" />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:name=".picture.PictureDetailActivity"
+            />
     </application>
 
 </manifest>

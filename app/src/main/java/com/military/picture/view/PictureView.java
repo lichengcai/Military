@@ -1,5 +1,6 @@
 package com.military.picture.view;
 
+import com.military.bean.Picture;
 import com.military.bean.Video;
 
 import java.util.ArrayList;
@@ -10,4 +11,5 @@ import java.util.ArrayList;
 
 public interface PictureView {
     void setPicture(ArrayList<Video> arrayList,boolean loadMore);
+    void setPicDetail(ArrayList<Picture> arrayList);
 }

@@ -31,6 +31,9 @@ public class PictureAdapter extends RecyclerView.Adapter {
     private OnItemClickListener onItemClickListener;
 
 
+    public Video getItemBean(int position) {
+        return mData.get(position);
+    }
     public void setIsShowFooter(boolean mShowFooter) {
         this.mShowFooter = mShowFooter;
     }
