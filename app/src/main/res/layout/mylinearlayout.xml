@@ -17,7 +17,7 @@
 	     android:id="@+id/myliear_image"
 	    android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-	     android:src="@mipmap/product_sort_arrow_up"
+	     android:src="@drawable/arrow_up"
 	     android:gravity="center"
 	     android:layout_marginLeft="3dp"
 	    

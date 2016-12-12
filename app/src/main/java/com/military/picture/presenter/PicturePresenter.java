@@ -1,11 +1,9 @@
 package com.military.picture.presenter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.military.bean.Picture;
 import com.military.bean.Video;
@@ -67,15 +65,17 @@ public class PicturePresenter {
     private ArrayList<Picture> getPicDetail(Document document){
         ArrayList<Picture> arrayList = new ArrayList<>();
         Elements elements = document.select("div.m_r");
-        Elements elements1 = elements.get(0).select("script");
-        String content = elements1.get(0).html();
-        Log.d("getPicDetail","elements---" + content.substring(15));
-        try {
-            JSONObject jsonObject = new JSONObject(content.substring(15));
-            Gson gson = new Gson();
-            arrayList = gson.fromJson(jsonObject.getString("img"),new TypeToken<ArrayList<Picture>>(){}.getType());
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (elements.size() != 0) {
+            Elements elements1 = elements.get(0).select("script");
+            String content = elements1.get(0).html();
+            Log.d("getPicDetail","elements---" + content.substring(15));
+            try {
+                JSONObject jsonObject = new JSONObject(content.substring(15));
+                Gson gson = new Gson();
+                arrayList = gson.fromJson(jsonObject.getString("img"),new TypeToken<ArrayList<Picture>>(){}.getType());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         return arrayList;
     }

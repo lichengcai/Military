@@ -48,9 +48,9 @@ public class MyLinearLayout extends LinearLayout {
 	public void setImageChange(boolean isUp){
 		this.isUp=isUp;
 		if (isUp) {
-			imageView.setImageResource(R.mipmap.product_sort_arrow_up);
+			imageView.setImageResource(R.drawable.arrow_up);
 		}else {
-			imageView.setImageResource(R.mipmap.product_sort_arrow_down);
+			imageView.setImageResource(R.drawable.down_arrow);
 		}
 	}
 
