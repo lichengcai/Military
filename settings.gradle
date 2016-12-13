@@ -1,1 +1,1 @@
-include ':app', ':snslib', 'slidingmenu'
+include ':app', 'slidingmenu'

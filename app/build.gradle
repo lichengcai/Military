@@ -69,7 +69,6 @@ dependencies {
     //boommenu
     compile 'com.nightonke:boommenu:1.0.9'
     //snslib
-    compile project(':snslib')
     //    compile 'zlc.season:rxdownload2:1.0.0'
     //LeakCanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
@@ -77,8 +76,7 @@ dependencies {
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     //gson
     compile 'com.google.code.gson:gson:2.8.0'
-
-//    compile 'com.github.chrisbanes:PhotoView:1.3.1'
+    //    compile 'com.github.chrisbanes:PhotoView:1.3.1'
     compile 'com.android.support:support-v4:24.1.1'
 }
 
