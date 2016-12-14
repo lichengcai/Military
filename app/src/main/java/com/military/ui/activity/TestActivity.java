@@ -1,18 +1,14 @@
 package com.military.ui.activity;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 
-
-import com.bm.library.PhotoView;
 import com.military.R;
 import com.squareup.picasso.Picasso;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
-import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.wenen.gridimageview.GridImageView;
+import com.wenen.gridimageview.LoadImageCallBack;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,8 +17,11 @@ import butterknife.ButterKnife;
  * Created by lichengcai on 2016/11/16.
  */
 
-public class TestActivity extends BaseActivity {
-    private IWXAPI wxApi;
+public class TestActivity extends BaseActivity implements LoadImageCallBack{
+    @BindView(R.id.images)
+    GridImageView gridImageView;
+    @BindView(R.id.expanded_image)
+    ImageView imageView;
 
 
     @Override
@@ -31,48 +30,33 @@ public class TestActivity extends BaseActivity {
         setContentView(R.layout.activity_test);
         ButterKnife.bind(this);
 
+        ArrayList<String> list = new ArrayList<>();
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+
+        gridImageView.setImage(list,this);
+
 //        Picasso.with(this).load("http://himg2.huanqiu.com/attachment2010/2016/1207/09/35/20161207093512548.jpg").into(photoView);
         // 启用图片缩放功能
-
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wechatShare(0);
-            }
-        });
-
-
     }
 
 
-    /**
-     *  微信分享方法
-     * @param flag
-     */
-    private void wechatShare(int flag) {
-        wxApi = WXAPIFactory.createWXAPI(this, "wx1de1c9f054645e8c");
-        wxApi.registerApp("wx1de1c9f054645e8c");
+    @Override
+    public void loadImage(ImageView view, String url) {
+        Picasso.with(TestActivity.this).load(url).into(view);
+    }
 
-        //判断是否安装微信
-        if(wxApi.isWXAppInstalled()) {
-            WXWebpageObject webpage = new WXWebpageObject();
-            WXMediaMessage msg = new WXMediaMessage(webpage);
+    @Override
+    public void onClickResponse(ImageView view, String url) {
+        Picasso.with(TestActivity.this).load(url).into(imageView);
+        gridImageView.zoomImageFromThumb(view, imageView,
+                (FrameLayout) findViewById(R.id.activity_main));
 
-                //分享的链接
-                webpage.webpageUrl = "http://photo.huanqiu.com/funnypicture/2016-12/2854188.html";
-                //分享标题--课程标题
-                msg.title = "test";
-                //分享内容--主讲老师
-                msg.description = "主讲：" + "Lcc";
-
-            SendMessageToWX.Req req = new SendMessageToWX.Req();
-            req.transaction = String.valueOf(System.currentTimeMillis());
-            req.message = msg;
-            req.scene = flag == 0 ? SendMessageToWX.Req.WXSceneSession : SendMessageToWX.Req.WXSceneTimeline;
-            wxApi.sendReq(req);
-
-            }else {
-                Toast.makeText(this,"您还没有安装微信",Toast.LENGTH_SHORT).show();
-        }
     }
 }
