@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * Created by lichengcai on 2016/11/16.
  */
 
-public class TestActivity extends BaseActivity implements LoadImageCallBack{
+public class TestActivity extends BaseActivity implements LoadImageCallBack {
     @BindView(R.id.images)
     GridImageView gridImageView;
     @BindView(R.id.expanded_image)
@@ -31,14 +31,16 @@ public class TestActivity extends BaseActivity implements LoadImageCallBack{
         ButterKnife.bind(this);
 
         ArrayList<String> list = new ArrayList<>();
+        //http://himg2.huanqiu.com/attachment2010/2016/1215/10/20/20161215102027361.jpg
+        //http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
+        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
         list.add("http://himg2.huanqiu.com/attachment2010/2016/1215/10/20/20161215102027361.jpg");
-        list.add("http://himg2.huanqiu.com/attachment2010/2016/1215/10/20/20161215102027361.jpg");
-        list.add("http://himg2.huanqiu.com/attachment2010/2016/1215/10/20/20161215102027361.jpg");
-        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
-        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
-        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
-        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
-        list.add("http://images.koolearn.com/kooupload/201612111203_1481428990160485.jpg");
 
         gridImageView.setImage(list,this);
 

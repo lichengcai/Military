@@ -65,19 +65,20 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
 
-            applicationVariants.all { variant ->
-                variant.outputs.each { output ->
-                    def outputFile = output.outputFile
-                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                        //输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
-//                        def fileName = "military.apk"
-//                        def fileName = "military_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
-                        def fileName = "military_${defaultConfig.versionName}_${releaseTime()}.apk"
-                        output.outputFile = new File(outputFile.parent, fileName)
-                    }
-                }
-            }
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        //输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
+////                        def fileName = "military.apk"
+////                        def fileName = "military_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+//                        def fileName = "military_${defaultConfig.versionName}_${releaseTime()}.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+//            }
         }
 
         debug {
@@ -125,8 +126,6 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    //gson
-//    compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.android.support:support-v4:24.1.1'
 
     compile 'com.wenen:gridimageview:1.0.5'
@@ -152,7 +151,7 @@ repositories {
     maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
 }
 
-def bakPath = file("${buildDir}/bakApk/guanfang/")
+def bakPath = file("${buildDir}/bakApk/")
 
 /**
  * you can use assembleRelease to build you base apk
@@ -165,7 +164,7 @@ ext {
 
     //for normal build
     //old apk file to build patch apk
-    tinkerOldApkPath = "${bakPath}/military_1.0_2016-12-15_guanfang.apk"
+    tinkerOldApkPath = "${bakPath}/app-debug-1215-16-39-18.apk"
     //proguard mapping file to build patch apk
     tinkerApplyMappingPath = "${bakPath}/app-debug-1018-17-32-47-mapping.txt"
     //resource R.txt to build patch apk, must input if there is resource changed
