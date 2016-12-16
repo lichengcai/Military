@@ -1,8 +1,6 @@
 package com.military.guide;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -82,7 +80,7 @@ public class GuideActivity extends BaseActivity  {
         mData.add(new GuideBean("武器库",R.drawable.weapon));
         mData.add(new GuideBean("视频",R.drawable.video));
         mData.add(new GuideBean("图片",R.drawable.picture));
-        mData.add(new GuideBean("测试",R.drawable.picture));
+        mData.add(new GuideBean("测试",R.drawable.weapon));
 
         mAdapter = new GuideListAdapter(this,mData);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
