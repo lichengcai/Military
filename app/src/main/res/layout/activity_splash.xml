@@ -4,13 +4,9 @@
     android:layout_height="match_parent"
     >
 
-   <ScrollView
-       android:background="@color/black"
+   <com.military.widget.wowsplash.WowSplashView
+       android:id="@+id/wowView"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="match_parent" />
-   </ScrollView>
+       android:layout_height="match_parent" />
 
 </FrameLayout>

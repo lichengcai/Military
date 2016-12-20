@@ -165,7 +165,7 @@ ext {
 
     //for normal build
     //old apk file to build patch apk
-    tinkerOldApkPath = "${bakPath}/app-release-1216-15-53-11.apk"
+    tinkerOldApkPath = "${bakPath}/app-release-1216-18-09-30.apk"
     //proguard mapping file to build patch apk
     tinkerApplyMappingPath = "${bakPath}/app-debug-1018-17-32-47-mapping.txt"
     //resource R.txt to build patch apk, must input if there is resource changed
