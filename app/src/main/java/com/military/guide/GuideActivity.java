@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.military.R;
@@ -17,6 +18,7 @@ import com.military.listener.OnItemClickListener;
 import com.military.picture.PictureActivity;
 import com.military.ui.activity.BaseActivity;
 import com.military.ui.activity.TestActivity;
+import com.military.utils.SDCardHelper;
 import com.military.video.VideoActivity;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
@@ -45,6 +47,11 @@ public class GuideActivity extends BaseActivity  {
 
         init();
         setAllListener();
+        SDCardHelper.saveFileToSDCardPrivateFilesDir(new byte[]{1,1,1,},"","SDFile",getApplicationContext());
+        Log.d("SDCard","all size--"+ SDCardHelper.getSDCardSize() + "   free size---" + SDCardHelper.getSDCardFreeSize()
+        + "   value size--- " + SDCardHelper.getSDCardAvailableSize()
+        + "  isSDCardMounted---" + SDCardHelper.isSDCardMounted()
+        + "  getSDCardBaseDir---" + SDCardHelper.getSDCardBaseDir());
     }
 
     private void setAllListener() {

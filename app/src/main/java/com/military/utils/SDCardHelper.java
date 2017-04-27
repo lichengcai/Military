@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.os.StatFs;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -70,23 +71,31 @@ public class SDCardHelper {
         BufferedOutputStream bos = null;
         if (isSDCardMounted()) {
             File file = Environment.getExternalStoragePublicDirectory(type);
-            try {
-                bos = new BufferedOutputStream(new FileOutputStream(new File(
-                        file, fileName)));
-                bos.write(data);
-                bos.flush();
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
+            if (file == null) {
+                Log.d("File"," file is null");
+            }else {
                 try {
-                    bos.close();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
+                    bos = new BufferedOutputStream(new FileOutputStream(new File(
+                            file, fileName)));
+                    bos.write(data);
+                    bos.flush();
+                    return true;
+                } catch (Exception e) {
                     e.printStackTrace();
+                } finally {
+                    if (bos != null) {
+                        try {
+                            bos.close();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+
                 }
             }
-        }
+            }
+
         return false;
     }
 

@@ -2,6 +2,7 @@ package com.military.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -9,6 +10,9 @@ import com.military.R;
 import com.military.guide.GuideActivity;
 import com.military.widget.particleview.ParticleView;
 import com.military.widget.wowsplash.WowSplashView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +30,8 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
+
+
 
         mWowView.startAnimate();
         mWowView.setOnEndListener(new WowSplashView.OnEndListener() {
