@@ -1,8 +1,8 @@
 package com.military.guide;
 
+import com.military.android.AndroidActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,16 +10,15 @@ import android.util.Log;
 import android.view.View;
 
 import com.military.R;
-import com.military.bean.GuideBean;
+import com.military.military.bean.GuideBean;
 import com.military.guide.adapter.GuideListAdapter;
-import com.military.huanqiu.news.MilitaryActivity;
-import com.military.huanqiu.weapon.WeaponActivity;
-import com.military.listener.OnItemClickListener;
-import com.military.picture.PictureActivity;
-import com.military.ui.activity.BaseActivity;
-import com.military.ui.activity.TestActivity;
-import com.military.utils.SDCardHelper;
-import com.military.video.VideoActivity;
+import com.military.military.huanqiu.news.MilitaryActivity;
+import com.military.military.huanqiu.weapon.WeaponActivity;
+import com.military.military.listener.OnItemClickListener;
+import com.military.military.picture.PictureActivity;
+import com.military.military.ui.activity.BaseActivity;
+import com.military.military.utils.SDCardHelper;
+import com.military.military.video.VideoActivity;
 
 import java.util.ArrayList;
 
@@ -30,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by lichengcai on 2016/11/18.
  */
 
-public class GuideActivity extends BaseActivity  {
+public class GuideActivity extends BaseActivity {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
@@ -71,7 +70,7 @@ public class GuideActivity extends BaseActivity  {
                             startActivity(new Intent(GuideActivity.this, PictureActivity.class));
                             break;
                         case 4:
-                            startActivity(new Intent(GuideActivity.this, TestActivity.class));
+                            startActivity(new Intent(GuideActivity.this, AndroidActivity.class));
                             break;
                     }
                 }

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     >
 
-   <com.military.widget.wowsplash.WowSplashView
+   <com.military.military.widget.wowsplash.WowSplashView
        android:id="@+id/wowView"
        android:layout_width="match_parent"
        android:layout_height="match_parent" />

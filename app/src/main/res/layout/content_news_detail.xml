@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.military.huanqiu.NewsDetailActivity"
+    tools:context="com.military.military.huanqiu.news.MilitaryActivity"
     tools:showIn="@layout/activity_news_detail">
 
     <TextView
         android:padding="10dp"
         android:layout_marginTop="12dp"
-        android:textSize="15sp"
+        android:textSize="17sp"
         android:id="@+id/text_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

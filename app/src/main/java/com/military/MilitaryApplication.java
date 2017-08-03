@@ -1,15 +1,9 @@
 package com.military;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.AssetManager;
-import android.content.res.Resources;
-import android.support.multidex.MultiDex;
 
-import com.military.bean.Channel;
-import com.military.common.Constants;
-import com.military.utils.CrashHandler;
+import com.military.military.bean.Channel;
+import com.military.military.utils.CrashHandler;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;

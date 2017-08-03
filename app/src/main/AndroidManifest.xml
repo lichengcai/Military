@@ -15,29 +15,28 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
         <activity
-            android:name=".huanqiu.news.MilitaryActivity"
+            android:name=".military.huanqiu.news.MilitaryActivity"
             android:launchMode="singleTop"
             android:theme="@style/VideoActivityTheme" />
         <activity
-            android:name=".ui.activity.TestActivity"
+            android:name=".military.ui.activity.TestActivity"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name=".guide.GuideActivity"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Light.NoTitleBar">
-
         </activity>
         <activity
-            android:name=".video.ChannelActivity"
+            android:name=".military.video.ChannelActivity"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
-            android:name=".video.VideoActivity"
+            android:name=".military.video.VideoActivity"
             android:launchMode="singleTop"
             android:theme="@style/VideoActivityTheme" />
         <activity
-            android:name=".ui.activity.SplashActivity"
+            android:name=".military.ui.activity.SplashActivity"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
             <intent-filter>
@@ -47,29 +46,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".huanqiu.NewsDetailActivity"
+            android:name=".military.huanqiu.news.NewsDetailActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".huanqiu.weapon.WeaponActivity"
+            android:name=".military.huanqiu.weapon.WeaponActivity"
             android:launchMode="singleTop"
             android:theme="@style/VideoActivityTheme" />
         <activity
-            android:name=".huanqiu.weapon.WeaponDetailActivity"
+            android:name=".military.huanqiu.weapon.WeaponDetailActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".picture.PictureActivity"
+            android:name=".military.picture.PictureActivity"
             android:launchMode="singleTop"
             android:theme="@style/VideoActivityTheme" />
         <activity
             android:theme="@android:style/Theme.Black.NoTitleBar"
-            android:name=".picture.PictureDetailActivity"
+            android:name=".military.picture.PictureDetailActivity"
             />
-
-        <service
-            android:name="com.tencent.tinker.app.service.TinkerServerResultService"
-            android:exported="false"
+        <activity android:name=".android.AndroidActivity"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
             />
     </application>
 

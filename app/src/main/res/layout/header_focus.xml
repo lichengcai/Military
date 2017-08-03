@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.military.widget.convenientbanner.ConvenientBanner
+    <com.military.military.widget.convenientbanner.ConvenientBanner
         android:id="@+id/bannerFocus"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>

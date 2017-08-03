@@ -8,7 +8,7 @@
     android:layout_height="wrap_content">
 
 
-    <com.military.widget.CircleImageView
+    <com.military.military.widget.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
         android:layout_width="66dp"

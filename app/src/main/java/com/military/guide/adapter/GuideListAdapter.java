@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.military.R;
-import com.military.bean.GuideBean;
-import com.military.listener.OnItemClickListener;
-import com.military.widget.CircleImageView;
+import com.military.military.bean.GuideBean;
+import com.military.military.listener.OnItemClickListener;
+import com.military.military.widget.CircleImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
