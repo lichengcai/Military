@@ -1,4 +1,4 @@
-package com.military.huanqiu;
+package com.military.huanqiu.news;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,16 +15,14 @@ import android.widget.LinearLayout;
 
 import com.military.R;
 import com.military.bean.NewsBean;
-import com.military.bean.WeaponBean;
+import com.military.huanqiu.NewsDetailActivity;
 import com.military.huanqiu.adapter.NewsListAdapter;
 import com.military.huanqiu.persenter.NewsListPresenter;
 import com.military.huanqiu.view.NewsListView;
 import com.military.listener.OnItemClickListener;
 import com.military.ui.fragment.FragmentBase;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

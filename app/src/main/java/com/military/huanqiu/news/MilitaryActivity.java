@@ -6,7 +6,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.military.R;
-import com.military.huanqiu.FragmentNewsList;
 import com.military.video.adapter.VideoPagerAdapter;
 
 import butterknife.BindView;

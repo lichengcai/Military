@@ -20,7 +20,6 @@ import com.military.ui.activity.BaseActivity;
 import com.military.ui.activity.TestActivity;
 import com.military.utils.SDCardHelper;
 import com.military.video.VideoActivity;
-import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
 import java.util.ArrayList;
 
@@ -43,7 +42,6 @@ public class GuideActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
         ButterKnife.bind(this);
-        TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
 
         init();
         setAllListener();
