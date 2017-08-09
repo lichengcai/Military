@@ -69,6 +69,11 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             />
+
+        <activity android:name=".android.view.CanvasActivity"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
     </application>
 
 </manifest>
