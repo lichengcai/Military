@@ -1,6 +1,5 @@
 package com.military.android.view.coordinatorLayout;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
@@ -17,20 +16,24 @@ import butterknife.ButterKnife;
  * Created by lichengcai on 2017/8/9.
  */
 
-public class CoordinatorLayoutActivity extends BaseActivity {
+public class CoordinatorLayoutActivity1 extends BaseActivity {
     @BindView(R.id.button)
     Button mButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coordinator);
+        setContentView(R.layout.activity_coordinator1);
         ButterKnife.bind(this);
 
-        mButton.setOnClickListener(new View.OnClickListener() {
+        mButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(CoordinatorLayoutActivity.this,CoordinatorLayoutActivity1.class));
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
+                    view.setX(motionEvent.getX() - view.getWidth()/2);
+                    view.setY(motionEvent.getY() - view.getHeight()/2);
+                }
+                return true;
             }
         });
 

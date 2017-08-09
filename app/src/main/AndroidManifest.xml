@@ -70,10 +70,25 @@
             android:theme="@android:style/Theme.Light.NoTitleBar"
             />
 
-        <activity android:name=".android.view.CanvasActivity"
+        <activity android:name=".android.view.canvas.CanvasActivity"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             />
+
+        <activity android:name=".android.view.coordinatorLayout.CoordinatorLayoutActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme"
+            />
+
+        <activity android:name=".android.view.coordinatorLayout.CoordinatorLayoutActivity1"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme"
+            />
+        <activity android:name=".android.view.ViewActivity"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
+
     </application>
 
 </manifest>
