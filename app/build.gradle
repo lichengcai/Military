@@ -39,10 +39,10 @@ android {
         }
 
         debug {
-            storeFile file("./military.jks")
-            storePassword "Cc1991Jj"
-            keyAlias "military"
-            keyPassword "Cc1991Jj"
+//            storeFile file("./military.jks")
+//            storePassword "Cc1991Jj"
+//            keyAlias "military"
+//            keyPassword "Cc1991Jj"
         }
     }
     buildTypes {
